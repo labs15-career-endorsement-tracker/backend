@@ -2,17 +2,27 @@
     "name": "backend",
     "version": "0.0.1",
     "description": "Backend API for careerendorsement.com",
-    "main": "src/index.js",
+    "main": "build",
     "scripts": {
-        "dev": "nodemon -r dotenv/config .",
+        "build": "yarn build:clean && babel src -d build --copy-files",
+        "build:clean": "rm -rf build",
+        "build:watch": "babel -w src -d build",
+        "dev": "yarn build && yarn nodemon & yarn build:watch",
         "format": "prettier --write \"**/*.{js,scss,css,html,json,md,less,tsx}\"",
-        "start": "node -r dotenv/config ."
+        "nodemon": "nodemon -r dotenv/config .",
+        "start": "yarn build && node -r dotenv/config ."
     },
     "repository": "git@github.com:labs15-career-endorsement-tracker/backend.git",
     "author": "Labs15SuperTeam",
     "license": "MIT",
     "private": true,
     "devDependencies": {
+        "@babel/cli": "^7.5.5",
+        "@babel/core": "^7.5.5",
+        "@babel/node": "^7.5.5",
+        "@babel/plugin-proposal-class-properties": "^7.5.5",
+        "@babel/plugin-transform-runtime": "^7.5.5",
+        "@babel/preset-env": "^7.5.5",
         "nodemon": "^1.19.1",
         "prettier": "^1.18.2"
     },

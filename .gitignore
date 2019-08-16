@@ -89,3 +89,6 @@ typings/
 
 # macOS
 .DS_Store
+
+# Babel build output
+build/
