@@ -25,10 +25,12 @@ const commonConfig = {
 
 export const development = commonConfig
 export const staging = commonConfig
+export const test = commonConfig
 export const production = commonConfig
 
 export default {
     development,
     staging,
+    test,
     production
 }
