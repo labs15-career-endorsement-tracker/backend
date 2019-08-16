@@ -1,5 +1,6 @@
 import request from "supertest"
 
+import { version } from "../../src/config"
 import db from "../../src/data"
 import app from "../../src/app"
 
@@ -18,7 +19,7 @@ describe("GET /users", () => {
 
     it("Returns a list of users", done => {
         request(app)
-            .get("/api/v0.0.1/users")
+            .get(`/api/v${version}/users`)
             .set("Accept", "application/json")
             .expect("Content-Type", /json/)
             .expect(200)
