@@ -1,0 +1,52 @@
+{
+    "name": "backend",
+    "version": "0.1.0",
+    "description": "Backend API for careerendorsement.com",
+    "main": "build",
+    "scripts": {
+        "build": "yarn build:clean && babel src -d build --copy-files",
+        "build:clean": "rm -rf build",
+        "build:watch": "babel -w src -d build",
+        "dev": "yarn build && yarn nodemon & yarn build:watch",
+        "format": "prettier --write \"**/*.{js,scss,css,html,json,md,less,tsx}\"",
+        "knex": "babel-node node_modules/.bin/knex",
+        "knex:migrate:make": "yarn knex migrate:make --knexfile ./src/knexfile.js",
+        "knex:migrate:latest": "yarn knex migrate:latest --knexfile ./src/knexfile.js",
+        "knex:seed:make": "yarn knex seed:make --knexfile ./src/knexfile.js",
+        "knex:rollback:all": "yarn knex migrate:rollback --all --knexfile ./src/knexfile.js",
+        "knex:seed:run": "yarn knex seed:run --knexfile ./src/knexfile.js",
+        "nodemon": "nodemon -r dotenv/config .",
+        "start": "yarn build && node -r dotenv/config .",
+        "test": "(dropdb test_career_endorsement && createdb test_career_endorsement) && jest --runInBand"
+    },
+    "repository": "git@github.com:labs15-career-endorsement-tracker/backend.git",
+    "author": "Labs15SuperTeam",
+    "license": "MIT",
+    "private": true,
+    "devDependencies": {
+        "@babel/cli": "^7.5.5",
+        "@babel/core": "^7.5.5",
+        "@babel/node": "^7.5.5",
+        "@babel/plugin-proposal-class-properties": "^7.5.5",
+        "@babel/plugin-transform-runtime": "^7.5.5",
+        "@babel/preset-env": "^7.5.5",
+        "@babel/runtime": "^7.5.5",
+        "faker": "^4.1.0",
+        "jest": "^24.9.0",
+        "knex-cleaner": "^1.3.0",
+        "nodemon": "^1.19.1",
+        "prettier": "^1.18.2",
+        "supertest": "^4.0.2"
+    },
+    "dependencies": {
+        "body-parser": "^1.19.0",
+        "cors": "^2.8.5",
+        "dotenv": "^8.0.0",
+        "express": "^4.17.1",
+        "helmet": "^3.20.0",
+        "http-errors": "^1.7.3",
+        "knex": "^0.19.1",
+        "morgan": "^1.9.1",
+        "pg": "^7.12.1"
+    }
+}
