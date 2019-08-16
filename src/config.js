@@ -4,9 +4,10 @@ require("dotenv").config({
     path: resolvePath(__dirname, "../.env")
 })
 
-const { NODE_ENV } = process.env
+const { NODE_ENV, DATABASE_URL, TEST_DATABASE_URL } = process.env
 
-const isProduction = NODE_ENV === "production"
-const isTesting = NODE_ENV === "test"
+const environment = NODE_ENV || "development"
+const isTesting = environment === "test"
+const dbUrl = isTesting ? TEST_DATABASE_URL : DATABASE_URL
 
-export { isProduction, isTesting }
+export { environment, dbUrl }

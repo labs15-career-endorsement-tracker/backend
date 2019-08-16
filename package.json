@@ -9,6 +9,12 @@
         "build:watch": "babel -w src -d build",
         "dev": "yarn build && yarn nodemon & yarn build:watch",
         "format": "prettier --write \"**/*.{js,scss,css,html,json,md,less,tsx}\"",
+        "knex": "babel-node node_modules/.bin/knex",
+        "knex:migrate:make": "yarn knex migrate:make --knexfile ./src/knexfile.js",
+        "knex:migrate:latest": "yarn knex migrate:latest --knexfile ./src/knexfile.js",
+        "knex:seed:make": "yarn knex seed:make --knexfile ./src/knexfile.js",
+        "knex:rollback:all": "yarn knex migrate:rollback --all --knexfile ./src/knexfile.js",
+        "knex:seed:run": "yarn knex seed:run --knexfile ./src/knexfile.js",
         "nodemon": "nodemon -r dotenv/config .",
         "start": "yarn build && node -r dotenv/config ."
     },
@@ -23,10 +29,15 @@
         "@babel/plugin-proposal-class-properties": "^7.5.5",
         "@babel/plugin-transform-runtime": "^7.5.5",
         "@babel/preset-env": "^7.5.5",
+        "@babel/runtime": "^7.5.5",
+        "faker": "^4.1.0",
+        "knex-cleaner": "^1.3.0",
         "nodemon": "^1.19.1",
         "prettier": "^1.18.2"
     },
     "dependencies": {
-        "dotenv": "^8.0.0"
+        "dotenv": "^8.0.0",
+        "knex": "^0.19.1",
+        "pg": "^7.12.1"
     }
 }

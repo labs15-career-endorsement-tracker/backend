@@ -1,6 +1,13 @@
-import { isProduction, isTesting } from "./config"
+import { environment } from "./config"
+import { getAllUsers } from "./model"
 
-console.log(isProduction, isTesting)
-const test = () => console.log("this is not an object")
-console.log(test())
-export default test
+const test = async () => {
+    try {
+        const users = await getAllUsers()
+        console.log(users)
+    } catch (error) {
+        console.log(error)
+    }
+}
+test()
+console.log(environment)
