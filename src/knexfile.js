@@ -23,7 +23,10 @@ const commonConfig = {
     seeds
 }
 
+<<<<<<< HEAD
 export const development = commonConfig
+=======
+>>>>>>> 5e41afa7cadfce99dc8f65affe817e2cd0a13f18
 export const staging = commonConfig
 export const test = commonConfig
 export const production = commonConfig
