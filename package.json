@@ -9,7 +9,6 @@
         "build:watch": "babel -w src -d build",
         "dev": "yarn build && yarn nodemon & yarn build:watch",
         "format": "prettier --write \"**/*.{js,scss,css,html,json,md,less,tsx}\"",
-        "knex": "babel-node node_modules/.bin/knex",
         "knex:migrate:make": "yarn knex migrate:make --knexfile ./src/knexfile.js",
         "knex:migrate:latest": "yarn knex migrate:latest --knexfile ./src/knexfile.js",
         "knex:seed:make": "yarn knex seed:make --knexfile ./src/knexfile.js",
