@@ -23,24 +23,6 @@ const commonConfig = {
     seeds
 }
 
-export const development = {
-    client: "sqlite3",
-    connection: {
-        filename: "./data/temp.db3"
-    },
-    useNullAsDefault: true,
-    pool: {
-        afterCreate: (conn, done) => {
-            conn.run("PRAGMA foreign_keys = ON", done) // enforce FK
-        }
-    },
-    migrations: {
-        directory: "./data/migrations"
-    },
-    seeds: {
-        directory: "./data/migrations"
-    }
-}
 export const staging = commonConfig
 export const test = commonConfig
 export const production = commonConfig
