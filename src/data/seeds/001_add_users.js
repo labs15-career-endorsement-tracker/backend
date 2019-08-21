@@ -1,4 +1,4 @@
-import { createMany, createUser } from "../utils"
+const { createMany, createUser } = require("../utils")
 
-export const seed = knex =>
+exports.seed = knex =>
     knex("users").then(() => knex("users").insert(createMany(createUser)))

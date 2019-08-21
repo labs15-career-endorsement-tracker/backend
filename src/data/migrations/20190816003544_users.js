@@ -1,4 +1,4 @@
-export const up = knex =>
+exports.up = knex =>
     knex.schema.createTable("users", users => {
         users.increments()
 
@@ -11,5 +11,4 @@ export const up = knex =>
         users.string("password", 255)
         users.string("track", 255)
     })
-
-export const down = knex => knex.schema.dropTableIfExists("users")
+exports.down = knex => knex.schema.dropTableIfExists("users")
