@@ -1,8 +1,25 @@
-
 exports.up = function(knex) {
-  
-};
+    return knex.schema.createTable("users", users => {
+        users.increments()
+
+        users.string("first_name")
+        users.string("last_name")
+        users
+            .string("email", 255)
+            .notNullable()
+            .unique()
+        users.string("password", 255)
+        users
+            .integer("tracks_id", 255)
+            .unsigned()
+            .notNullable()
+            .references("id")
+            .inTable("tracks")
+            .onDelete("RESTRICT")
+            .onUpdate("CASCADE")
+    })
+}
 
 exports.down = function(knex) {
-  
-};
+    return knex.schema.dropTableIfExists("users")
+}
