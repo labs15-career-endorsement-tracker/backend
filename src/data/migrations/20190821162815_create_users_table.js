@@ -10,7 +10,7 @@ exports.up = function(knex) {
             .unique()
         users.string("password", 255)
         users
-            .integer("tracks_id", 255)
+            .integer("tracks_id")
             .unsigned()
             .notNullable()
             .references("id")
