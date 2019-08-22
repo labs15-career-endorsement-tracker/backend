@@ -2,7 +2,7 @@ exports.up = knex =>
     knex.schema.createTable("tracks", tracks => {
         tracks.increments()
         tracks
-            .string()
+            .string("title")
             .notNullable()
             .unique()
     })
