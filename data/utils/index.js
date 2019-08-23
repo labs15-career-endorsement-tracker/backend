@@ -1,4 +1,4 @@
-import { name, internet, random } from "faker"
+const { name, internet, random } = require("faker")
 
 const maxRecords = 1000
 
@@ -22,4 +22,4 @@ const createUser = () => {
     }
 }
 
-export { createMany, createUser }
+module.exports = { createMany, createUser }
