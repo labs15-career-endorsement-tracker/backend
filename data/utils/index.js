@@ -1,4 +1,5 @@
 const { name, internet, random } = require("faker")
+const bcrypt = require("bcryptjs")
 const maxRecords = 1000
 
 const createMany = (factory, count = maxRecords) => {
@@ -16,7 +17,7 @@ const createUser = () => {
         first_name,
         last_name,
         email: internet.email(first_name, last_name),
-        password: internet.password(16, true),
+        password: bcrypt.hashSync("Password1234!", 4),
         tracks_id: random.arrayElement(tracks)
     }
 }
