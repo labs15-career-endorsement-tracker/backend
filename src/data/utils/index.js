@@ -1,5 +1,4 @@
-import { name, internet, random } from "faker"
-
+const { name, internet, random } = require("faker")
 const maxRecords = 1000
 
 const createMany = (factory, count = maxRecords) => {
@@ -9,7 +8,7 @@ const createMany = (factory, count = maxRecords) => {
     }
     return many
 }
-const tracks = ["Full-Stack Web", "iOS", "Data Science", "Android", "UX Design"]
+const tracks = [1, 2, 3, 4, 5]
 const createUser = () => {
     const first_name = name.firstName()
     const last_name = name.lastName()
@@ -18,8 +17,8 @@ const createUser = () => {
         last_name,
         email: internet.email(first_name, last_name),
         password: internet.password(16, true),
-        track: random.arrayElement(tracks)
+        tracks_id: random.arrayElement(tracks)
     }
 }
 
-export { createMany, createUser }
+module.exports = { createMany, createUser }
