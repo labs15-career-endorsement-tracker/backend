@@ -3,7 +3,7 @@ exports.up = function(knex) {
         tasks.increments()
         tasks.string("title", 255).notNullable()
         tasks.boolean("is_required").notNullable()
-        tasks.string("description").notNullable()
+        tasks.string("tasks_description").notNullable()
         tasks.boolean("is_endorsement_requirement").notNullable()
     })
 }
