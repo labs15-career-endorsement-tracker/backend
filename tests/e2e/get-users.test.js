@@ -1,7 +1,7 @@
 const request = require("supertest")
 
 const { version } = require("../../src/config")
-const db = require("../../src/data")
+const db = require("../../data")
 const app = require("../../src/app")
 
 describe("GET /users", () => {
