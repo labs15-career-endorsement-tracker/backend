@@ -1,6 +1,4 @@
 const { Router } = require("express")
-// What's this doing???
-// import {} from "http-errors"
 
 const { getUsers } = require("../controllers")
 
