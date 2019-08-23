@@ -10,7 +10,6 @@ exports.seed = function(knex) {
         {
             title: "Deploy an app to app store",
             is_required: true,
-            tracks_id: 2,
             description:
                 "You must have an app deployed on the app store in order to be career endorsed",
             is_endorsement_requirement: true
@@ -28,6 +27,13 @@ exports.seed = function(knex) {
             description:
                 "Groom your Twitter, Facebook, Instagram, or any other public social media profiles:- Remove any photos or posts that contain content that you would not want a potential employer to see.",
             is_endorsement_requirement: false
+        },
+        {
+            title: "Green GitHub with quality contributions",
+            is_required: true,
+            description:
+                "You should have quality contributions in your git hub",
+            is_endorsement_requirement: true
         }
     ])
 }
