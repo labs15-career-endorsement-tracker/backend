@@ -6,11 +6,11 @@
     "scripts": {
         "dev": "nodemon -r dotenv/config .",
         "format": "prettier --write \"**/*.{js,scss,css,html,json,md,less,tsx}\"",
-        "knex:migrate:make": "yarn knex migrate:make --knexfile ./src/knexfile.js",
-        "knex:migrate:latest": "yarn knex migrate:latest --knexfile ./src/knexfile.js",
-        "knex:seed:make": "yarn knex seed:make --knexfile ./src/knexfile.js",
-        "knex:rollback:all": "yarn knex migrate:rollback --all --knexfile ./src/knexfile.js",
-        "knex:seed:run": "yarn knex seed:run --knexfile ./src/knexfile.js",
+        "knex:migrate:make": "yarn knex migrate:make",
+        "knex:migrate:latest": "yarn knex migrate:latest",
+        "knex:seed:make": "yarn knex seed:make",
+        "knex:rollback:all": "yarn knex migrate:rollback --all",
+        "knex:seed:run": "yarn knex seed:run",
         "start": "node -r dotenv/config .",
         "test": "(dropdb test_career_endorsement && createdb test_career_endorsement) && jest --runInBand"
     },
