@@ -1,10 +1,11 @@
-import { Router } from "express"
-import {} from "http-errors"
+const { Router } = require("express")
+// What's this doing???
+// import {} from "http-errors"
 
-import { getUsers } from "../controllers"
+const { getUsers } = require("../controllers")
 
 const api = Router()
 
 api.get("/users", getUsers)
 
-export default api
+module.exports = api

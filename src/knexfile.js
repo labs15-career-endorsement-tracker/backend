@@ -1,6 +1,6 @@
-import { resolve as resolvePath } from "path"
+const { resolve: resolvePath } = require("path")
 
-import { dbUrl } from "./config"
+const { dbUrl } = require("./config")
 
 const client = "postgresql"
 const pool = {
@@ -23,15 +23,12 @@ const commonConfig = {
     seeds
 }
 
-<<<<<<< HEAD
-export const development = commonConfig
-=======
->>>>>>> 5e41afa7cadfce99dc8f65affe817e2cd0a13f18
-export const staging = commonConfig
-export const test = commonConfig
-export const production = commonConfig
+const development = commonConfig
+const staging = commonConfig
+const test = commonConfig
+const production = commonConfig
 
-export default {
+module.exports = {
     development,
     staging,
     test,

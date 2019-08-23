@@ -1,3 +1,2 @@
-import cleaner from "knex-cleaner"
-
-export const seed = knex => cleaner.clean(knex)
+const cleaner = require("knex-cleaner")
+exports.seed = knex => cleaner.clean(knex)

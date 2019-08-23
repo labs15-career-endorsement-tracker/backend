@@ -1,3 +1,3 @@
-import db from "../data"
-
-export const findUsers = () => db("users")
+const db = require("../data")
+const findUsers = () => db("users")
+module.exports = findUsers

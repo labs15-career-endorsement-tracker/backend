@@ -1,6 +1,5 @@
-import knex from "knex"
+const knex = require("knex")
+const environment = require("../config")
+const config = require("../knexfile")
 
-import { environment } from "../config"
-import config from "../knexfile"
-
-export default knex(config[environment])
+module.exports = knex(config[environment])

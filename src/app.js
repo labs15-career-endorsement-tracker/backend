@@ -1,12 +1,12 @@
-import express from "express"
-import { json as jsonParser } from "body-parser"
-import cors from "cors"
-import morgan from "morgan"
-import helmet from "helmet"
+const express = require("express")
+const { json: jsonParser } = require("body-parser")
+const cors = require("cors")
+const morgan = require("morgan")
+const helmet = require("helmet")
 
-import { version } from "./config"
-import { handle404, handle500 } from "./middleware"
-import router from "./routes"
+const { version } = require("./config")
+const { handle404, handle500 } = require("./middleware")
+const router = require("./routes")
 
 const app = express()
 
@@ -28,4 +28,4 @@ app.get("/", (_req, res) => {
 app.use(handle404)
 app.use(handle500)
 
-export default app
+module.exports = app

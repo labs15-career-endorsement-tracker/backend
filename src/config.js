@@ -1,6 +1,5 @@
-import { resolve as resolvePath } from "path"
-
-import { version } from "../package.json"
+const { resolve: resolvePath } = require("path")
+const { version } = require("../package.json")
 
 require("dotenv").config({
     path: resolvePath(__dirname, "../.env")
@@ -13,4 +12,4 @@ const isTesting = environment === "test"
 const dbUrl = isTesting ? TEST_DATABASE_URL : DATABASE_URL
 const port = PORT || 5000
 
-export { environment, dbUrl, port, version }
+module.exports = { environment, dbUrl, port, version }
