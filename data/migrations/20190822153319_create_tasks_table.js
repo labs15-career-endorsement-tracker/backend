@@ -5,13 +5,6 @@ exports.up = function(knex) {
         tasks.boolean("is_required").notNullable()
         tasks.string("description").notNullable()
         tasks.boolean("is_endorsement_requirement").notNullable()
-        tasks
-            .integer("tracks_id")
-            .unsigned()
-            .references("id")
-            .inTable("tracks")
-            .onDelete("RESTRICT")
-            .onUpdate("CASCADE")
     })
 }
 
