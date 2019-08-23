@@ -15,6 +15,7 @@ exports.up = function(knex) {
             .inTable("tasks")
             .onDelete("CASCADE")
             .onUpdate("CASCADE")
+        tbl.unique(["tasks_id", "tracks_id"])
     })
 }
 
