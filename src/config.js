@@ -12,4 +12,4 @@ const isTesting = environment === "test"
 const dbUrl = isTesting ? TEST_DATABASE_URL : DATABASE_URL
 const port = PORT || 5000
 
-module.exports = { environment, dbUrl, port, version }
+module.exports = { environment, dbUrl, port, version: version.split(".")[0] }

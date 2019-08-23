@@ -1,6 +1,6 @@
 const { resolve: resolvePath } = require("path")
 
-const { dbUrl } = require("./config")
+const { dbUrl } = require("./src/config")
 
 const client = "postgresql"
 const pool = {
