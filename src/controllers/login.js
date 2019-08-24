@@ -7,7 +7,6 @@ const login = async (req, res, next) => {
     const { email, password } = req.body
     try {
         const user = await findUsersBy({ email }).first()
-        console.log(typeof user.password)
         if (user && bcrypt.compareSync(password, user.password)) {
             const token = generateToken(user)
             res.status(200).json({
