@@ -10,7 +10,19 @@ const handle500 = ({ status = 500, name, message }, _req, res, next) => {
     res.status(status).json({ name, statusCode: status, message })
 }
 
+const checkEmailPasswordExist = (req, res, next) => {
+    const { email, password } = req.body
+    if (!email || !password) {
+        res.status(400).json({
+            message: "Please enter your email and password"
+        })
+    } else {
+        next()
+    }
+}
+
 module.exports = {
     handle404,
-    handle500
+    handle500,
+    checkEmailPasswordExist
 }
