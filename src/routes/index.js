@@ -10,7 +10,7 @@ const { requiresAuth } = require("../middleware")
 
 const api = Router()
 
-api.get("/users", requiresAuth, getUsers)
+api.get("/users", getUsers)
 
 api.post("/login", login)
 
