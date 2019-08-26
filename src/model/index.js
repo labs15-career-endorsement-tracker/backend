@@ -4,4 +4,9 @@ const findUsers = () => db("users")
 
 const findUsersBy = filter => db("users").where(filter)
 
-module.exports = { findUsers, findUsersBy }
+const insertUser = userData =>
+    db("users")
+        .insert(userData)
+        .returning(["id"])
+
+module.exports = { findUsers, findUsersBy, insertUser }
