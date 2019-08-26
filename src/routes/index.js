@@ -14,6 +14,6 @@ api.get("/users", getUsers)
 
 api.post("/login", login)
 
-api.get("/view-endorsement-requirements")
+api.get("/view-requirements", auth, viewEndorsementRequirements)
 
 module.exports = api
