@@ -2,4 +2,6 @@ const db = require("../../data")
 
 const findUsers = () => db("users")
 
-module.exports = { findUsers }
+const findUsersBy = filter => db("users").where(filter)
+
+module.exports = { findUsers, findUsersBy }
