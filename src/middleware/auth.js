@@ -4,7 +4,7 @@ const { Unauthorized } = require("http-errors")
 const restricted = (req, res, next) => {
     const token = req.headers.authorization
     const error401 = Unauthorized(`Incorrect credentials`)
-
+    console.log(token)
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
         if (err) {
             throw error401
