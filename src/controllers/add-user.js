@@ -1,5 +1,5 @@
 const {} = require("bcryptjs")
-const {} = require("http-errors")
+const { Conflict } = require("http-errors")
 
 const { insertUser } = require("../model")
 const {} = require("../utils")
@@ -11,7 +11,13 @@ const addUser = async (req, res, next) => {
 
         res.status(201).json({ userId: createdUser.id })
     } catch (error) {
-        next(error)
+        switch (Number(error.code)) {
+            case 23505:
+                next(Conflict(`User already has an account`))
+                break
+            default:
+                next(error)
+        }
     }
 }
 
