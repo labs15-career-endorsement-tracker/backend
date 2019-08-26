@@ -1,9 +1,9 @@
 const jwt = require("jsonwebtoken")
 const { Unauthorized } = require("http-errors")
 
-const restricted = (req, res, next) => {
+const auth = (req, res, next) => {
     const token = req.headers.authorization
-    const error401 = Unauthorized(`Incorrect credentials`)
+    const error401 = Unauthorized(`Bad or no token`)
     console.log(token)
     jwt.verify(token, process.env.JWT_SECRET, (err, decoded) => {
         if (err) {
@@ -14,4 +14,4 @@ const restricted = (req, res, next) => {
         }
     })
 }
-module.exports = restricted
+module.exports = auth

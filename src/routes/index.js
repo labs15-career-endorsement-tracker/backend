@@ -2,11 +2,11 @@ const { Router } = require("express")
 
 const { getUsers, login } = require("../controllers")
 
-const { restricted } = require("../middleware")
+const { auth } = require("../middleware")
 
 const api = Router()
 
-api.get("/users", restricted, getUsers)
+api.get("/users", auth, getUsers)
 
 api.post("/login", login)
 
