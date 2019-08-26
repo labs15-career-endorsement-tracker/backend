@@ -3,6 +3,7 @@ const { Unauthorized } = require("http-errors")
 
 const { findUsersBy } = require("../model")
 const { generateJwt } = require("../utils")
+const { validateEmail, validatePassword } = require("../middleware")
 
 const login = async (req, res, next) => {
     const { email, password } = req.body
@@ -24,4 +25,4 @@ const login = async (req, res, next) => {
     }
 }
 
-module.exports = login
+module.exports = [validateEmail, validatePassword, login]

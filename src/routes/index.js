@@ -2,12 +2,10 @@ const { Router } = require("express")
 
 const { getUsers, login } = require("../controllers")
 
-const { checkEmailPasswordExist } = require("../middleware")
-
 const api = Router()
 
 api.get("/users", getUsers)
 
-api.post("/login", checkEmailPasswordExist, login)
+api.post("/login", login)
 
 module.exports = api
