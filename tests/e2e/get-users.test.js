@@ -1,5 +1,4 @@
 const request = require("supertest")
-const bcrypt = require("bcryptjs")
 
 const { version } = require("../../src/config")
 const db = require("../../data")
