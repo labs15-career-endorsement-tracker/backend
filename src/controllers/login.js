@@ -1,8 +1,7 @@
 const bcrypt = require("bcryptjs")
-const jwt = require("jsonwebtoken")
 
-const { jwtSecret } = require("../config")
 const { findUsersBy } = require("../model")
+const { generateJwt } = require("../utils")
 
 const login = async (req, res, next) => {
     const { email, password } = req.body
@@ -11,7 +10,10 @@ const login = async (req, res, next) => {
         const user = await findUsersBy({ email }).first()
 
         if (user && bcrypt.compareSync(password, user.password)) {
-            const token = generateToken(user)
+            const token = generateJwt({
+                userId: user.id,
+                isAdmin: user.is_admin
+            })
             res.status(200).json({
                 message: `Welcome ${user.first_name}, you are logged in`,
                 token
@@ -25,19 +27,6 @@ const login = async (req, res, next) => {
         console.error(error)
         next(error)
     }
-}
-
-function generateToken(user) {
-    const payload = {
-        subject: user.id,
-        email: user.email,
-        is_admin: user.is_admin
-    }
-    const options = {
-        expiresIn: "1d"
-    }
-
-    return jwt.sign(payload, jwtSecret, options)
 }
 
 module.exports = login
