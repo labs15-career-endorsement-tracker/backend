@@ -6,6 +6,8 @@ const {
     viewEndorsementRequirements
 } = require("../controllers")
 
+const { auth } = require("../middleware")
+
 const api = Router()
 
 api.get("/users", getUsers)
