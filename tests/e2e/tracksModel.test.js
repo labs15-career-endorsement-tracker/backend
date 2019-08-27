@@ -2,8 +2,6 @@ const db = require("../../data")
 const { findAllTracks } = require("../../src/model")
 const { fakeTracks } = require("../fixtures")
 
-// const url = `/api/v${version}/view-requirements`
-
 describe("MODEL tracks", () => {
     beforeAll(async done => {
         await db.migrate.rollback(null, true)
@@ -12,17 +10,12 @@ describe("MODEL tracks", () => {
         done()
     })
 
-    // beforeEach(async done => {
-    //     done()
-    // })
-
     afterAll(async done => {
         await db.destroy()
         done()
     })
 
     describe("findAllTracks", () => {
-        // the only track_id we have is 1
         it("should return an array of objects", done => {
             findAllTracks().then(res => {
                 expect(res).toEqual(expect.any(Array))
