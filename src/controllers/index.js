@@ -10,4 +10,8 @@ const getUsers = async (req, res, next) => {
     }
 }
 
-module.exports = { getUsers }
+module.exports = {
+    getUsers,
+    login: require("./login"),
+    viewEndorsementRequirements: require("./viewEndorsementRequirements")
+}

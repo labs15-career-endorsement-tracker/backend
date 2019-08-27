@@ -8,7 +8,9 @@
 
 # API Documentation
 
-#### 1️⃣ Backend delpoyed at [🚫name service here](🚫add URL here) <br>
+#### Backend delpoyed at STAGING: [HEROKU](https://endrsd-api-staging.herokuapp.com/) <br>
+
+#### Backend delpoyed at PRODUCTION: [HEROKU](https://endrsd-api.herokuapp.com/) <br>
 
 ## 1️⃣ Getting started
 
@@ -44,14 +46,73 @@ To get the server running locally:
 
 #### User Routes
 
-| Method | Endpoint                | Access Control      | Description                                        |
-| ------ | ----------------------- | ------------------- | -------------------------------------------------- |
-| GET    | `/users/current`        | all users           | Returns info for the logged in user.               |
-| GET    | `/users/org/:userId`    | owners, supervisors | Returns all users for an organization.             |
-| GET    | `/users/:userId`        | owners, supervisors | Returns info for a single user.                    |
-| POST   | `/users/register/owner` | none                | Creates a new user as owner of a new organization. |
-| PUT    | `/users/:userId`        | owners, supervisors |                                                    |
-| DELETE | `/users/:userId`        | owners, supervisors |                                                    |
+| Method | Endpoint                    | Access Control      | Description                                           |
+| ------ | --------------------------- | ------------------- | ----------------------------------------------------- |
+| GET    | `/api/v0/view-requirements` | all users           | Returns a list of the user's endorsement requirements |
+| POST   | `/api/v0/view-requirements` | all users           | Returns an object with token and userId.              |
+| GET    | `/users/:userId`            | owners, supervisors | Returns info for a single user.                       |
+| POST   | `/users/register/owner`     | none                | Creates a new user as owner of a new organization.    |
+| PUT    | `/users/:userId`            | owners, supervisors |                                                       |
+| DELETE | `/users/:userId`            | owners, supervisors |                                                       |
+
+## Endpoint Examples
+
+#### POST /api/v0/login
+
+##### REQUEST
+
+```
+Body
+{
+        email: "bob_ross@happylittlemistakes.com",
+        password: "Password1234!"
+}
+```
+
+##### RESPONSE
+
+```
+{
+  "token": "eyQiOjEsImlhdCI6MTU2NjkyODU0MywiZXhwIjoxNTY3MDE0O",
+  "userId": 1
+}
+```
+
+#### GET /api/v0/view-requirements
+
+##### REQUEST
+
+```
+Headers
+{
+  authorization: bearer token
+}
+```
+
+##### RESPONSE
+
+```
+[
+  {
+    "id": 1,
+    "tracks_id": 3,
+    "tasks_id": 1,
+    "title": "Update Resume",
+    "is_required": true,
+    "tasks_description": "Update your resume to include your recent work history",
+    "is_endorsement_requirement": true
+  },
+  {
+    "id": 5,
+    "tracks_id": 3,
+    "tasks_id": 5,
+    "title": "Green GitHub with quality contributions",
+    "is_required": true,
+    "tasks_description": "You should have quality contributions in your git hub",
+    "is_endorsement_requirement": true
+  }
+]
+```
 
 # Data Model
 
