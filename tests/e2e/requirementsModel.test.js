@@ -11,7 +11,7 @@ const {
     fakeTracks
 } = require("../fixtures")
 
-// const url = `/api/v${version}/view-requirements`
+// const url = `/api/v${version}/requirements`
 
 describe("MODEL requirements", () => {
     beforeAll(async done => {

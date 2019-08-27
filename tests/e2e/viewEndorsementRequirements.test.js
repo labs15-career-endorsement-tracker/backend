@@ -11,7 +11,7 @@ const {
     fakeTracks
 } = require("../fixtures")
 
-describe("GET /view-requirements", () => {
+describe("GET /requirements", () => {
     let token
     beforeAll(async done => {
         await db.migrate.rollback(null, true)
@@ -39,7 +39,7 @@ describe("GET /view-requirements", () => {
 
     it("should return status 401 when no token is present", done => {
         request(app)
-            .get(`/api/v${version}/view-requirements`)
+            .get(`/api/v${version}/requirements`)
             .set("Accept", "application/json")
             .expect("Content-Type", /json/)
             .expect(401)
@@ -47,7 +47,7 @@ describe("GET /view-requirements", () => {
     })
     it("should return status 401 when bad token is present", done => {
         request(app)
-            .get(`/api/v${version}/view-requirements`)
+            .get(`/api/v${version}/requirements`)
             .set("Accept", "application/json")
             .set("authorization", `trash can token`)
             .expect("Content-Type", /json/)
@@ -56,7 +56,7 @@ describe("GET /view-requirements", () => {
     })
     it("should return status 200 when token is present", done => {
         return request(app)
-            .get(`/api/v${version}/view-requirements`)
+            .get(`/api/v${version}/requirements`)
             .set("Accept", "application/json")
             .set("authorization", `bearer ${token}`)
             .expect("Content-Type", /json/)
@@ -65,7 +65,7 @@ describe("GET /view-requirements", () => {
     })
     it("should return an array of objects", done => {
         return request(app)
-            .get(`/api/v${version}/view-requirements`)
+            .get(`/api/v${version}/requirements`)
             .set("Accept", "application/json")
             .set("authorization", `bearer ${token}`)
             .expect("Content-Type", /json/)
@@ -78,7 +78,7 @@ describe("GET /view-requirements", () => {
     })
     it("should return an array of objects with shape: {id (int), is_endorsement_requirement (bool), is_required (bool), tasks_id (int), title (string), tracks_id (int),  tasks_description (String)} ", done => {
         return request(app)
-            .get(`/api/v${version}/view-requirements`)
+            .get(`/api/v${version}/requirements`)
             .set("Accept", "application/json")
             .set("authorization", `bearer ${token}`)
             .expect("Content-Type", /json/)
@@ -100,7 +100,7 @@ describe("GET /view-requirements", () => {
     })
     it("should have this object as it's first element: {title: 'Requirement 1',is_required: true, tasks_description: 'Requirement 1 description',is_endorsement_requirement: true },", done => {
         return request(app)
-            .get(`/api/v${version}/view-requirements`)
+            .get(`/api/v${version}/requirements`)
             .set("Accept", "application/json")
             .set("authorization", `bearer ${token}`)
             .expect("Content-Type", /json/)

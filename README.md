@@ -46,14 +46,14 @@ To get the server running locally:
 
 #### User Routes
 
-| Method | Endpoint                    | Access Control      | Description                                           |
-| ------ | --------------------------- | ------------------- | ----------------------------------------------------- |
-| GET    | `/api/v0/view-requirements` | all users           | Returns a list of the user's endorsement requirements |
-| POST   | `/api/v0/view-requirements` | all users           | Returns an object with token and userId.              |
-| GET    | `/users/:userId`            | owners, supervisors | Returns info for a single user.                       |
-| POST   | `/users/register/owner`     | none                | Creates a new user as owner of a new organization.    |
-| PUT    | `/users/:userId`            | owners, supervisors |                                                       |
-| DELETE | `/users/:userId`            | owners, supervisors |                                                       |
+| Method | Endpoint                | Access Control      | Description                                           |
+| ------ | ----------------------- | ------------------- | ----------------------------------------------------- |
+| GET    | `/api/v0/requirements`  | all users           | Returns a list of the user's endorsement requirements |
+| POST   | `/api/v0/requirements`  | all users           | Returns an object with token and userId.              |
+| GET    | `/users/:userId`        | owners, supervisors | Returns info for a single user.                       |
+| POST   | `/users/register/owner` | none                | Creates a new user as owner of a new organization.    |
+| PUT    | `/users/:userId`        | owners, supervisors |                                                       |
+| DELETE | `/users/:userId`        | owners, supervisors |                                                       |
 
 ## Endpoint Examples
 
@@ -78,7 +78,7 @@ Body
 }
 ```
 
-#### GET /api/v0/view-requirements
+#### GET /api/v0/requirements
 
 ##### REQUEST
 
