@@ -5,7 +5,7 @@ exports.up = function(knex) {
             .integer("number")
             .unsigned()
             .notNullable()
-        steps.text("steps_description").notNullable()
+        steps.text("description").notNullable()
         steps.boolean("is_required").notNullable()
         steps
             .integer("tasks_id")
