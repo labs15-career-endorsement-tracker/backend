@@ -49,7 +49,7 @@ To get the server running locally:
 | Method | Endpoint                    | Access Control      | Description                                           |
 | ------ | --------------------------- | ------------------- | ----------------------------------------------------- |
 | GET    | `/api/v0/view-requirements` | all users           | Returns a list of the user's endorsement requirements |
-| GET    | `/users/org/:userId`        | owners, supervisors | Returns all users for an organization.                |
+| POST   | `/api/v0/view-requirements` | all users           | Returns an object with token and userId.              |
 | GET    | `/users/:userId`            | owners, supervisors | Returns info for a single user.                       |
 | POST   | `/users/register/owner`     | none                | Creates a new user as owner of a new organization.    |
 | PUT    | `/users/:userId`            | owners, supervisors |                                                       |
@@ -57,15 +57,41 @@ To get the server running locally:
 
 ## Endpoint Examples
 
+#### POST /api/v0/login
+
+##### REQUEST
+
+```
+Body
+{
+        email: "bob_ross@happylittlemistakes.com",
+        password: "Password1234!"
+}
+```
+
+##### RESPONSE
+
+```
+{
+  "token": "eyQiOjEsImlhdCI6MTU2NjkyODU0MywiZXhwIjoxNTY3MDE0O",
+  "userId": 1
+}
+```
+
 #### GET /api/v0/view-requirements
+
+##### REQUEST
 
 ```
 Headers
 {
   authorization: bearer token
 }
+```
 
-Response
+##### RESPONSE
+
+```
 [
   {
     "id": 1,
@@ -86,7 +112,6 @@ Response
     "is_endorsement_requirement": true
   }
 ]
-
 ```
 
 # Data Model
