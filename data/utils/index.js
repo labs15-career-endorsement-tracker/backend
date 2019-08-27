@@ -18,7 +18,8 @@ const createUser = () => {
         last_name,
         email: internet.email(first_name, last_name).toLowerCase(),
         password: bcrypt.hashSync("Password1234!", 4),
-        tracks_id: random.arrayElement(tracks)
+        tracks_id: random.arrayElement(tracks),
+        is_admin: false
     }
 }
 
