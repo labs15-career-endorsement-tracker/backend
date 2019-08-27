@@ -4,7 +4,7 @@ const { fakeTracks } = require("../fixtures")
 
 // const url = `/api/v${version}/view-requirements`
 
-describe("MODEL requirements", () => {
+describe("MODEL tracks", () => {
     beforeAll(async done => {
         await db.migrate.rollback(null, true)
         await db.migrate.latest()
@@ -21,7 +21,7 @@ describe("MODEL requirements", () => {
         done()
     })
 
-    describe("findRequirementsByTrack", () => {
+    describe("findAllTracks", () => {
         // the only track_id we have is 1
         it("should return an array of objects", done => {
             findAllTracks().then(res => {
