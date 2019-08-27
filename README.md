@@ -49,8 +49,8 @@ To get the server running locally:
 | Method | Endpoint                | Access Control      | Description                                           |
 | ------ | ----------------------- | ------------------- | ----------------------------------------------------- |
 | GET    | `/api/v0/requirements`  | all users           | Returns a list of the user's endorsement requirements |
-| POST   | `/api/v0/requirements`  | all users           | Returns an object with token and userId.              |
-| GET    | `/users/:userId`        | owners, supervisors | Returns info for a single user.                       |
+| POST   | `/api/v0/login`         | all users           | Returns an object with token and userId.              |
+| GET    | `/api/v0/tracks`        | all users           | Returns a list of all available tracks                |
 | POST   | `/users/register/owner` | none                | Creates a new user as owner of a new organization.    |
 | PUT    | `/users/:userId`        | owners, supervisors |                                                       |
 | DELETE | `/users/:userId`        | owners, supervisors |                                                       |
@@ -111,6 +111,44 @@ Headers
     "tasks_description": "You should have quality contributions in your git hub",
     "is_endorsement_requirement": true
   }
+]
+```
+
+#### GET /api/v0/requirements
+
+##### REQUEST
+
+```
+Headers
+{
+  authorization: bearer token
+}
+```
+
+##### RESPONSE
+
+```
+[
+    {
+        "id": 1,
+        "title": "Full-Stack Web"
+    },
+    {
+        "id": 2,
+        "title": "iOS"
+    },
+    {
+        "id": 3,
+        "title": "Data Science"
+    },
+    {
+        "id": 4,
+        "title": "Android"
+    },
+    {
+        "id": 5,
+        "title": "UX Design"
+    }
 ]
 ```
 
