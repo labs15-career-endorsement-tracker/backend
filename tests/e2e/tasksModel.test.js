@@ -38,7 +38,7 @@ describe("MODEL requirements", () => {
         })
         it("should have [{'id': 1, 'title': 'Web'}] as it's first element,", done => {
             findRequirementsByTrack(1).then(res => {
-                expect(res[0]).toEqual(["Web"])
+                expect(res[0]).toEqual([{ id: 1, title: "Web" }])
                 done()
             })
         })
