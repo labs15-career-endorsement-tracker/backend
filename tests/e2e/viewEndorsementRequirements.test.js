@@ -34,7 +34,7 @@ describe("GET /view-requirements", () => {
         done()
     })
 
-    it("should return status 401", done => {
+    it("should return status 401 when no token is present", done => {
         request(app)
             .get(`/api/v${version}/view-requirements`)
             .set("Accept", "application/json")
