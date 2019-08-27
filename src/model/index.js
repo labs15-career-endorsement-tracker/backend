@@ -1,10 +1,6 @@
 const db = require("../../data")
-const {
-    findRequirementsByTrack,
-    getRequirementsWithProgress
-} = require("./requirements")
+const { findRequirementsByTrack } = require("./requirements")
 
-const { findCompletedStepsBy, findStepsByTask } = require("./steps")
 const { findAllTracks } = require("./tracks")
 
 const findUsers = () => db("users")
@@ -15,6 +11,5 @@ module.exports = {
     findUsers,
     findUsersBy,
     findRequirementsByTrack,
-    getRequirementsWithProgress,
     findAllTracks
 }
