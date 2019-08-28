@@ -43,14 +43,14 @@ const fakeSteps = [
         tasks_id: 1
     },
     {
-        number: 2,
-        steps_description: "Requirement 1 step 2",
+        number: 3,
+        steps_description: "Requirement 1 step 3",
         is_required: true,
         tasks_id: 1
     },
     {
-        number: 3,
-        steps_description: "Requirement 1 step 3",
+        number: 2,
+        steps_description: "Requirement 1 step 2",
         is_required: true,
         tasks_id: 1
     },
@@ -74,10 +74,30 @@ const fakeSteps = [
     }
 ]
 
+// hard code the created_at for testability
+const fakeCompletedSteps = [
+    {
+        user_id: 1,
+        steps_id: 1,
+        created_at: new Date("2019-08-28T19:24:40.504Z")
+    },
+    {
+        user_id: 1,
+        steps_id: 2,
+        created_at: new Date("2019-08-28T19:24:40.504Z")
+    },
+    {
+        user_id: 1,
+        steps_id: 6,
+        created_at: new Date("2019-08-28T19:24:40.504Z")
+    }
+]
+
 module.exports = {
     fakeUsers,
     fakeTasks,
     fakeSteps,
     fakeTasksTracks,
-    fakeTracks
+    fakeTracks,
+    fakeCompletedSteps
 }

@@ -1,8 +1,5 @@
 const db = require("../../data")
-const {
-    findRequirementsByTrack,
-    getRequirementsWithProgress
-} = require("../../src/model")
+const { findRequirementsByTrack } = require("../../src/model")
 const {
     fakeUsers,
     fakeTasks,
