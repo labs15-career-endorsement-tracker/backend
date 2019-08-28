@@ -9,6 +9,11 @@ exports.up = function(knex) {
             .notNullable()
             .unique()
         users.string("password", 255)
+        users.string("device_token").unique()
+        users
+            .boolean("is_admin")
+            .notNullable()
+            .defaultTo(false)
         users
             .integer("tracks_id")
             .unsigned()
