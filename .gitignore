@@ -92,3 +92,6 @@ typings/
 
 # Babel build output
 build/
+
+# VS Code Editor Settings
+.vscode/
