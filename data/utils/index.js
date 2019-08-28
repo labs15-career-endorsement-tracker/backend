@@ -9,8 +9,7 @@ const createMany = (factory, count = maxRecords) => {
         last_name: "ross",
         email: "bob_ross@happylittlemistakes.com",
         password: bcrypt.hashSync("Password1234!", 4),
-        tracks_id: 1,
-        is_admin: false
+        tracks_id: 1
     })
     for (let index = 0; index < count; index++) {
         many.push(factory())
@@ -26,8 +25,7 @@ const createUser = () => {
         last_name,
         email: internet.email(first_name, last_name).toLowerCase(),
         password: bcrypt.hashSync("Password1234!", 4),
-        tracks_id: random.arrayElement(tracks),
-        is_admin: false
+        tracks_id: random.arrayElement(tracks)
     }
 }
 
