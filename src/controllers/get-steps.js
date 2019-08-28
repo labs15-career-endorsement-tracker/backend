@@ -1,10 +1,6 @@
-const {} = require("http-errors")
+const { NotFound } = require("http-errors")
 
-const {
-    findCompletedStepsBy,
-    findStepsByTask,
-    getFormattedSteps
-} = require("../model")
+const { getFormattedSteps } = require("../model")
 const {} = require("../middleware")
 
 const getSteps = async (req, res, next) => {
@@ -12,6 +8,7 @@ const getSteps = async (req, res, next) => {
     const { requirementsId } = req.params
     try {
         const steps = await getFormattedSteps(requirementsId, id)
+        if (!steps.length) throw NotFound("Requirement does not exist")
         res.json(steps)
     } catch (error) {
         console.log(error)
