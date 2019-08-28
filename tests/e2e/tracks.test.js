@@ -19,7 +19,7 @@ describe("GET /tracks", () => {
         done()
     })
 
-    it("should return status 200 when token is present", done => {
+    it("should return status 200", done => {
         return request(app)
             .get(`/api/v${version}/tracks`)
             .set("Accept", "application/json")
