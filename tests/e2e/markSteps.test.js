@@ -68,7 +68,7 @@ describe("PUT /requirements/:requirementsId/steps/:stepsId", () => {
             .expect(404)
             .then(res => done())
     })
-    it("should return status 400 when user tries to mark incomplete task incomplete", done => {
+    it("should return status 400 when user mistakenly sends is_complete as a string (or anything that's not a boolean)", done => {
         request(app)
             .put(`/api/v${version}/requirements/100/steps/1`)
             .set("Accept", "application/json")
