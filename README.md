@@ -46,15 +46,15 @@ To get the server running locally:
 
 #### User Routes
 
-| Method | Endpoint                | Access Control      | Description                                           |
-| ------ | ----------------------- | ------------------- | ----------------------------------------------------- |
-| GET    | `/api/v0/requirements`  | all users           | Returns a list of the user's endorsement requirements |
-| POST   | `/api/v0/users`         | all users           | Returns `{userId: Int, token: String }`               |
-| POST   | `/api/v0/login`         | all users           | Returns an object with token and userId.              |
-| GET    | `/api/v0/tracks`        | all users           | Returns a list of all available tracks                |
-| POST   | `/users/register/owner` | none                | Creates a new user as owner of a new organization.    |
-| PUT    | `/users/:userId`        | owners, supervisors |                                                       |
-| DELETE | `/users/:userId`        | owners, supervisors |                                                       |
+| Method | Endpoint                              | Access Control      | Description                                                                                        |
+| ------ | ------------------------------------- | ------------------- | -------------------------------------------------------------------------------------------------- |
+| GET    | `/api/v0/requirements`                | all users           | Returns a list of the user's endorsement requirements                                              |
+| POST   | `/api/v0/users`                       | all users           | Returns `{userId: Int, token: String }`                                                            |
+| POST   | `/api/v0/login`                       | all users           | Returns an object with token and userId.                                                           |
+| GET    | `/api/v0/tracks`                      | all users           | Returns a list of all available tracks                                                             |
+| GET    | `/requirements/:requirementsId/steps` | all users           | Gets a list of the steps for a given requirement, ordered by step number, with flag for completion |
+| PUT    | `/users/:userId`                      | owners, supervisors |                                                                                                    |
+| DELETE | `/users/:userId`                      | owners, supervisors |                                                                                                    |
 
 ## Endpoint Examples
 
@@ -115,7 +115,7 @@ Headers
 ]
 ```
 
-#### GET /api/v0/requirements
+#### GET /api/v0/tracks
 
 ##### REQUEST
 
@@ -146,6 +146,48 @@ Headers
     {
         "id": 5,
         "title": "UX Design"
+    }
+]
+```
+
+#### GET /api/v0/requirements/:requirementsId/steps
+
+##### REQUEST
+
+```
+Headers
+{
+  authorization: bearer token
+}
+```
+
+##### RESPONSE
+
+```
+[
+    {
+        "id": 1,
+        "number": 1,
+        "steps_description": "Get started with Creddle or Novoresume as a template. You can also use your own, but Creddle and Novoresume look great and take the guesswork out of formatting!",
+        "is_required": true,
+        "tasks_id": 1,
+        "is_complete": true
+    },
+    {
+        "id": 2,
+        "number": 2,
+        "steps_description": "Use the resume rubric and resume deep-dive to make sure you’re including all required sections in your resume",
+        "is_required": true,
+        "tasks_id": 1,
+        "is_complete": true
+    },
+    {
+        "id": 3,
+        "number": 3,
+        "steps_description": "Submit your resume for a free review through CV Compiler",
+        "is_required": true,
+        "tasks_id": 1,
+        "is_complete": false
     }
 ]
 ```
