@@ -1,8 +1,6 @@
-const {} = require("bcryptjs")
 const { Conflict } = require("http-errors")
 
 const { insertUser } = require("../model")
-const {} = require("../utils")
 const { validateEmail, validatePassword } = require("../middleware")
 
 const addUser = async (req, res, next) => {
