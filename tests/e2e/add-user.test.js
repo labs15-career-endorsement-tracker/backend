@@ -108,4 +108,22 @@ describe("POST /users", () => {
                 done()
             })
     })
+
+    it("throws a 400 error if user provides invalid track_id", async done => {
+        bob.tracks_id = 1234
+
+        request(app)
+            .post(`/api/v${version}/users`)
+            .send(bob)
+            .set("Accept", "application/json")
+            .expect(400)
+            .then(res => {
+                expect(res.body).toEqual({
+                    message: "Invalid tracks_id",
+                    name: "BadRequestError",
+                    statusCode: 400
+                })
+                done()
+            })
+    })
 })
