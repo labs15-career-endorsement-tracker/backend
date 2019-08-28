@@ -1,4 +1,7 @@
-exports.up = function(knex) {
+exports.up = async knex => {
+    const hasTable = await knex.schema.hasTable("tasks")
+    if (hasTable) return
+
     return knex.schema.createTable("tasks", tasks => {
         tasks.increments()
         tasks.string("title", 255).notNullable()
