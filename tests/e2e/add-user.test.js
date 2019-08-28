@@ -30,7 +30,8 @@ describe("POST /users", () => {
             .expect(201)
             .then(async res => {
                 const user = res.body
-                expect(user).toHaveProperty("userId")
+                expect(res.body).toHaveProperty("token")
+                expect(res.body).toHaveProperty("userId")
                 done()
             })
     })
