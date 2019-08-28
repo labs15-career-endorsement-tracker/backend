@@ -7,6 +7,8 @@ const {
     getFormattedSteps
 } = require("./steps")
 
+const { markComplete, markIncomplete } = require("./completedSteps")
+
 module.exports = {
     findUsers,
     findUsersBy,
@@ -16,5 +18,7 @@ module.exports = {
     insertUser,
     findStepsByTask,
     findCompletedStepsBy,
-    getFormattedSteps
+    getFormattedSteps,
+    markComplete,
+    markIncomplete
 }
