@@ -9,15 +9,16 @@ const markSteps = async (req, res, next) => {
     const { userId } = res.locals
     const { stepsId, requirementsId } = req.params
     try {
-        if (typeof is_complete !== Boolean)
-            throw BadRequest("is_complete should be boolean")
+        if (typeof is_complete !== "boolean")
+            throw BadRequest(`is_complete should be boolean`)
         if (is_complete) {
-            await markIncomplete(userId, stepsId)
+            const deleted = await markIncomplete(userId, stepsId)
+            if (!deleted) throw BadRequest(`Step is already incomplete`)
         } else {
             await markComplete(userId, stepsId)
         }
         const steps = await getFormattedSteps(requirementsId, userId)
-        if (!steps.length) throw NotFound("Requirement does not exist")
+        if (!steps.length) throw NotFound(`Requirement does not exist`)
         res.json(steps)
     } catch (error) {
         switch (Number(error.code)) {
