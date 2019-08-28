@@ -5,7 +5,8 @@ const {
     addUser,
     login,
     viewEndorsementRequirements,
-    viewTracks
+    viewTracks,
+    getSteps
 } = require("../controllers")
 
 const { requiresAuth } = require("../middleware")
@@ -20,5 +21,7 @@ api.post("/login", login)
 api.get("/requirements", requiresAuth, viewEndorsementRequirements)
 
 api.get("/tracks", viewTracks)
+
+api.get("/requirements/:requirementsId/steps", requiresAuth, getSteps)
 
 module.exports = api
