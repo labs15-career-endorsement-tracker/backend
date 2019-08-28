@@ -16,5 +16,6 @@ module.exports = {
     addUser: require("./add-user"),
     viewEndorsementRequirements: require("./viewEndorsementRequirements"),
     viewTracks: require("./tracks"),
-    getSteps: require("./get-steps")
+    getSteps: require("./get-steps"),
+    markSteps: require("./mark-steps")
 }
