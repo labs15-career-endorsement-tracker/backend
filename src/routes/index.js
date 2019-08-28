@@ -19,6 +19,6 @@ api.post("/login", login)
 
 api.get("/requirements", requiresAuth, viewEndorsementRequirements)
 
-api.get("/tracks", requiresAuth, viewTracks)
+api.get("/tracks", viewTracks)
 
 module.exports = api
