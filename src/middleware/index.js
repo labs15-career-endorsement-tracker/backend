@@ -3,7 +3,8 @@ const {
     validateEmail,
     validatePassword,
     validateFirstName,
-    validateLastName
+    validateLastName,
+    validateTrackId
 } = require("./validators")
 const requiresAuth = require("./requiresAuth")
 
@@ -14,5 +15,6 @@ module.exports = {
     validatePassword,
     validateFirstName,
     validateLastName,
+    validateTrackId,
     requiresAuth
 }

@@ -5,7 +5,8 @@ const {
     validateEmail,
     validatePassword,
     validateFirstName,
-    validateLastName
+    validateLastName,
+    validateTrackId
 } = require("../middleware")
 
 const addUser = async (req, res, next) => {
@@ -29,5 +30,6 @@ module.exports = [
     validatePassword,
     validateFirstName,
     validateLastName,
+    validateTrackId,
     addUser
 ]

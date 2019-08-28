@@ -1,6 +1,8 @@
 const { BadRequest } = require("http-errors")
 const { check, validationResult } = require("express-validator")
 
+const { findAllTracks } = require("../model")
+
 const handleValidationResult = (req, next, fieldName) => {
     const result = validationResult(req)
 
@@ -78,9 +80,30 @@ const validateLastName = async (req, _res, next) => {
     next()
 }
 
+const validateTrackId = async (req, _res, next) => {
+    const fieldName = "tracks_id"
+
+    try {
+        const [{ count }] = await findAllTracks().count()
+        await check(fieldName)
+            .not()
+            .isEmpty()
+            .withMessage(`Missing required key: ${fieldName}`)
+            .isInt({ min: 1, max: count })
+            .withMessage(`Invalid ${fieldName}`)
+            .run(req)
+    } catch (error) {
+        next(error)
+    }
+
+    handleValidationResult(req, next, fieldName)
+    next()
+}
+
 module.exports = {
     validateEmail,
     validatePassword,
     validateFirstName,
-    validateLastName
+    validateLastName,
+    validateTrackId
 }
