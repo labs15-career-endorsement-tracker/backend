@@ -7,7 +7,10 @@ const app = require("../../src/app")
 const { fakeUsers } = require("../fixtures")
 
 describe("POST /users", () => {
+    let bob
+
     beforeEach(async done => {
+        bob = { ...fakeUsers[0], password: "Password1234!" }
         await db.migrate.rollback(null, true)
         await db.migrate.latest()
         await db("tracks").insert({ title: "Web" })
@@ -20,9 +23,6 @@ describe("POST /users", () => {
     })
 
     it("adds a user", done => {
-        const bob = fakeUsers[0]
-        bob.password = "Password1234!"
-
         request(app)
             .post(`/api/v${version}/users`)
             .send(bob)
@@ -36,9 +36,6 @@ describe("POST /users", () => {
     })
 
     it("hashes user's password correctly", done => {
-        const bob = fakeUsers[0]
-        bob.password = "Password1234!"
-
         request(app)
             .post(`/api/v${version}/users`)
             .send(bob)
@@ -58,9 +55,6 @@ describe("POST /users", () => {
     })
 
     it("throws a 409 error if user already exists", async done => {
-        const bob = fakeUsers[0]
-        bob.password = "Password1234!"
-
         await db("users").insert(fakeUsers)
 
         request(app)
@@ -73,6 +67,43 @@ describe("POST /users", () => {
                     message: "User already has an account",
                     name: "ConflictError",
                     statusCode: 409
+                })
+                done()
+            })
+    })
+
+    it("throws a 400 error if user provides invalid first_name", async done => {
+        bob.first_name = ""
+
+        request(app)
+            .post(`/api/v${version}/users`)
+            .send(bob)
+            .set("Accept", "application/json")
+            .expect(400)
+            .then(async res => {
+                expect(res.body).toEqual({
+                    message: "Missing required key: first_name",
+                    name: "BadRequestError",
+                    statusCode: 400
+                })
+
+                done()
+            })
+    })
+
+    it("throws a 400 error if user provides invalid last_name", async done => {
+        bob.last_name = 1234
+
+        request(app)
+            .post(`/api/v${version}/users`)
+            .send(bob)
+            .set("Accept", "application/json")
+            .expect(400)
+            .then(res => {
+                expect(res.body).toEqual({
+                    message: "last_name must be a string",
+                    name: "BadRequestError",
+                    statusCode: 400
                 })
                 done()
             })
