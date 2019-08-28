@@ -13,8 +13,6 @@ const {
     fakeCompletedSteps
 } = require("../fixtures")
 
-// const url = `/api/v${version}/requirements`
-
 describe("MODEL steps", () => {
     beforeAll(async done => {
         await db.migrate.rollback(null, true)
@@ -27,10 +25,6 @@ describe("MODEL steps", () => {
         await db("user_steps_completed").insert(fakeCompletedSteps)
         done()
     })
-
-    // beforeEach(async done => {
-    //     done()
-    // })
 
     afterAll(async done => {
         await db.destroy()
