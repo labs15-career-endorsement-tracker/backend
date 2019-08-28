@@ -8,6 +8,5 @@ const markComplete = (userId, stepId) =>
 const markIncomplete = (userId, stepId) =>
     db("user_steps_completed")
         .where({ user_id: userId, steps_id: stepId })
-
         .del()
 module.exports = { markComplete, markIncomplete }
