@@ -49,6 +49,7 @@ To get the server running locally:
 | Method | Endpoint                | Access Control      | Description                                           |
 | ------ | ----------------------- | ------------------- | ----------------------------------------------------- |
 | GET    | `/api/v0/requirements`  | all users           | Returns a list of the user's endorsement requirements |
+| POST   | `/api/v0/users`         | all users           | Returns `{userId: Int, token: String }`               |
 | POST   | `/api/v0/login`         | all users           | Returns an object with token and userId.              |
 | GET    | `/api/v0/tracks`        | all users           | Returns a list of all available tracks                |
 | POST   | `/users/register/owner` | none                | Creates a new user as owner of a new organization.    |
