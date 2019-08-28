@@ -1,5 +1,5 @@
 exports.up = async knex => {
-    const hasTable = await knex.schema.hasTable("users")
+    const hasTable = await knex.schema.hasTable("steps")
     if (hasTable) return
 
     return knex.schema.createTable("steps", steps => {
