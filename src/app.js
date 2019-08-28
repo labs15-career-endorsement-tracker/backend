@@ -4,7 +4,7 @@ const cors = require("cors")
 const morgan = require("morgan")
 const helmet = require("helmet")
 
-const { version } = require("./config")
+const { version, isTesting } = require("./config")
 const { handle404, handle500 } = require("./middleware")
 const router = require("./routes")
 
@@ -13,7 +13,11 @@ const app = express()
 app.use(helmet())
 app.use(jsonParser())
 app.use(cors())
-app.use(morgan("dev"))
+app.use(
+    morgan("dev", {
+        skip: () => isTesting
+    })
+)
 
 app.use(`/api/v${version}`, router)
 app.get("/", (_req, res) => {

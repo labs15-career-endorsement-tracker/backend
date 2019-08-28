@@ -1,6 +1,8 @@
 const { BadRequest } = require("http-errors")
 const { check, validationResult } = require("express-validator")
 
+const { findAllTracks } = require("../model")
+
 const handleValidationResult = (req, next, fieldName) => {
     const result = validationResult(req)
 
@@ -42,4 +44,66 @@ const validatePassword = async (req, _res, next) => {
     next()
 }
 
-module.exports = { validateEmail, validatePassword }
+const validateFirstName = async (req, _res, next) => {
+    const fieldName = "first_name"
+
+    try {
+        await check(fieldName)
+            .not()
+            .isEmpty()
+            .withMessage(`Missing required key: ${fieldName}`)
+            .isString()
+            .withMessage(`${fieldName} must be a string`)
+            .run(req)
+    } catch (error) {
+        next(error)
+    }
+    handleValidationResult(req, next, fieldName)
+    next()
+}
+
+const validateLastName = async (req, _res, next) => {
+    const fieldName = "last_name"
+
+    try {
+        await check(fieldName)
+            .not()
+            .isEmpty()
+            .withMessage(`Missing required key: ${fieldName}`)
+            .isString()
+            .withMessage(`${fieldName} must be a string`)
+            .run(req)
+    } catch (error) {
+        next(error)
+    }
+    handleValidationResult(req, next, fieldName)
+    next()
+}
+
+const validateTrackId = async (req, _res, next) => {
+    const fieldName = "tracks_id"
+
+    try {
+        const [{ count }] = await findAllTracks().count()
+        await check(fieldName)
+            .not()
+            .isEmpty()
+            .withMessage(`Missing required key: ${fieldName}`)
+            .isInt({ min: 1, max: count })
+            .withMessage(`Invalid ${fieldName}`)
+            .run(req)
+    } catch (error) {
+        next(error)
+    }
+
+    handleValidationResult(req, next, fieldName)
+    next()
+}
+
+module.exports = {
+    validateEmail,
+    validatePassword,
+    validateFirstName,
+    validateLastName,
+    validateTrackId
+}

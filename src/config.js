@@ -20,6 +20,7 @@ const port = PORT || 5000
 
 module.exports = {
     environment,
+    isTesting,
     dbUrl,
     port,
     version: version.split(".")[0],
