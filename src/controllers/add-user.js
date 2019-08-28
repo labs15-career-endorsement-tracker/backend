@@ -1,7 +1,12 @@
 const { Conflict } = require("http-errors")
 
 const { insertUser } = require("../model")
-const { validateEmail, validatePassword } = require("../middleware")
+const {
+    validateEmail,
+    validatePassword,
+    validateFirstName,
+    validateLastName
+} = require("../middleware")
 
 const addUser = async (req, res, next) => {
     try {
@@ -19,4 +24,10 @@ const addUser = async (req, res, next) => {
     }
 }
 
-module.exports = [validateEmail, validatePassword, addUser]
+module.exports = [
+    validateEmail,
+    validatePassword,
+    validateFirstName,
+    validateLastName,
+    addUser
+]

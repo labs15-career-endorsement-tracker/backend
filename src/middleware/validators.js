@@ -42,4 +42,45 @@ const validatePassword = async (req, _res, next) => {
     next()
 }
 
-module.exports = { validateEmail, validatePassword }
+const validateFirstName = async (req, _res, next) => {
+    const fieldName = "first_name"
+
+    try {
+        await check(fieldName)
+            .not()
+            .isEmpty()
+            .withMessage(`Missing required key: ${fieldName}`)
+            .isString()
+            .withMessage(`${fieldName} must be a string`)
+            .run(req)
+    } catch (error) {
+        next(error)
+    }
+    handleValidationResult(req, next, fieldName)
+    next()
+}
+
+const validateLastName = async (req, _res, next) => {
+    const fieldName = "last_name"
+
+    try {
+        await check(fieldName)
+            .not()
+            .isEmpty()
+            .withMessage(`Missing required key: ${fieldName}`)
+            .isString()
+            .withMessage(`${fieldName} must be a string`)
+            .run(req)
+    } catch (error) {
+        next(error)
+    }
+    handleValidationResult(req, next, fieldName)
+    next()
+}
+
+module.exports = {
+    validateEmail,
+    validatePassword,
+    validateFirstName,
+    validateLastName
+}
