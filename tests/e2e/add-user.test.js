@@ -1,4 +1,5 @@
 const request = require("supertest")
+const { compare } = require("bcryptjs")
 
 const { version } = require("../../src/config")
 const db = require("../../data")
@@ -27,9 +28,31 @@ describe("POST /users", () => {
             .send(bob)
             .set("Accept", "application/json")
             .expect(201)
-            .then(res => {
+            .then(async res => {
                 const user = res.body
                 expect(user).toHaveProperty("userId")
+                done()
+            })
+    })
+
+    it("hashes user's password correctly", done => {
+        const bob = fakeUsers[0]
+        bob.password = "Password1234!"
+
+        request(app)
+            .post(`/api/v${version}/users`)
+            .send(bob)
+            .set("Accept", "application/json")
+            .expect(201)
+            .then(async res => {
+                const { userId } = res.body
+
+                const { password } = await db("users")
+                    .where("id", userId)
+                    .first()
+
+                const passwordsMatch = await compare(bob.password, password)
+                expect(passwordsMatch).toBeTruthy()
                 done()
             })
     })
