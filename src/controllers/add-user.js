@@ -8,12 +8,14 @@ const {
     validateLastName,
     validateTrackId
 } = require("../middleware")
+const { generateJwt } = require("../utils")
 
 const addUser = async (req, res, next) => {
     try {
         const [createdUser] = await insertUser(req.body)
 
-        res.status(201).json({ userId: createdUser.id })
+        const userId = createdUser.id
+        res.status(201).json({ token: generateJwt({ userId }), userId })
     } catch (error) {
         switch (Number(error.code)) {
             case 23505:
