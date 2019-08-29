@@ -9,8 +9,8 @@ const findUsers = () => db("users")
 
 const findUsersBy = filter => db("users").where(filter)
 
-const findUserNoPassword = userId =>
-    db("users")
+const findUserNoPassword = userId => {
+    return db("users")
         .where({ id: userId })
         .select(
             "first_name",
@@ -21,6 +21,7 @@ const findUserNoPassword = userId =>
             "id"
         )
         .first()
+}
 
 const getUserWithProgress = async userId => {
     const user = await findUserNoPassword(userId)
