@@ -11,7 +11,6 @@ const getAllProgressForUser = async (req, res, next) => {
         const userProgress = await getUserWithProgress(userId, 10)
         res.json(userProgress)
     } catch (error) {
-        console.log(error)
         next(error)
     }
 }

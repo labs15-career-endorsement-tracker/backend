@@ -12,7 +12,8 @@ const { findStepsByTask, getFormattedSteps } = require("./steps")
 const {
     findCompletedStepsBy,
     markComplete,
-    markIncomplete
+    markIncomplete,
+    findCompletedRequirementStepsByUser
 } = require("./completedSteps")
 
 module.exports = {
@@ -28,5 +29,6 @@ module.exports = {
     findCompletedStepsBy,
     getFormattedSteps,
     markComplete,
-    markIncomplete
+    markIncomplete,
+    findCompletedRequirementStepsByUser
 }

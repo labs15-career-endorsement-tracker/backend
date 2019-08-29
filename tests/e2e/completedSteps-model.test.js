@@ -2,7 +2,9 @@ const db = require("../../data")
 const {
     markComplete,
     markIncomplete,
-    findCompletedStepsBy
+    findCompletedStepsBy,
+    findStepsByTask,
+    findCompletedRequirementStepsByUser
 } = require("../../src/model")
 const {
     fakeUsers,
@@ -13,7 +15,7 @@ const {
     fakeCompletedSteps
 } = require("../fixtures")
 
-describe("MODEL steps", () => {
+describe("MODEL completed steps", () => {
     beforeAll(async done => {
         await db.migrate.rollback(null, true)
         await db.migrate.latest()
@@ -25,7 +27,9 @@ describe("MODEL steps", () => {
         await db("user_steps_completed").insert(fakeCompletedSteps)
         done()
     })
-
+    beforeEach(async done => {
+        done()
+    })
     afterAll(async done => {
         await db.destroy()
         done()
@@ -120,5 +124,21 @@ describe("MODEL steps", () => {
                 done()
             })
         })
+        it("should not remove any other entries from the db", done => {
+            findCompletedStepsBy({ user_id: 1 }).then(res => {
+                expect(res.length).toBe(3)
+            })
+
+            findStepsByTask(1).then(steps => {
+                expect(steps.length).toBe(3)
+                done()
+            })
+        })
+        // it("should not remove any other entries from the db", done => {
+        //     findCompletedRequirementStepsBy(1).then(res => {
+        //         expect(res.length).toBe(3)
+        //         done()
+        //     })
+        // })
     })
 })

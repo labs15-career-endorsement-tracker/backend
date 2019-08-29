@@ -13,9 +13,7 @@ const {
     fakeTracks
 } = require("../fixtures")
 
-// const url = `/api/v${version}/requirements`
-
-describe("MODEL requirements", () => {
+describe("MODEL all progress", () => {
     beforeAll(async done => {
         await db.migrate.rollback(null, true)
         await db.migrate.latest()
@@ -27,9 +25,12 @@ describe("MODEL requirements", () => {
         done()
     })
 
-    // beforeEach(async done => {
-    //     done()
-    // })
+    beforeEach(async done => {
+        done()
+    })
+    afterEach(async done => {
+        done()
+    })
 
     afterAll(async done => {
         await db.destroy()
@@ -84,14 +85,13 @@ describe("MODEL requirements", () => {
         })
     })
     describe("getUserWithProgress", () => {
-        // the only track_id we have is 1
         it("should return an object", done => {
             getUserWithProgress(1).then(res => {
                 expect(res).toEqual(expect.any(Object))
                 done()
             })
         })
-        it("should return an array of objects with shape: {id (int), first_name (string), last_name (string), email (string), tracks_id (int), is_admin (bool), progress (int)} ", done => {
+        it("should return an object with shape: {id (int), first_name (string), last_name (string), email (string), tracks_id (int), is_admin (bool), progress (int)} ", done => {
             getUserWithProgress(1).then(res => {
                 expect(res).toEqual(
                     expect.objectContaining({
@@ -108,6 +108,7 @@ describe("MODEL requirements", () => {
             })
         })
         it("should have this object as it's first element: { first_name: 'bob',last_name: 'ross', email: 'bob_ross@happylittlemistakes.com', tracks_id: 1, is_admin: false, id: 1 },", done => {
+            debugger
             getUserWithProgress(1).then(res => {
                 expect(res).toEqual({
                     first_name: "bob",
@@ -137,7 +138,7 @@ describe("MODEL requirements", () => {
                     done()
                 })
         })
-        it("should return updated data if a step is marked ncomplete", done => {
+        it("should return updated data if a step is marked incomplete", done => {
             markIncomplete(1, 3)
                 .then(() => getUserWithProgress(1))
                 .then(res => {

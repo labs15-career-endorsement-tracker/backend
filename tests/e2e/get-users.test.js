@@ -13,7 +13,9 @@ describe("GET /users", () => {
         await db("users").insert(fakeUsers)
         done()
     })
-
+    beforeEach(async done => {
+        done()
+    })
     afterAll(async done => {
         await db.destroy()
         done()

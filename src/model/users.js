@@ -27,14 +27,19 @@ const getUserWithProgress = async userId => {
     const user = await findUserNoPassword(userId)
     const requirements = await findRequirementsByTrack(user.tracks_id)
     const allSteps = []
+    const aStep = await findStepsByTask(1)
+    debugger
     requirements.forEach(async requirement => {
         const steps = await findStepsByTask(requirement.id)
+        debugger
         allSteps.push(...steps)
     })
     const completedSteps = await findCompletedStepsBy({ user_id: userId })
+    const progress = Math.round((completedSteps.length / allSteps.length) * 100)
+    debugger
     return {
         ...user,
-        progress: Math.round((completedSteps.length / allSteps.length) * 100)
+        progress
     }
 }
 
