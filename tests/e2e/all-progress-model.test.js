@@ -107,6 +107,7 @@ describe("MODEL all progress", () => {
                 done()
             })
         })
+        // original failer
         it("should have this object as it's first element: { first_name: 'bob',last_name: 'ross', email: 'bob_ross@happylittlemistakes.com', tracks_id: 1, is_admin: false, id: 1 },", done => {
             debugger
             getUserWithProgress(1).then(res => {
