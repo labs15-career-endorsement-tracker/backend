@@ -11,7 +11,6 @@ const getSteps = async (req, res, next) => {
         if (!steps.length) throw NotFound("Requirement does not exist")
         res.json(steps)
     } catch (error) {
-        console.log(error)
         next(error)
     }
 }
