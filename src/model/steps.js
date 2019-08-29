@@ -1,12 +1,11 @@
 const db = require("../../data")
+
+const { findCompletedStepsBy } = require("./completedSteps")
 // Get all the steps for a task
 const findStepsByTask = taskId =>
     db("steps")
         .where({ tasks_id: taskId })
         .orderBy("number")
-
-// Get steps from the user_steps_completed table either by user_id or steps_id
-const findCompletedStepsBy = filter => db("user_steps_completed").where(filter)
 
 // Format steps into an array of step objects with completion flag
 const getFormattedSteps = async (taskId, userId) => {
@@ -22,7 +21,6 @@ const getFormattedSteps = async (taskId, userId) => {
 }
 
 module.exports = {
-    findCompletedStepsBy,
     findStepsByTask,
     getFormattedSteps
 }

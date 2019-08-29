@@ -1,9 +1,5 @@
 const db = require("../../data")
-const {
-    findStepsByTask,
-    findCompletedStepsBy,
-    getFormattedSteps
-} = require("../../src/model")
+const { findStepsByTask, getFormattedSteps } = require("../../src/model")
 const {
     fakeUsers,
     fakeTasks,
@@ -74,34 +70,7 @@ describe("MODEL steps", () => {
             })
         })
     })
-    describe("findCompletedStepsBy", () => {
-        it("should return an array of objects", done => {
-            findCompletedStepsBy({ user_id: 1 }).then(res => {
-                expect(res).toEqual(expect.any(Array))
-                expect(res).toContainEqual(expect.any(Object))
-                done()
-            })
-        })
-        it("should return an array of objects with shape: {id (int), user_id (int), steps_id (bool), created_at (String)} ", done => {
-            findCompletedStepsBy({ user_id: 1 }).then(res => {
-                expect(res[0]).toEqual(
-                    expect.objectContaining({
-                        id: expect.any(Number),
-                        user_id: expect.any(Number),
-                        steps_id: expect.any(Number),
-                        created_at: expect.any(Date)
-                    })
-                )
-                done()
-            })
-        })
-        it("should have this object as it's first element: { user_id: 1, steps_id: 1 },", done => {
-            findCompletedStepsBy({ user_id: 1 }).then(res => {
-                expect(res[0]).toEqual({ ...fakeCompletedSteps[0], id: 1 })
-                done()
-            })
-        })
-    })
+
     describe("getFormattedSteps", () => {
         it("should return an array of objects", done => {
             getFormattedSteps(1, 1).then(res => {
