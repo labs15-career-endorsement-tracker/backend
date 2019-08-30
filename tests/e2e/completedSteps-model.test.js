@@ -61,6 +61,60 @@ describe("MODEL completed steps", () => {
                 done()
             })
         })
+        it("should have have 3 elements,", done => {
+            findCompletedStepsBy({ user_id: 1 }).then(res => {
+                expect(res.length).toBe(3)
+                done()
+            })
+        })
+        it("should return an empty array when you look up a user that does not exist,", done => {
+            findCompletedStepsBy({ user_id: 1000 }).then(res => {
+                expect(res).toEqual([])
+                expect(res.length).toBe(0)
+                done()
+            })
+        })
+    })
+    describe("findCompletedRequirementStepsByUser", () => {
+        it("should return an array of objects", done => {
+            findCompletedRequirementStepsByUser(1).then(res => {
+                expect(res).toEqual(expect.any(Array))
+                expect(res).toContainEqual(expect.any(Object))
+                done()
+            })
+        })
+        it("should return an array of objects with shape: {id (int), user_id (int), steps_id (bool), created_at (String)} ", done => {
+            findCompletedRequirementStepsByUser(1).then(res => {
+                expect(res[0]).toEqual(
+                    expect.objectContaining({
+                        id: expect.any(Number),
+                        user_id: expect.any(Number),
+                        steps_id: expect.any(Number),
+                        created_at: expect.any(Date)
+                    })
+                )
+                done()
+            })
+        })
+        it("should have this object as it's first element: { user_id: 1, steps_id: 1 },", done => {
+            findCompletedRequirementStepsByUser(1).then(res => {
+                expect(res[0]).toEqual({ ...fakeCompletedSteps[0], id: 1 })
+                done()
+            })
+        })
+        it("should have have 2 elements,", done => {
+            findCompletedRequirementStepsByUser(1).then(res => {
+                expect(res.length).toBe(2)
+                done()
+            })
+        })
+        it("should return an empty array when you look up a user that does not exist,", done => {
+            findCompletedRequirementStepsByUser(1000).then(res => {
+                expect(res).toEqual([])
+                expect(res.length).toBe(0)
+                done()
+            })
+        })
     })
     describe("markComplete", () => {
         it("should return an array with an object", done => {

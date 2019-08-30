@@ -12,6 +12,12 @@ const findCompletedRequirementStepsByUser = userId => {
         .join("user_steps_completed as u_s_c", "st.id", "u_s_c.steps_id")
         .where({ is_endorsement_requirement: true })
         .andWhere({ "u_s_c.user_id": userId })
+        .select(
+            "u_s_c.id",
+            "u_s_c.steps_id",
+            "u_s_c.user_id",
+            "u_s_c.created_at"
+        )
 }
 
 const markComplete = (userId, stepId) =>
