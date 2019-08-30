@@ -33,7 +33,7 @@ const fakeCoaches = [
 const createMany = (factory, count = maxRecords) => {
     const many = []
     // we want to seed a couple static users and coaches for static login creds
-    many.push(...fakeUsers, ...fakeCoaches)
+    many.push(...fakeUsers)
     for (let index = 0; index < count; index++) {
         many.push(factory())
     }

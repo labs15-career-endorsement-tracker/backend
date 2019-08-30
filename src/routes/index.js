@@ -16,6 +16,7 @@ const { requiresAuth } = require("../middleware")
 const api = Router()
 
 api.get("/users", getUsers)
+
 api.post("/users", addUser)
 
 api.get("/users/:userId", requiresAuth, getAllProgressForUser)
