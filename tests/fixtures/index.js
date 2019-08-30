@@ -9,6 +9,30 @@ const fakeUsers = [
         tracks_id: 1
     }
 ]
+
+const fakeCoaches = [
+    {
+        first_name: "Alan",
+        last_name: "Turing",
+        email: "a_turing@gmail.com",
+        password: bcrypt.hashSync("Password1234!", 4),
+        is_admin: true
+    },
+    {
+        first_name: "Grace",
+        last_name: "Hopper",
+        email: "g_hopper@gmail.com",
+        password: bcrypt.hashSync("Password1234!", 4),
+        is_admin: true
+    },
+    {
+        first_name: "Ada",
+        last_name: "Lovelace",
+        email: "a_lovelace@gmail.com",
+        password: bcrypt.hashSync("Password1234!", 4),
+        is_admin: true
+    }
+]
 const fakeTracks = [{ title: "Web" }]
 const fakeTasks = [
     {
@@ -28,14 +52,22 @@ const fakeTasks = [
         is_required: true,
         tasks_description: "Requirement 3 description",
         is_endorsement_requirement: false
+    },
+    {
+        title: "Requirement 4",
+        is_required: true,
+        tasks_description: "Requirement 4 description",
+        is_endorsement_requirement: true
     }
 ]
 const fakeTasksTracks = [
     { tracks_id: 1, tasks_id: 1 },
-    { tracks_id: 1, tasks_id: 3 }
+    { tracks_id: 1, tasks_id: 3 },
+    { tracks_id: 1, tasks_id: 4 }
 ]
 
 const fakeSteps = [
+    // Only these first three steps belong to a REQUIREMENT
     {
         number: 1,
         steps_description: "Requirement 1 step 1",
@@ -71,6 +103,24 @@ const fakeSteps = [
         steps_description: "Requirement 3 step 3",
         is_required: true,
         tasks_id: 3
+    },
+    {
+        number: 1,
+        steps_description: "Requirement 2 step 1",
+        is_required: true,
+        tasks_id: 4
+    },
+    {
+        number: 2,
+        steps_description: "Requirement 2 step 2",
+        is_required: true,
+        tasks_id: 4
+    },
+    {
+        number: 3,
+        steps_description: "Requirement 3 step 3",
+        is_required: true,
+        tasks_id: 4
     }
 ]
 
@@ -90,6 +140,11 @@ const fakeCompletedSteps = [
         user_id: 1,
         steps_id: 6,
         created_at: new Date("2019-08-28T19:24:40.504Z")
+    },
+    {
+        user_id: 1,
+        steps_id: 7,
+        created_at: new Date("2019-08-28T19:24:40.504Z")
     }
 ]
 
@@ -99,5 +154,6 @@ module.exports = {
     fakeSteps,
     fakeTasksTracks,
     fakeTracks,
-    fakeCompletedSteps
+    fakeCompletedSteps,
+    fakeCoaches
 }

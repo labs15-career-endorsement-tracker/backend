@@ -46,15 +46,15 @@ To get the server running locally:
 
 #### User Routes
 
-| Method | Endpoint                              | Access Control      | Description                                                                                                                                                                 |
-| ------ | ------------------------------------- | ------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| GET    | `/api/v0/requirements`                | all users           | Returns a list of the user's endorsement requirements                                                                                                                       |
-| POST   | `/api/v0/users`                       | all users           | Returns `{userId: Int, token: String }`                                                                                                                                     |
-| POST   | `/api/v0/login`                       | all users           | Returns an object with token and userId.                                                                                                                                    |
-| GET    | `/api/v0/tracks`                      | all users           | Returns a list of all available tracks                                                                                                                                      |
-| GET    | `/requirements/:requirementsId/steps` | all users           | Gets a list of the steps for a given requirement, ordered by step number, with flag for completion                                                                          |
-| PUT    | `/requirements/:requirementsId/steps` | all users           | Mark a step complete or incomplete: send the current state of the step. If its is_complete flag is currently true, send {is_complete:true} and it will be marked incomplete |
-| DELETE | `/users/:userId`                      | owners, supervisors |                                                                                                                                                                             |
+| Method | Endpoint                              | Access Control | Description                                                                                                                                                                 |
+| ------ | ------------------------------------- | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| GET    | `/api/v0/requirements`                | all users      | Returns a list of the user's endorsement requirements                                                                                                                       |
+| POST   | `/api/v0/users`                       | all users      | Returns `{userId: Int, token: String }`                                                                                                                                     |
+| POST   | `/api/v0/login`                       | all users      | Returns an object with token and userId.                                                                                                                                    |
+| GET    | `/api/v0/tracks`                      | all users      | Returns a list of all available tracks                                                                                                                                      |
+| GET    | `/requirements/:requirementsId/steps` | all users      | Gets a list of the steps for a given requirement, ordered by step number, with flag for completion                                                                          |
+| PUT    | `/requirements/:requirementsId/steps` | all users      | Mark a step complete or incomplete: send the current state of the step. If its is_complete flag is currently true, send {is_complete:true} and it will be marked incomplete |
+| GET    | `/users/:userId`                      | all users      | Get a user object with progress propery indicatin completion of all user requirements                                                                                       |
 
 ## Endpoint Examples
 
@@ -239,6 +239,31 @@ Body
         "is_complete": false
     }
 ]
+```
+
+#### GET /api/v0/user/:userId
+
+##### REQUEST
+
+```
+Headers
+{
+  authorization: bearer token
+}
+```
+
+##### RESPONSE
+
+```
+{
+    "first_name": "bob",
+    "last_name": "ross",
+    "email": "bob_ross@happylittlemistakes.com",
+    "tracks_id": 1,
+    "is_admin": false,
+    "id": 1,
+    "progress": 50
+}
 ```
 
 # Data Model

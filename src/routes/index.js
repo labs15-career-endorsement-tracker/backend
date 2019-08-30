@@ -7,7 +7,8 @@ const {
     viewEndorsementRequirements,
     viewTracks,
     getSteps,
-    markSteps
+    markSteps,
+    getAllProgressForUser
 } = require("../controllers")
 
 const { requiresAuth } = require("../middleware")
@@ -16,6 +17,8 @@ const api = Router()
 
 api.get("/users", getUsers)
 api.post("/users", addUser)
+
+api.get("/users/:userId", requiresAuth, getAllProgressForUser)
 
 api.post("/login", login)
 

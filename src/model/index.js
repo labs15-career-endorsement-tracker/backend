@@ -1,18 +1,27 @@
 const { findRequirementsByTrack } = require("./requirements")
 const { findAllTracks } = require("./tracks")
-const { findUsers, findUsersBy, insertUser } = require("./users")
 const {
-    findStepsByTask,
-    findCompletedStepsBy,
-    getFormattedSteps
-} = require("./steps")
+    findUsers,
+    findUsersBy,
+    insertUser,
+    getUserWithProgress,
+    findUserNoPassword
+} = require("./users")
+const { findStepsByTask, getFormattedSteps } = require("./steps")
 
-const { markComplete, markIncomplete } = require("./completedSteps")
+const {
+    findCompletedStepsBy,
+    markComplete,
+    markIncomplete,
+    findCompletedRequirementStepsByUser
+} = require("./completedSteps")
 
 module.exports = {
     findUsers,
     findUsersBy,
     insertUser,
+    getUserWithProgress,
+    findUserNoPassword,
     findRequirementsByTrack,
     findAllTracks,
     insertUser,
@@ -20,5 +29,6 @@ module.exports = {
     findCompletedStepsBy,
     getFormattedSteps,
     markComplete,
-    markIncomplete
+    markIncomplete,
+    findCompletedRequirementStepsByUser
 }

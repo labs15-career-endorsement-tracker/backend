@@ -17,5 +17,6 @@ module.exports = {
     viewEndorsementRequirements: require("./viewEndorsementRequirements"),
     viewTracks: require("./tracks"),
     getSteps: require("./get-steps"),
-    markSteps: require("./mark-steps")
+    markSteps: require("./mark-steps"),
+    getAllProgressForUser: require("./get-all-progress")
 }
