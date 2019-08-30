@@ -1,5 +1,9 @@
 const db = require("../../data")
 
+const { findStepsByTask } = require("../model")
+
+const getRequirementProgress = async () => {}
+
 // get all the requirements (NOTE: REQUIREMENTS NOT INCLUDING ASSIGNMENTS) for a track
 const findRequirementsByTrack = trackId =>
     db("tasks_tracks")
