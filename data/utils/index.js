@@ -1,9 +1,35 @@
 const { name, internet, random } = require("faker")
 const bcrypt = require("bcryptjs")
 
-const { fakeUsers, fakeCoaches } = require("../../tests/fixtures")
+const { fakeUsers } = require("../../tests/fixtures")
 const maxRecords = 1000
 
+const fakeCoaches = [
+    {
+        first_name: "Alan",
+        last_name: "Turing",
+        email: "a_turing@gmail.com",
+        password: bcrypt.hashSync("Password1234!", 4),
+        is_admin: true,
+        tracks_id: 6
+    },
+    {
+        first_name: "Grace",
+        last_name: "Hopper",
+        email: "g_hopper@gmail.com",
+        password: bcrypt.hashSync("Password1234!", 4),
+        is_admin: true,
+        tracks_id: 6
+    },
+    {
+        first_name: "Ada",
+        last_name: "Lovelace",
+        email: "a_lovelace@gmail.com",
+        password: bcrypt.hashSync("Password1234!", 4),
+        is_admin: true,
+        tracks_id: 6
+    }
+]
 const createMany = (factory, count = maxRecords) => {
     const many = []
     // we want to seed a couple static users and coaches for static login creds

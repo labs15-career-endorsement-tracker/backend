@@ -9,7 +9,7 @@ const {
     fakeCompletedSteps
 } = require("../fixtures")
 
-describe.skip("MODEL steps", () => {
+describe("MODEL steps", () => {
     beforeAll(async done => {
         await db.migrate.rollback(null, true)
         await db.migrate.latest()
