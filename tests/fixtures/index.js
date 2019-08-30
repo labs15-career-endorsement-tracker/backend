@@ -52,11 +52,18 @@ const fakeTasks = [
         is_required: true,
         tasks_description: "Requirement 3 description",
         is_endorsement_requirement: false
+    },
+    {
+        title: "Requirement 4",
+        is_required: true,
+        tasks_description: "Requirement 4 description",
+        is_endorsement_requirement: true
     }
 ]
 const fakeTasksTracks = [
     { tracks_id: 1, tasks_id: 1 },
-    { tracks_id: 1, tasks_id: 3 }
+    { tracks_id: 1, tasks_id: 3 },
+    { tracks_id: 1, tasks_id: 4 }
 ]
 
 const fakeSteps = [
@@ -96,6 +103,24 @@ const fakeSteps = [
         steps_description: "Requirement 3 step 3",
         is_required: true,
         tasks_id: 3
+    },
+    {
+        number: 1,
+        steps_description: "Requirement 2 step 1",
+        is_required: true,
+        tasks_id: 4
+    },
+    {
+        number: 2,
+        steps_description: "Requirement 2 step 2",
+        is_required: true,
+        tasks_id: 4
+    },
+    {
+        number: 3,
+        steps_description: "Requirement 3 step 3",
+        is_required: true,
+        tasks_id: 4
     }
 ]
 
@@ -114,6 +139,11 @@ const fakeCompletedSteps = [
     {
         user_id: 1,
         steps_id: 6,
+        created_at: new Date("2019-08-28T19:24:40.504Z")
+    },
+    {
+        user_id: 1,
+        steps_id: 7,
         created_at: new Date("2019-08-28T19:24:40.504Z")
     }
 ]

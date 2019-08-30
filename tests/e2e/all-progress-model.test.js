@@ -20,12 +20,16 @@ describe("MODEL all progress", () => {
         await db("tracks").insert(fakeTracks)
         await db("users").insert(fakeUsers)
         await db("tasks").insert(fakeTasks)
-        await db("tasks_tracks").insert(fakeTasksTracks)
         await db("steps").insert(fakeSteps)
+        await db("tasks_tracks").insert(fakeTasksTracks)
         done()
     })
 
     beforeEach(async done => {
+        done()
+    })
+
+    afterEach(async done => {
         done()
     })
 
@@ -41,7 +45,7 @@ describe("MODEL all progress", () => {
                 done()
             })
         })
-        it("should return an array of objects with shape: {id (int), first_name (string), last_name (string), email (string), tracks_id (int), is_admin (bool)} ", done => {
+        it("should return an object with shape: {id (int), first_name (string), last_name (string), email (string), tracks_id (int), is_admin (bool)} ", done => {
             findUserNoPassword(1).then(res => {
                 expect(res).toEqual(
                     expect.objectContaining({
@@ -87,6 +91,9 @@ describe("MODEL all progress", () => {
         })
     })
     describe("getUserWithProgress", () => {
+        beforeEach(done => {
+            done()
+        })
         it("should return an object", done => {
             getUserWithProgress(1).then(res => {
                 expect(res).toEqual(expect.any(Object))
@@ -109,7 +116,7 @@ describe("MODEL all progress", () => {
                 done()
             })
         })
-        it("should have this object as it's first element: { first_name: 'bob',last_name: 'ross', email: 'bob_ross@happylittlemistakes.com', tracks_id: 1, is_admin: false, id: 1 },", done => {
+        it("should be this: { first_name: 'bob',last_name: 'ross', email: 'bob_ross@happylittlemistakes.com', tracks_id: 1, is_admin: false, id: 1 },", done => {
             getUserWithProgress(1).then(res => {
                 expect(res).toEqual({
                     first_name: "bob",
@@ -127,15 +134,7 @@ describe("MODEL all progress", () => {
             markComplete(1, 3)
                 .then(() => getUserWithProgress(1))
                 .then(res => {
-                    expect(res).toEqual({
-                        first_name: "bob",
-                        last_name: "ross",
-                        email: "bob_ross@happylittlemistakes.com",
-                        tracks_id: 1,
-                        is_admin: false,
-                        id: 1,
-                        progress: 33
-                    })
+                    expect(res.progress).toBe(17)
                     done()
                 })
         })
@@ -143,15 +142,7 @@ describe("MODEL all progress", () => {
             markComplete(1, 2)
                 .then(() => getUserWithProgress(1))
                 .then(res => {
-                    expect(res).toEqual({
-                        first_name: "bob",
-                        last_name: "ross",
-                        email: "bob_ross@happylittlemistakes.com",
-                        tracks_id: 1,
-                        is_admin: false,
-                        id: 1,
-                        progress: 67
-                    })
+                    expect(res.progress).toBe(33)
                     done()
                 })
         })
@@ -159,15 +150,7 @@ describe("MODEL all progress", () => {
             markComplete(1, 1)
                 .then(() => getUserWithProgress(1))
                 .then(res => {
-                    expect(res).toEqual({
-                        first_name: "bob",
-                        last_name: "ross",
-                        email: "bob_ross@happylittlemistakes.com",
-                        tracks_id: 1,
-                        is_admin: false,
-                        id: 1,
-                        progress: 100
-                    })
+                    expect(res.progress).toEqual(50)
                     done()
                 })
         })
@@ -175,15 +158,7 @@ describe("MODEL all progress", () => {
             markIncomplete(1, 3)
                 .then(() => getUserWithProgress(1))
                 .then(res => {
-                    expect(res).toEqual({
-                        first_name: "bob",
-                        last_name: "ross",
-                        email: "bob_ross@happylittlemistakes.com",
-                        tracks_id: 1,
-                        is_admin: false,
-                        id: 1,
-                        progress: 67
-                    })
+                    expect(res.progress).toBe(33)
                     done()
                 })
         })
@@ -191,15 +166,7 @@ describe("MODEL all progress", () => {
             markIncomplete(1, 2)
                 .then(() => getUserWithProgress(1))
                 .then(res => {
-                    expect(res).toEqual({
-                        first_name: "bob",
-                        last_name: "ross",
-                        email: "bob_ross@happylittlemistakes.com",
-                        tracks_id: 1,
-                        is_admin: false,
-                        id: 1,
-                        progress: 33
-                    })
+                    expect(res.progress).toEqual(17)
                     done()
                 })
         })
@@ -207,15 +174,7 @@ describe("MODEL all progress", () => {
             markIncomplete(1, 1)
                 .then(() => getUserWithProgress(1))
                 .then(res => {
-                    expect(res).toEqual({
-                        first_name: "bob",
-                        last_name: "ross",
-                        email: "bob_ross@happylittlemistakes.com",
-                        tracks_id: 1,
-                        is_admin: false,
-                        id: 1,
-                        progress: 0
-                    })
+                    expect(res.progress).toBe(0)
                     done()
                 })
         })

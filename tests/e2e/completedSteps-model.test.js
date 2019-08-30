@@ -61,9 +61,9 @@ describe("MODEL completed steps", () => {
                 done()
             })
         })
-        it("should have have 3 elements,", done => {
+        it("should have have 4 elements,", done => {
             findCompletedStepsBy({ user_id: 1 }).then(res => {
-                expect(res.length).toBe(3)
+                expect(res.length).toBe(4)
                 done()
             })
         })
@@ -102,9 +102,9 @@ describe("MODEL completed steps", () => {
                 done()
             })
         })
-        it("should have have 2 elements,", done => {
+        it("should have have 3 elements,", done => {
             findCompletedRequirementStepsByUser(1).then(res => {
-                expect(res.length).toBe(2)
+                expect(res.length).toBe(3)
                 done()
             })
         })
@@ -128,7 +128,7 @@ describe("MODEL completed steps", () => {
             findCompletedStepsBy({ user_id: 1, steps_id: 3 }).then(res => {
                 expect(res[0]).toEqual(
                     expect.objectContaining({
-                        id: 4,
+                        id: 5,
                         user_id: 1,
                         steps_id: 3,
                         created_at: expect.any(Date)
@@ -175,16 +175,6 @@ describe("MODEL completed steps", () => {
         it("should remove the entry from the database", done => {
             findCompletedStepsBy({ user_id: 1, steps_id: 3 }).then(res => {
                 expect(res).toEqual([])
-                done()
-            })
-        })
-        it("should not remove any other entries from the db", done => {
-            findCompletedStepsBy({ user_id: 1 }).then(res => {
-                expect(res.length).toBe(3)
-            })
-
-            findStepsByTask(1).then(steps => {
-                expect(steps.length).toBe(3)
                 done()
             })
         })

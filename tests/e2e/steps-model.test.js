@@ -69,6 +69,12 @@ describe("MODEL steps", () => {
                 done()
             })
         })
+        it("should have 6 elements,", done => {
+            findStepsByTask(1).then(res => {
+                expect(res.length).toBe(3)
+                done()
+            })
+        })
     })
 
     describe("getFormattedSteps", () => {

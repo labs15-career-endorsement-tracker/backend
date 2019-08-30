@@ -8,7 +8,7 @@ const findCompletedRequirementStepsByUser = userId => {
         .join("tracks as tr", "u.tracks_id", "tr.id")
         .join("tasks_tracks as ta_tr", "tr.id", "ta_tr.tracks_id")
         .join("tasks as ta", "ta_tr.tasks_id", "ta.id")
-        .join("steps as st", "st.tasks_id", "ta.id")
+        .join("steps as st", "st.tasks_id", "ta_tr.tasks_id")
         .join("user_steps_completed as u_s_c", "st.id", "u_s_c.steps_id")
         .where({ is_endorsement_requirement: true })
         .andWhere({ "u_s_c.user_id": userId })
@@ -18,6 +18,7 @@ const findCompletedRequirementStepsByUser = userId => {
             "u_s_c.user_id",
             "u_s_c.created_at"
         )
+        .distinct("u_s_c.user_id", "u_s_c.steps_id")
 }
 
 const markComplete = (userId, stepId) =>
