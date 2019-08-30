@@ -16,27 +16,24 @@ const fakeCoaches = [
         last_name: "Turing",
         email: "a_turing@gmail.com",
         password: bcrypt.hashSync("Password1234!", 4),
-        is_admin: true,
-        tracks_id: 2
+        is_admin: true
     },
     {
         first_name: "Grace",
         last_name: "Hopper",
         email: "g_hopper@gmail.com",
         password: bcrypt.hashSync("Password1234!", 4),
-        is_admin: true,
-        tracks_id: 2
+        is_admin: true
     },
     {
         first_name: "Ada",
         last_name: "Lovelace",
         email: "a_lovelace@gmail.com",
         password: bcrypt.hashSync("Password1234!", 4),
-        is_admin: true,
-        tracks_id: 2
+        is_admin: true
     }
 ]
-const fakeTracks = [{ title: "Web" }, { title: "Coaches" }]
+const fakeTracks = [{ title: "Web" }]
 const fakeTasks = [
     {
         title: "Requirement 1",
@@ -63,6 +60,7 @@ const fakeTasksTracks = [
 ]
 
 const fakeSteps = [
+    // Only these first three steps belong to a REQUIREMENT
     {
         number: 1,
         steps_description: "Requirement 1 step 1",

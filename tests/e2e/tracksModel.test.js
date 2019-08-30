@@ -25,7 +25,7 @@ describe("MODEL tracks", () => {
         })
         it("should return an array with two elements", done => {
             findAllTracks().then(res => {
-                expect(res.length).toBe(2)
+                expect(res.length).toBe(1)
                 done()
             })
         })

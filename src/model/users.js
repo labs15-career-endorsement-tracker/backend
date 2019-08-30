@@ -3,7 +3,7 @@ const { hash } = require("bcryptjs")
 const db = require("../../data")
 const { findRequirementsByTrack } = require("./requirements")
 const { findStepsByTask } = require("./steps")
-const { findCompletedStepsBy } = require("./completedSteps")
+const { findCompletedRequirementStepsByUser } = require("./completedSteps")
 
 const findUsers = () => db("users")
 
@@ -33,7 +33,7 @@ const getUserWithProgress = async userId => {
         debugger
         allSteps.push(...steps)
     })
-    const completedSteps = await findCompletedStepsBy({ user_id: userId })
+    const completedSteps = await findCompletedRequirementStepsByUser(userId)
     const progress = Math.round((completedSteps.length / allSteps.length) * 100)
     debugger
     return {

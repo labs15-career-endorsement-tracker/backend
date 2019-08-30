@@ -4,7 +4,6 @@ exports.seed = function(knex) {
         { title: "iOS" },
         { title: "Data Science" },
         { title: "Android" },
-        { title: "UX Design" },
-        { title: "Coach" }
+        { title: "UX Design" }
     ])
 }

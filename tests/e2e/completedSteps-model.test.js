@@ -188,13 +188,5 @@ describe("MODEL completed steps", () => {
                 done()
             })
         })
-        // NOT A REAL TEST
-        // it("should not remove any other entries from the db", done => {
-        //     findCompletedRequirementStepsByUser(1).then(res => {
-        //         console.log(res)
-        //         expect(res.length).toBe(2)
-        //         done()
-        //     })
-        // })
     })
 })

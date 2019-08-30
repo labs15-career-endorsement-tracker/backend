@@ -28,9 +28,6 @@ describe("MODEL all progress", () => {
     beforeEach(async done => {
         done()
     })
-    afterEach(async done => {
-        done()
-    })
 
     afterAll(async done => {
         await db.destroy()
@@ -38,7 +35,6 @@ describe("MODEL all progress", () => {
     })
 
     describe("findUserNoPassword", () => {
-        // the only track_id we have is 1
         it("should return an object", done => {
             findUserNoPassword(1).then(res => {
                 expect(res).toEqual(expect.any(Object))
@@ -62,7 +58,7 @@ describe("MODEL all progress", () => {
         })
         it("should not have a password field ", done => {
             findUserNoPassword(1).then(res => {
-                expect(res[0]).toEqual(
+                expect(res).toEqual(
                     expect.not.objectContaining({
                         password: expect.any(String)
                     })
@@ -80,6 +76,12 @@ describe("MODEL all progress", () => {
                     is_admin: false,
                     id: 1
                 })
+                done()
+            })
+        })
+        it("should not have a password field ", done => {
+            findUserNoPassword(1000).then(res => {
+                expect(res).toBeUndefined()
                 done()
             })
         })
@@ -107,9 +109,7 @@ describe("MODEL all progress", () => {
                 done()
             })
         })
-        // original failer
         it("should have this object as it's first element: { first_name: 'bob',last_name: 'ross', email: 'bob_ross@happylittlemistakes.com', tracks_id: 1, is_admin: false, id: 1 },", done => {
-            debugger
             getUserWithProgress(1).then(res => {
                 expect(res).toEqual({
                     first_name: "bob",
@@ -139,8 +139,72 @@ describe("MODEL all progress", () => {
                     done()
                 })
         })
+        it("should return updated data if a step is marked complete (2)", done => {
+            markComplete(1, 2)
+                .then(() => getUserWithProgress(1))
+                .then(res => {
+                    expect(res).toEqual({
+                        first_name: "bob",
+                        last_name: "ross",
+                        email: "bob_ross@happylittlemistakes.com",
+                        tracks_id: 1,
+                        is_admin: false,
+                        id: 1,
+                        progress: 67
+                    })
+                    done()
+                })
+        })
+        it("should return updated data if a step is marked complete (3)", done => {
+            markComplete(1, 1)
+                .then(() => getUserWithProgress(1))
+                .then(res => {
+                    expect(res).toEqual({
+                        first_name: "bob",
+                        last_name: "ross",
+                        email: "bob_ross@happylittlemistakes.com",
+                        tracks_id: 1,
+                        is_admin: false,
+                        id: 1,
+                        progress: 100
+                    })
+                    done()
+                })
+        })
         it("should return updated data if a step is marked incomplete", done => {
             markIncomplete(1, 3)
+                .then(() => getUserWithProgress(1))
+                .then(res => {
+                    expect(res).toEqual({
+                        first_name: "bob",
+                        last_name: "ross",
+                        email: "bob_ross@happylittlemistakes.com",
+                        tracks_id: 1,
+                        is_admin: false,
+                        id: 1,
+                        progress: 67
+                    })
+                    done()
+                })
+        })
+        it("should return updated data if a step is marked incomplete (2)", done => {
+            markIncomplete(1, 2)
+                .then(() => getUserWithProgress(1))
+                .then(res => {
+                    expect(res).toEqual({
+                        first_name: "bob",
+                        last_name: "ross",
+                        email: "bob_ross@happylittlemistakes.com",
+                        tracks_id: 1,
+                        is_admin: false,
+                        id: 1,
+                        progress: 33
+                    })
+                    done()
+                })
+        })
+        it("should return updated data if a step is marked incomplete (3)", done => {
+            markIncomplete(1, 1)
                 .then(() => getUserWithProgress(1))
                 .then(res => {
                     expect(res).toEqual({
