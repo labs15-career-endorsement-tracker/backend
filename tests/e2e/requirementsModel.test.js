@@ -1,11 +1,17 @@
 const db = require("../../data")
-const { findRequirementsByTrack } = require("../../src/model")
+const {
+    findRequirementsByTrack,
+    getRequirementProgress,
+    markIncomplete,
+    markComplete
+} = require("../../src/model")
 const {
     fakeUsers,
     fakeTasks,
     fakeSteps,
     fakeTasksTracks,
-    fakeTracks
+    fakeTracks,
+    fakeCompletedSteps
 } = require("../fixtures")
 
 // const url = `/api/v${version}/requirements`
@@ -69,6 +75,60 @@ describe("MODEL requirements", () => {
                 })
                 done()
             })
+        })
+    })
+    describe("getRequirementProgress NO SEEDS", () => {
+        it("should return a number", done => {
+            getRequirementProgress(1, 1).then(res => {
+                expect(res).toEqual(expect.any(Number))
+                done()
+            })
+        })
+        it("should return 0 when there are no seeded completed steps ", done => {
+            getRequirementProgress(1, 1).then(res => {
+                expect(res).toBe(0)
+                done()
+            })
+        })
+        it("should return null when you look for a requirement that does not exist", done => {
+            getRequirementProgress(1, 100).then(res => {
+                expect(res).toBeNull()
+                done()
+            })
+        })
+    })
+    describe("getRequirementProgress SEEDS", () => {
+        beforeAll(async done => {
+            await db("user_steps_completed").insert(fakeCompletedSteps)
+            done()
+        })
+        it("should return a number", done => {
+            getRequirementProgress(1, 1).then(res => {
+                expect(res).toEqual(expect.any(Number))
+                done()
+            })
+        })
+        it("should return 67 with the test seeds", done => {
+            getRequirementProgress(1, 1).then(res => {
+                expect(res).toBe(67)
+                done()
+            })
+        })
+        it("should update when a task is marked incomplete", done => {
+            markIncomplete(1, 1)
+                .then(() => getRequirementProgress(1, 1))
+                .then(res => {
+                    expect(res).toBe(33)
+                    done()
+                })
+        })
+        it("should update when a task is marked complete", done => {
+            markComplete(1, 1)
+                .then(() => getRequirementProgress(1, 1))
+                .then(res => {
+                    expect(res).toBe(67)
+                    done()
+                })
         })
     })
 })

@@ -1,8 +1,21 @@
 const db = require("../../data")
 
-const { findStepsByTask } = require("../model")
+const { findCompletedStepsForTaskByUser } = require("./completedSteps")
+const { findStepsByTask } = require("./steps")
 
-const getRequirementProgress = async () => {}
+const getRequirementProgress = async (userId, requirementId) => {
+    const allSteps = await findStepsByTask(requirementId)
+    const completedSteps = await findCompletedStepsForTaskByUser(
+        userId,
+        requirementId
+    )
+    // if there are no steps for the requirement then you obviously can't track how many steps need to be done, send null and the server will send some sort of message instead. Seeded, every requirement should have at least one step
+    if (allSteps.length === 0) {
+        return null
+    }
+    const progress = Math.round((completedSteps.length / allSteps.length) * 100)
+    return progress
+}
 
 // get all the requirements (NOTE: REQUIREMENTS NOT INCLUDING ASSIGNMENTS) for a track
 const findRequirementsByTrack = trackId =>
@@ -11,4 +24,4 @@ const findRequirementsByTrack = trackId =>
         .where({ tracks_id: trackId })
         .andWhere({ is_endorsement_requirement: true })
 
-module.exports = { findRequirementsByTrack }
+module.exports = { findRequirementsByTrack, getRequirementProgress }
