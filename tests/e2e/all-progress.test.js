@@ -21,7 +21,6 @@ describe.skip("GET /users/:userId", () => {
         await db.migrate.latest()
         await db("tracks").insert(fakeTracks)
         await db("users").insert(fakeUsers)
-        await db("users").insert(fakeCoaches)
         await db("tasks").insert(fakeTasks)
         await db("tasks_tracks").insert(fakeTasksTracks)
         await db("steps").insert(fakeSteps)

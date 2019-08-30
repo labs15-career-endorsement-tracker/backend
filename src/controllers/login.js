@@ -19,7 +19,8 @@ const login = async (req, res, next) => {
         if (!isCorrectPassword) throw error401
 
         const userId = user.id
-        res.json({ token: generateJwt({ userId }), userId })
+        const isAdmin = user.is_admin
+        res.json({ token: generateJwt({ userId, isAdmin }), userId })
     } catch (error) {
         next(error)
     }
