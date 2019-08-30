@@ -17,11 +17,32 @@ const getRequirementProgress = async (userId, requirementId) => {
     return progress
 }
 
-// get all the requirements (NOTE: REQUIREMENTS NOT INCLUDING ASSIGNMENTS) for a track
+// find all the requirements (NOTE: REQUIREMENTS NOT INCLUDING ASSIGNMENTS) for a track
 const findRequirementsByTrack = trackId =>
     db("tasks_tracks")
         .join("tasks", "tasks.id", "tasks_tracks.tasks_id")
         .where({ tracks_id: trackId })
         .andWhere({ is_endorsement_requirement: true })
 
-module.exports = { findRequirementsByTrack, getRequirementProgress }
+const getRequirementsWithProgress = async (userId, trackId) => {
+    const requirements = await findRequirementsByTrack(trackId)
+    const requirementsWithProgress = await Promise.all(
+        requirements.map(async requirement => {
+            const progress = await getRequirementProgress(
+                userId,
+                requirement.id
+            )
+            return {
+                ...requirement,
+                progress
+            }
+        })
+    )
+    return requirementsWithProgress
+}
+
+module.exports = {
+    findRequirementsByTrack,
+    getRequirementProgress,
+    getRequirementsWithProgress
+}
