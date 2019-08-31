@@ -9,7 +9,6 @@ const getRequirementProgress = async (userId, requirementId) => {
         userId,
         requirementId
     )
-    // if there are no steps for the requirement then you obviously can't track how many steps need to be done, send null and the server will send some sort of message instead. Seeded, every requirement should have at least one step
     if (allSteps.length === 0) {
         return null
     }
