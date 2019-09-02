@@ -75,6 +75,13 @@ describe("MODEL steps", () => {
                 done()
             })
         })
+        it("should return an empty array when invalid taskId is given,", done => {
+            findStepsByTask(1000).then(res => {
+                expect(res).toEqual([])
+                expect(res.length).toBe(0)
+                done()
+            })
+        })
     })
 
     describe("getFormattedSteps", () => {

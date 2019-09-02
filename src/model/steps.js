@@ -1,6 +1,7 @@
 const db = require("../../data")
 
 const { findCompletedStepsBy } = require("./completedSteps")
+
 // Get all the steps for a task
 const findStepsByTask = taskId =>
     db("steps")

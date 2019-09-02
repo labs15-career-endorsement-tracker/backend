@@ -92,7 +92,8 @@ describe("GET /requirements", () => {
                         tasks_id: expect.any(Number),
                         title: expect.any(String),
                         tracks_id: expect.any(Number),
-                        tasks_description: expect.any(String)
+                        tasks_description: expect.any(String),
+                        progress: expect.any(Number)
                     })
                 )
                 done()
@@ -113,7 +114,8 @@ describe("GET /requirements", () => {
                     tasks_id: 1,
                     title: "Requirement 1",
                     tracks_id: 1,
-                    tasks_description: "Requirement 1 description"
+                    tasks_description: "Requirement 1 description",
+                    progress: 0
                 })
                 done()
             })

@@ -3,7 +3,7 @@ const {
     markComplete,
     markIncomplete,
     findCompletedStepsBy,
-    findStepsByTask,
+    findCompletedStepsForTaskByUser,
     findCompletedRequirementStepsByUser
 } = require("../../src/model")
 const {
@@ -110,6 +110,60 @@ describe("MODEL completed steps", () => {
         })
         it("should return an empty array when you look up a user that does not exist,", done => {
             findCompletedRequirementStepsByUser(1000).then(res => {
+                expect(res).toEqual([])
+                expect(res.length).toBe(0)
+                done()
+            })
+        })
+    })
+    describe("findCompletedStepsForTaskByUser", () => {
+        it("should return an array of objects", done => {
+            findCompletedStepsForTaskByUser(1, 1).then(res => {
+                expect(res).toEqual(expect.any(Array))
+                expect(res).toContainEqual(expect.any(Object))
+                done()
+            })
+        })
+        it("should return an array of objects with shape: {id (int), user_id (int), steps_id (bool), created_at (String)} ", done => {
+            findCompletedStepsForTaskByUser(1, 1).then(res => {
+                expect(res[0]).toEqual(
+                    expect.objectContaining({
+                        id: expect.any(Number),
+                        user_id: expect.any(Number),
+                        steps_id: expect.any(Number),
+                        created_at: expect.any(Date),
+                        number: expect.any(Number),
+                        steps_description: expect.any(String),
+                        tasks_id: expect.any(Number)
+                    })
+                )
+                done()
+            })
+        })
+        it("should have this object as it's first element: {{ user_id: 1, id: 1, created_at: 2019-08-28T19:24:40.504Z, steps_id: 1,is_required: true, number: 1, steps_description: 'Requirement 1 step 1',       tasks_id: 1 },", done => {
+            findCompletedStepsForTaskByUser(1, 1).then(res => {
+                expect(res[0]).toEqual({
+                    user_id: 1,
+                    id: 1,
+                    created_at: new Date("2019-08-28T19:24:40.504Z"),
+                    steps_id: 1,
+                    is_required: true,
+                    number: 1,
+                    steps_description: "Requirement 1 step 1",
+                    tasks_id: 1
+                })
+                done()
+            })
+        })
+        it("should return an empty array when looking for a task that does not exist,", done => {
+            findCompletedStepsForTaskByUser(1, 1000).then(res => {
+                expect(res).toEqual([])
+                expect(res.length).toBe(0)
+                done()
+            })
+        })
+        it("should return an empty array when you look up a user that does not exist,", done => {
+            findCompletedStepsForTaskByUser(1000, 1).then(res => {
                 expect(res).toEqual([])
                 expect(res.length).toBe(0)
                 done()

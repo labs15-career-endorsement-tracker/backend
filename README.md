@@ -101,7 +101,8 @@ Headers
     "title": "Update Resume",
     "is_required": true,
     "tasks_description": "Update your resume to include your recent work history",
-    "is_endorsement_requirement": true
+    "is_endorsement_requirement": true,
+    "progress": 50
   },
   {
     "id": 5,
@@ -110,7 +111,8 @@ Headers
     "title": "Green GitHub with quality contributions",
     "is_required": true,
     "tasks_description": "You should have quality contributions in your git hub",
-    "is_endorsement_requirement": true
+    "is_endorsement_requirement": true,
+    "progress": 50
   }
 ]
 ```
