@@ -2,6 +2,7 @@ const db = require("../../data")
 
 const { findCompletedStepsForTaskByUser } = require("./completedSteps")
 const { findStepsByTask } = require("./steps")
+const { findResourcesForRequirement } = require("./resources")
 
 // get progress for individual requirement
 const getRequirementProgress = async (userId, requirementId) => {
@@ -41,8 +42,23 @@ const getRequirementsWithProgress = async (userId, trackId) => {
     return requirementsWithProgress
 }
 
+const getRequirementsWithProgressAndResources = async (userId, trackId) => {
+    const requirements = await getRequirementsWithProgress(userId, trackId)
+    const requirementsWithResources = await Promise.all(
+        requirements.map(async requirement => {
+            const resources = await findResourcesForRequirement(requirement.id)
+            return {
+                ...requirement,
+                resources
+            }
+        })
+    )
+    return requirementsWithResources
+}
+
 module.exports = {
     findRequirementsByTrack,
     getRequirementProgress,
-    getRequirementsWithProgress
+    getRequirementsWithProgress,
+    getRequirementsWithProgressAndResources
 }
