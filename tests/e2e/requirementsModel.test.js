@@ -5,7 +5,8 @@ const {
     getRequirementProgress,
     markIncomplete,
     markComplete,
-    getRequirementsWithProgress
+    getRequirementsWithProgress,
+    getRequirementsWithProgressAndResources
 } = require("../../src/model")
 const {
     fakeUsers,
@@ -13,7 +14,8 @@ const {
     fakeSteps,
     fakeTasksTracks,
     fakeTracks,
-    fakeCompletedSteps
+    fakeCompletedSteps,
+    fakeResources
 } = require("../fixtures")
 
 describe("MODEL requirements", () => {
@@ -25,6 +27,7 @@ describe("MODEL requirements", () => {
         await db("tasks").insert(fakeTasks)
         await db("tasks_tracks").insert(fakeTasksTracks)
         await db("steps").insert(fakeSteps)
+        await db("resources").insert(fakeResources)
         done()
     })
 
@@ -225,6 +228,83 @@ describe("MODEL requirements", () => {
                     expect(res).toBe(67)
                     done()
                 })
+        })
+    })
+    describe("getRequirementsWithProgressAndResources", () => {
+        it("should return an array of objects", done => {
+            getRequirementsWithProgressAndResources(1, 1).then(res => {
+                expect(res).toEqual(expect.any(Array))
+                expect(res).toContainEqual(expect.any(Object))
+                done()
+            })
+        })
+        it("should return an array of objects with shape: {id (int), is_endorsement_requirement (bool), is_required (bool), tasks_id (int), title (string), tracks_id (int),  tasks_description (String), progress (int), resources (array)} ", done => {
+            getRequirementsWithProgressAndResources(1, 1).then(res => {
+                expect(res[0]).toEqual(
+                    expect.objectContaining({
+                        id: expect.any(Number),
+                        is_endorsement_requirement: expect.any(Boolean),
+                        is_required: expect.any(Boolean),
+                        tasks_id: expect.any(Number),
+                        title: expect.any(String),
+                        tracks_id: expect.any(Number),
+                        tasks_description: expect.any(String),
+                        progress: expect.any(Number),
+                        resources: expect.any(Array)
+                    })
+                )
+                done()
+            })
+        })
+        it("should have this object as it's first element: {title: 'Requirement 1',is_required: true, tasks_description: 'Requirement 1 description',is_endorsement_requirement: true, resources: ARRAY},", done => {
+            getRequirementsWithProgressAndResources(1, 1).then(res => {
+                expect(res[0]).toEqual({
+                    id: 1,
+                    is_endorsement_requirement: true,
+                    is_required: true,
+                    tasks_id: 1,
+                    title: "Requirement 1",
+                    tracks_id: 1,
+                    tasks_description: "Requirement 1 description",
+                    progress: 0,
+                    resources: [
+                        {
+                            id: 1,
+                            type: "google_doc",
+                            title: "Action verbs for technical resumes",
+                            url:
+                                "https://docs.google.com/document/d/1wZkDPBWtQZDGGdvStD61iRx_jOWVlIyyQl9UOYHtZgA/edit",
+                            description: null,
+                            tasks_id: 1
+                        },
+                        {
+                            id: 2,
+                            type: "google_doc",
+                            title: "Power statement article",
+                            url:
+                                "https://www.linkedin.com/pulse/20140929001534-24454816-my-personal-formula-for-a-better-resume/",
+                            description: null,
+                            tasks_id: 1
+                        },
+                        {
+                            id: 3,
+                            type: "google_doc",
+                            title: "'Lambda is…' paragraphs",
+                            url:
+                                "https://docs.google.com/document/d/19OxIgJYkLMq4c1o5zHu1Na4a3PYcyutOosVfg6a03RI/edit",
+                            description: null,
+                            tasks_id: 1
+                        }
+                    ]
+                })
+                done()
+            })
+        })
+        it("should return an empty array when given an invalid track id,", done => {
+            getRequirementsWithProgressAndResources(1, 100).then(res => {
+                expect(res).toEqual([])
+                done()
+            })
         })
     })
 })
