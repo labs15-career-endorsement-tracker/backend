@@ -3,6 +3,7 @@ const db = require("../../data")
 const { findCompletedStepsForTaskByUser } = require("./completedSteps")
 const { findStepsByTask } = require("./steps")
 
+// get progress for individual requirement
 const getRequirementProgress = async (userId, requirementId) => {
     const allSteps = await findStepsByTask(requirementId)
     const completedSteps = await findCompletedStepsForTaskByUser(

@@ -21,6 +21,7 @@ const {
     findCompletedStepsForTaskByUser
 } = require("./completedSteps")
 
+const { findResourcesForRequirement } = require("./resources")
 module.exports = {
     findUsers,
     findUsersBy,
@@ -38,5 +39,6 @@ module.exports = {
     findCompletedRequirementStepsByUser,
     findCompletedStepsForTaskByUser,
     getRequirementProgress,
-    getRequirementsWithProgress
+    getRequirementsWithProgress,
+    findResourcesForRequirement
 }
