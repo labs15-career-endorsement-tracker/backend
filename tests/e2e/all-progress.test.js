@@ -81,7 +81,7 @@ describe("GET /users/:userId", () => {
             .expect(200)
             .then(res => done())
     })
-    it("should return an object with shape: {id (int), first_name (string), last_name (string), email (string), tracks_id (int), is_admin (bool), progress (int)} ", done => {
+    it("should return an object with shape: {id (int), first_name (string), last_name (string), email (string), tracks_id (int), is_admin (bool), progress (int), tracks_title (string)} ", done => {
         request(app)
             .get(`/api/v${version}/users/1`)
             .set("Accept", "application/json")
@@ -98,7 +98,8 @@ describe("GET /users/:userId", () => {
                         email: expect.any(String),
                         tracks_id: expect.any(Number),
                         is_admin: expect.any(Boolean),
-                        progress: expect.any(Number)
+                        progress: expect.any(Number),
+                        tracks_title: expect.any(String)
                     })
                 )
                 done()
