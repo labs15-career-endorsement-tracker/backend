@@ -1,4 +1,4 @@
-const { createMany, createUser } = require("./users")
+const { createMany, createUser, staticUser } = require("./users")
 const { tracks } = require("./tracks")
 const { tasks } = require("./tasks")
 const { steps } = require("./steps")
@@ -14,5 +14,6 @@ module.exports = {
     steps,
     tasksTracks,
     resources,
-    userStepsCompleted
+    userStepsCompleted,
+    staticUser
 }

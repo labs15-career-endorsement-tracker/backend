@@ -1,14 +1,7 @@
 const bcrypt = require("bcryptjs")
+const { staticUser } = require("../../data/utils")
 
-const fakeUsers = [
-    {
-        first_name: "bob",
-        last_name: "ross",
-        email: "bob_ross@happylittlemistakes.com",
-        password: bcrypt.hashSync("Password1234!", 4),
-        tracks_id: 1
-    }
-]
+const fakeUsers = [staticUser]
 
 const fakeTracks = [{ title: "Web" }]
 const fakeTasks = [
