@@ -1,5 +1,6 @@
 module.exports = {
     steps: [
+        // Resume
         {
             number: 1,
             steps_description:
@@ -21,6 +22,7 @@ module.exports = {
             is_required: true,
             tasks_id: 1
         },
+        // LinkedIn
         {
             number: 1,
             steps_description:
@@ -49,27 +51,29 @@ module.exports = {
             is_required: true,
             tasks_id: 2
         },
+        // Green Github
         {
             number: 1,
             steps_description:
-                "Send at least 5 cold outreach messages to someone on LinkedIn (or via email if you have their email addresses)",
+                "A clear headshot and and professional user handle",
             is_required: true,
             tasks_id: 3
         },
         {
             number: 2,
             steps_description:
-                "Submit screenshots of your outreach messages to your PM on Friday2",
+                "Top pinned projects should include any open source contributions and your Build Week or Labs projects",
             is_required: true,
             tasks_id: 3
         },
         {
             number: 3,
             steps_description:
-                "Identify three upcoming networking events that you can attend over the next month or two. If you live in an area without many events like this, then instead join three online groups relevant to your field and interests and post an introduction.",
+                "Weekly contributions, to show ongoing commitment to skills-building",
             is_required: true,
             tasks_id: 3
         },
+        //
         {
             number: 1,
             steps_description:

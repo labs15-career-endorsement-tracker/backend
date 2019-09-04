@@ -15,6 +15,13 @@ module.exports = {
             is_endorsement_requirement: true
         },
         {
+            title: "Green GitHub with quality contributions",
+            is_required: true,
+            tasks_description:
+                "You should have quality contributions in your git hub with your top projects pinned and a clear headshot",
+            is_endorsement_requirement: true
+        },
+        {
             title: "Networking Strategies",
             is_required: true,
             tasks_description:
@@ -27,13 +34,6 @@ module.exports = {
             tasks_description:
                 "Groom your Twitter, Facebook, Instagram, or any other public social media profiles:- Remove any photos or posts that contain content that you would not want a potential employer to see.",
             is_endorsement_requirement: false
-        },
-        {
-            title: "Green GitHub with quality contributions",
-            is_required: true,
-            tasks_description:
-                "You should have quality contributions in your git hub",
-            is_endorsement_requirement: true
         }
     ]
 }
