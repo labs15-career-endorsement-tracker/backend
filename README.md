@@ -291,7 +291,8 @@ Headers
     "tracks_id": 1,
     "is_admin": false,
     "id": 1,
-    "progress": 50
+    "progress": 50,
+    "tracks_title": "Fullstack Web"
 }
 ```
 

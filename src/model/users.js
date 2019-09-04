@@ -11,14 +11,16 @@ const findUsersBy = filter => db("users").where(filter)
 
 const findUserNoPassword = userId => {
     return db("users")
-        .where({ id: userId })
+        .join("tracks", "tracks.id", "users.tracks_id")
+        .where({ "users.id": userId })
         .select(
             "first_name",
             "last_name",
             "email",
             "tracks_id",
             "is_admin",
-            "id"
+            "tracks.title as tracks_title",
+            "users.id"
         )
         .first()
 }

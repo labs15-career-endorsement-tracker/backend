@@ -45,7 +45,7 @@ describe("MODEL all progress", () => {
                 done()
             })
         })
-        it("should return an object with shape: {id (int), first_name (string), last_name (string), email (string), tracks_id (int), is_admin (bool)} ", done => {
+        it("should return an object with shape: {id (int), first_name (string), last_name (string), email (string), tracks_id (int), is_admin (bool), tracks_title (string)} ", done => {
             findUserNoPassword(1).then(res => {
                 expect(res).toEqual(
                     expect.objectContaining({
@@ -54,7 +54,8 @@ describe("MODEL all progress", () => {
                         last_name: expect.any(String),
                         email: expect.any(String),
                         tracks_id: expect.any(Number),
-                        is_admin: expect.any(Boolean)
+                        is_admin: expect.any(Boolean),
+                        tracks_title: expect.any(String)
                     })
                 )
                 done()
@@ -70,7 +71,7 @@ describe("MODEL all progress", () => {
                 done()
             })
         })
-        it("should have this object as it's first element: { first_name: 'bob',last_name: 'ross', email: 'bob_ross@happylittlemistakes.com', tracks_id: 1, is_admin: false, id: 1 },", done => {
+        it("should have this object as it's first element: { first_name: 'bob',last_name: 'ross', email: 'bob_ross@happylittlemistakes.com', tracks_id: 1, is_admin: false, id: 1, tracks_title: 'Web' },", done => {
             findUserNoPassword(1).then(res => {
                 expect(res).toEqual({
                     first_name: "bob",
@@ -78,12 +79,13 @@ describe("MODEL all progress", () => {
                     email: "bob_ross@happylittlemistakes.com",
                     tracks_id: 1,
                     is_admin: false,
-                    id: 1
+                    id: 1,
+                    tracks_title: "Web"
                 })
                 done()
             })
         })
-        it("should not have a password field ", done => {
+        it("should return undefined when looking for a user id that does not exist", done => {
             findUserNoPassword(1000).then(res => {
                 expect(res).toBeUndefined()
                 done()
@@ -100,7 +102,7 @@ describe("MODEL all progress", () => {
                 done()
             })
         })
-        it("should return an object with shape: {id (int), first_name (string), last_name (string), email (string), tracks_id (int), is_admin (bool), progress (int)} ", done => {
+        it("should return an object with shape: {id (int), first_name (string), last_name (string), email (string), tracks_id (int), is_admin (bool), progress (int), tracks_title (String)} ", done => {
             getUserWithProgress(1).then(res => {
                 expect(res).toEqual(
                     expect.objectContaining({
@@ -110,13 +112,14 @@ describe("MODEL all progress", () => {
                         email: expect.any(String),
                         tracks_id: expect.any(Number),
                         is_admin: expect.any(Boolean),
-                        progress: expect.any(Number)
+                        progress: expect.any(Number),
+                        tracks_title: expect.any(String)
                     })
                 )
                 done()
             })
         })
-        it("should be this: { first_name: 'bob',last_name: 'ross', email: 'bob_ross@happylittlemistakes.com', tracks_id: 1, is_admin: false, id: 1 },", done => {
+        it("should be this: { first_name: 'bob',last_name: 'ross', email: 'bob_ross@happylittlemistakes.com', tracks_id: 1, is_admin: false, id: 1 , tracks_title: 'Web'},", done => {
             getUserWithProgress(1).then(res => {
                 expect(res).toEqual({
                     first_name: "bob",
@@ -125,7 +128,8 @@ describe("MODEL all progress", () => {
                     tracks_id: 1,
                     is_admin: false,
                     id: 1,
-                    progress: 0
+                    progress: 0,
+                    tracks_title: "Web"
                 })
                 done()
             })
