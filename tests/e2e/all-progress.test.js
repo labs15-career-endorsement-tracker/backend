@@ -9,8 +9,7 @@ const {
     fakeSteps,
     fakeTasksTracks,
     fakeTracks,
-    fakeCompletedSteps,
-    fakeCoaches
+    fakeCompletedSteps
 } = require("../fixtures")
 
 // NEED TO FIX THE MODEL FIRST
@@ -105,24 +104,4 @@ describe("GET /users/:userId", () => {
                 done()
             })
     })
-    // We do not have coaches yet, but this test could be used once we add them
-    // it("should return status 200 when a coach looks up another user's information", done => {
-    //     let coachToken
-    //     request(app)
-    //         .post(`/api/v${version}/login`)
-    //         .send({
-    //             email: fakeCoaches[0].email,
-    //             password: "Password1234!"
-    //         })
-    //         .then(res => {
-    //             coachToken = res.body.token
-    //             request(app)
-    //                 .get(`/api/v${version}/requirements/100/steps/1`)
-    //                 .set("Accept", "application/json")
-    //                 .set("authorization", `bearer ${coachToken}`)
-    //                 .expect("Content-Type", /json/)
-    //                 .expect(200)
-    //                 .then(() => done())
-    //         })
-    // })
 })

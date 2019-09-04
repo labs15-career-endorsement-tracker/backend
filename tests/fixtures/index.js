@@ -168,6 +168,5 @@ module.exports = {
     fakeTasksTracks,
     fakeTracks,
     fakeCompletedSteps,
-    fakeCoaches,
     fakeResources
 }
