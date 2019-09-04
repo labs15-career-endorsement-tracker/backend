@@ -11,7 +11,7 @@ module.exports = {
             title: "LinkedIn Profile",
             is_required: true,
             tasks_description:
-                "You must have an updated LinkedIn profile including A clear headshot and cover photo, personal summary to let people get to know you- reference your portfolio site here, work experiences, with descriptions (only include Lambda under work if you were a PM), Projects, which LI categorizes under 'accomplishments' section. Highlight personal, build week, and labs projects, with a link for any deployed projects and education, featuring Lambda School and any previous schooling ",
+                "You must have an updated LinkedIn profile including A clear headshot and cover photo, personal summary to let people get to know you- reference your portfolio site here, work experiences, with descriptions (only include Lambda under work if you were a PM), projects, which LI categorizes under 'accomplishments' section. Highlight personal, build week, and labs projects, with a link for any deployed projects and education, featuring Lambda School and any previous schooling ",
             is_endorsement_requirement: true
         },
         {
@@ -22,18 +22,18 @@ module.exports = {
             is_endorsement_requirement: true
         },
         {
-            title: "Networking Strategies",
+            title: "Portfolio Website: Web Dev",
             is_required: true,
             tasks_description:
-                "80% of jobs are found through networking, so students should be finding opportunities to build their professional networks throughout their time as a student at Lambda School",
-            is_endorsement_requirement: false
+                "You must have an original portfolio, built without using templates from drag and drop website builders like wix",
+            is_endorsement_requirement: true
         },
         {
-            title: "Groom Your Social Media",
-            is_required: false,
+            title: "Portfolio Website",
+            is_required: true,
             tasks_description:
-                "Groom your Twitter, Facebook, Instagram, or any other public social media profiles:- Remove any photos or posts that contain content that you would not want a potential employer to see.",
-            is_endorsement_requirement: false
+                "You must have an active online presence, including a portfolio site (buildable through Beautiful Jekyll, Wix, Squarespace, etc.) OR Medium/other blog highlighting your projects and skills",
+            is_endorsement_requirement: true
         }
     ]
 }
