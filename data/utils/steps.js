@@ -23,14 +23,29 @@ module.exports = {
         },
         {
             number: 1,
-            steps_description: "Functioning, debugged, user-ready app",
+            steps_description:
+                "Create a LinkedIn account if you haven’t already",
             is_required: true,
             tasks_id: 2
         },
         {
             number: 2,
             steps_description:
-                "Clear screenshots of your app and coherent description of what it does",
+                "Pull in all skills, work experience, projects, education, etc. from your resume",
+            is_required: true,
+            tasks_id: 2
+        },
+        {
+            number: 3,
+            steps_description:
+                "Add in any other experience that did not fit on your resume",
+            is_required: true,
+            tasks_id: 2
+        },
+        {
+            number: 4,
+            steps_description:
+                "Use the LinkedIn rubric LinkedIn deep-dive to make sure you’re including all required sections in your LinkedIn",
             is_required: true,
             tasks_id: 2
         },

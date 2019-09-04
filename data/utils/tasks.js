@@ -8,10 +8,10 @@ module.exports = {
             is_endorsement_requirement: true
         },
         {
-            title: "Deploy an app to app store",
+            title: "LinkedIn Profile",
             is_required: true,
             tasks_description:
-                "You must have an app deployed on the app store in order to be career endorsed",
+                "You must have an updated LinkedIn profile including A clear headshot and cover photo, personal summary to let people get to know you- reference your portfolio site here, work experiences, with descriptions (only include Lambda under work if you were a PM), Projects, which LI categorizes under 'accomplishments' section. Highlight personal, build week, and labs projects, with a link for any deployed projects and education, featuring Lambda School and any previous schooling ",
             is_endorsement_requirement: true
         },
         {

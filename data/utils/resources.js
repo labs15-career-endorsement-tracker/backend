@@ -1,5 +1,6 @@
 module.exports = {
     resources: [
+        // resources for resume
         {
             type: "google_doc",
             title: "Action verbs for technical resumes",
@@ -63,17 +64,20 @@ module.exports = {
             url:
                 "https://docs.google.com/document/d/1bYAuFyZfa-BIAYUf529Px3ULNOKZwAvUFRxDqlOCvaE/edit"
         },
+        // resources for linked in
         {
-            type: "youtube_vid",
-            title: "Link to Recorded Video",
+            type: "unspecified",
+            title: "LinkedIn Rubric",
             tasks_id: 3,
-            url: "https://youtu.be/osyavDyNeQ4"
+            url:
+                "https://drive.google.com/file/d/1fgBBDBSoZwCB8exoRSFy20MpGZxNd6zq/view"
         },
         {
-            type: "youtube_vid",
-            title: "Link to Recorded Video",
+            type: "google_doc",
+            title: "LinkedIn Deep Dive",
             tasks_id: 4,
-            url: "https://youtu.be/AdAA9d5vCaE"
+            url:
+                "https://docs.google.com/document/d/1Gp4ZjEwRUY2a1dcbXK0Ml5LE4ZzWRnUjHa9pJnNFIpo/edit"
         }
     ]
 }
