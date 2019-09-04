@@ -8,7 +8,8 @@ const {
     fakeTasks,
     fakeSteps,
     fakeTasksTracks,
-    fakeTracks
+    fakeTracks,
+    fakeResources
 } = require("../fixtures")
 
 describe("GET /requirements", () => {
@@ -21,6 +22,7 @@ describe("GET /requirements", () => {
         await db("tasks").insert(fakeTasks)
         await db("tasks_tracks").insert(fakeTasksTracks)
         await db("steps").insert(fakeSteps)
+        await db("resources").insert(fakeResources)
         // login, you need a token!
         const res = await request(app)
             .post(`/api/v${version}/login`)
@@ -76,7 +78,7 @@ describe("GET /requirements", () => {
                 done()
             })
     })
-    it("should return an array of objects with shape: {id (int), is_endorsement_requirement (bool), is_required (bool), tasks_id (int), title (string), tracks_id (int),  tasks_description (String)} ", done => {
+    it("should return an array of objects with shape: {id (int), is_endorsement_requirement (bool), is_required (bool), tasks_id (int), title (string), tracks_id (int),  tasks_description (String), resource (Array)} ", done => {
         return request(app)
             .get(`/api/v${version}/requirements`)
             .set("Accept", "application/json")
@@ -93,13 +95,14 @@ describe("GET /requirements", () => {
                         title: expect.any(String),
                         tracks_id: expect.any(Number),
                         tasks_description: expect.any(String),
-                        progress: expect.any(Number)
+                        progress: expect.any(Number),
+                        resources: expect.any(Array)
                     })
                 )
                 done()
             })
     })
-    it("should have this object as it's first element: {title: 'Requirement 1',is_required: true, tasks_description: 'Requirement 1 description',is_endorsement_requirement: true },", done => {
+    it("should have this object as it's first element: {title: 'Requirement 1',is_required: true, tasks_description: 'Requirement 1 description',is_endorsement_requirement: true, resources: ARRAY },", done => {
         return request(app)
             .get(`/api/v${version}/requirements`)
             .set("Accept", "application/json")
@@ -115,7 +118,36 @@ describe("GET /requirements", () => {
                     title: "Requirement 1",
                     tracks_id: 1,
                     tasks_description: "Requirement 1 description",
-                    progress: 0
+                    progress: 0,
+                    resources: [
+                        {
+                            id: 1,
+                            type: "google_doc",
+                            title: "Action verbs for technical resumes",
+                            url:
+                                "https://docs.google.com/document/d/1wZkDPBWtQZDGGdvStD61iRx_jOWVlIyyQl9UOYHtZgA/edit",
+                            description: null,
+                            tasks_id: 1
+                        },
+                        {
+                            id: 2,
+                            type: "google_doc",
+                            title: "Power statement article",
+                            url:
+                                "https://www.linkedin.com/pulse/20140929001534-24454816-my-personal-formula-for-a-better-resume/",
+                            description: null,
+                            tasks_id: 1
+                        },
+                        {
+                            id: 3,
+                            type: "google_doc",
+                            title: "'Lambda is…' paragraphs",
+                            url:
+                                "https://docs.google.com/document/d/19OxIgJYkLMq4c1o5zHu1Na4a3PYcyutOosVfg6a03RI/edit",
+                            description: null,
+                            tasks_id: 1
+                        }
+                    ]
                 })
                 done()
             })

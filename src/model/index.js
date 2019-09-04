@@ -1,7 +1,8 @@
 const {
     findRequirementsByTrack,
     getRequirementProgress,
-    getRequirementsWithProgress
+    getRequirementsWithProgress,
+    getRequirementsWithProgressAndResources
 } = require("./requirements")
 const { findAllTracks } = require("./tracks")
 const {
@@ -21,6 +22,7 @@ const {
     findCompletedStepsForTaskByUser
 } = require("./completedSteps")
 
+const { findResourcesForRequirement } = require("./resources")
 module.exports = {
     findUsers,
     findUsersBy,
@@ -38,5 +40,7 @@ module.exports = {
     findCompletedRequirementStepsByUser,
     findCompletedStepsForTaskByUser,
     getRequirementProgress,
-    getRequirementsWithProgress
+    getRequirementsWithProgress,
+    findResourcesForRequirement,
+    getRequirementsWithProgressAndResources
 }
