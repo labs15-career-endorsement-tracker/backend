@@ -31,7 +31,7 @@ module.exports = {
         },
         {
             type: "unspecified",
-            title: "Resume  Rubric",
+            title: "Resume Rubric",
             tasks_id: 1,
             url:
                 "https://drive.google.com/file/d/1h0CCENtwDuNxVwqIG8-P6O2sZj8S4BPg/view"
@@ -68,16 +68,67 @@ module.exports = {
         {
             type: "unspecified",
             title: "LinkedIn Rubric",
-            tasks_id: 3,
+            tasks_id: 2,
             url:
                 "https://drive.google.com/file/d/1fgBBDBSoZwCB8exoRSFy20MpGZxNd6zq/view"
         },
         {
             type: "google_doc",
             title: "LinkedIn Deep Dive",
-            tasks_id: 4,
+            tasks_id: 2,
             url:
                 "https://docs.google.com/document/d/1Gp4ZjEwRUY2a1dcbXK0Ml5LE4ZzWRnUjHa9pJnNFIpo/edit"
+        },
+        // green github
+        {
+            type: "unspecified",
+            title: "TroubleShoot GitHub Contributions Not Showing",
+            tasks_id: 3,
+            url:
+                "https://help.github.com/en/articles/why-are-my-contributions-not-showing-up-on-my-profile"
+        },
+        {
+            type: "unspecified",
+            title: "GitHub Rubric",
+            tasks_id: 3,
+            url:
+                "https://drive.google.com/file/d/1ar_sdfp78CjBJLw1ru4HlYdZbobZFiks/view"
+        },
+        // resources for web portfolio
+        {
+            type: "unspecified",
+            title: "Request Your Free Domain Name",
+            tasks_id: 4,
+            url:
+                "https://docs.google.com/forms/d/e/1FAIpQLSeOSmjjWpO5PmXCiiSwZGgS8jp4OxUI8h0HhU6ErjBZmvYs8w/viewform"
+        },
+        {
+            type: "unspecified",
+            title: "Building Your Portfolio: MVP",
+            tasks_id: 4,
+            url: "https://github.com/LambdaSchool/portfolio-website"
+        },
+        {
+            type: "unspecified",
+            title: "Web Design Resources",
+            tasks_id: 4,
+            url:
+                "https://gist.github.com/justsml/badccebfb44fd20dae39b49a2e29085b#web-design-resources"
+        },
+        {
+            type: "unspecified",
+            title: "Portfolio Rubrid",
+            tasks_id: 4,
+            url:
+                "https://drive.google.com/file/d/1On275nNm5St9sF9a4w3Tkv-k6YmXKb9F/view"
+        },
+        // resources for portfolio for all other tracks (not web)
+        {
+            type: "unspecified",
+            title: "Request Your Free Domain Name",
+            tasks_id: 5,
+            url:
+                "https://docs.google.com/forms/d/e/1FAIpQLSeOSmjjWpO5PmXCiiSwZGgS8jp4OxUI8h0HhU6ErjBZmvYs8w/viewform"
         }
     ]
 }
