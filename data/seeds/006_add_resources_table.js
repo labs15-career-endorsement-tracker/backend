@@ -9,7 +9,7 @@ exports.seed = function(knex) {
         },
         {
             type: "google_doc",
-            title: "Power statement article",
+            title: "Power statements article",
             tasks_id: 1,
             url:
                 "https://www.linkedin.com/pulse/20140929001534-24454816-my-personal-formula-for-a-better-resume/"

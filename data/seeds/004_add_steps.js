@@ -17,7 +17,7 @@ exports.seed = function(knex) {
         {
             number: 3,
             steps_description:
-                "Submit your resume for a free review through CV Compiler",
+                "Submit your resume for a free review through CV Compiler: Log in and use the promo code for your track: iOSresumes, DSresumes, or WEBresumes. Upload your resume and start working on improving it with CV Compiler. In case of any questions (e.g. issues with processing resumes), feel free to contact their support team - hello@cvcompiler.com .",
             is_required: true,
             tasks_id: 1
         },
