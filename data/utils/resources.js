@@ -6,7 +6,7 @@ module.exports = {
             title: "Action verbs for technical resumes",
             tasks_id: 1,
             url:
-                "https://docs.google.com/document/d/1wZkDPBWtQZDGGdvStD61iRx_jOWVlIyyQl9UOYHtZgA/edit"
+                "https://docs.google.com/document/d/1wZkDPBWtQZDGGdvStD61iRx_jOWVlIyyQl9UOYHtZgA/edit?usp=sharing"
         },
         {
             type: "unspecified",
@@ -20,49 +20,49 @@ module.exports = {
             title: "'Lambda is…' paragraphs",
             tasks_id: 1,
             url:
-                "https://docs.google.com/document/d/19OxIgJYkLMq4c1o5zHu1Na4a3PYcyutOosVfg6a03RI/edit"
+                "https://docs.google.com/document/d/19OxIgJYkLMq4c1o5zHu1Na4a3PYcyutOosVfg6a03RI/edit?usp=sharing"
         },
         {
             type: "google_doc",
             title: "Resume Deep Dive",
             tasks_id: 1,
             url:
-                "https://docs.google.com/document/d/1BOwmlkiPJH_96dnjI3nAW8ok-BOR8hkl5Us70bwf24U/edit"
+                "https://docs.google.com/document/d/1BOwmlkiPJH_96dnjI3nAW8ok-BOR8hkl5Us70bwf24U/edit?usp=sharing"
         },
         {
             type: "unspecified",
             title: "Resume Rubric",
             tasks_id: 1,
             url:
-                "https://drive.google.com/file/d/1h0CCENtwDuNxVwqIG8-P6O2sZj8S4BPg/view"
+                "https://drive.google.com/file/d/1h0CCENtwDuNxVwqIG8-P6O2sZj8S4BPg/view?usp=sharing"
         },
         {
             type: "google_doc",
             title: "Resume tips for UX Designers",
             tasks_id: 1,
             url:
-                "https://docs.google.com/document/d/1yHAw9CbXjmA5TJwI8j84uS-w5tojC8y7eeoGmmoYzMc/edit"
+                "https://docs.google.com/document/d/1yHAw9CbXjmA5TJwI8j84uS-w5tojC8y7eeoGmmoYzMc/edit?usp=sharing"
         },
         {
             type: "google_doc",
             title: "Resume tips for Mobile Developers",
             tasks_id: 1,
             url:
-                "https://docs.google.com/document/d/1bvqn0aFGpvkaKVfmBDAhtmoWlAlDoRTD5DuiMXwsJlQ/edit"
+                "https://docs.google.com/document/d/1bvqn0aFGpvkaKVfmBDAhtmoWlAlDoRTD5DuiMXwsJlQ/edit?usp=sharing"
         },
         {
             type: "google_doc",
             title: "Resume tips for Web Developers",
             tasks_id: 1,
             url:
-                "https://docs.google.com/document/d/1RHpYdEqrvSPL3Z4dIHLVaYyju06aGrApBI6RMyAqFg0/edit"
+                "https://docs.google.com/document/d/1RHpYdEqrvSPL3Z4dIHLVaYyju06aGrApBI6RMyAqFg0/edit?usp=sharing"
         },
         {
             type: "google_doc",
             title: "Resume tips for Data Scientists",
             tasks_id: 1,
             url:
-                "https://docs.google.com/document/d/1bYAuFyZfa-BIAYUf529Px3ULNOKZwAvUFRxDqlOCvaE/edit"
+                "https://docs.google.com/document/d/1bYAuFyZfa-BIAYUf529Px3ULNOKZwAvUFRxDqlOCvaE/edit?usp=sharing"
         },
         // resources for linked in
         {
@@ -70,14 +70,14 @@ module.exports = {
             title: "LinkedIn Rubric",
             tasks_id: 2,
             url:
-                "https://drive.google.com/file/d/1fgBBDBSoZwCB8exoRSFy20MpGZxNd6zq/view"
+                "https://drive.google.com/file/d/1fgBBDBSoZwCB8exoRSFy20MpGZxNd6zq/view?usp=sharing"
         },
         {
             type: "google_doc",
             title: "LinkedIn Deep Dive",
             tasks_id: 2,
             url:
-                "https://docs.google.com/document/d/1Gp4ZjEwRUY2a1dcbXK0Ml5LE4ZzWRnUjHa9pJnNFIpo/edit"
+                "https://docs.google.com/document/d/1Gp4ZjEwRUY2a1dcbXK0Ml5LE4ZzWRnUjHa9pJnNFIpo/edit?usp=sharing"
         },
         // green github
         {
@@ -92,15 +92,14 @@ module.exports = {
             title: "GitHub Rubric",
             tasks_id: 3,
             url:
-                "https://drive.google.com/file/d/1ar_sdfp78CjBJLw1ru4HlYdZbobZFiks/view"
+                "https://drive.google.com/file/d/1ar_sdfp78CjBJLw1ru4HlYdZbobZFiks/view?usp=sharing"
         },
         // resources for web portfolio
         {
             type: "unspecified",
             title: "Request Your Free Domain Name",
             tasks_id: 4,
-            url:
-                "https://docs.google.com/forms/d/e/1FAIpQLSeOSmjjWpO5PmXCiiSwZGgS8jp4OxUI8h0HhU6ErjBZmvYs8w/viewform"
+            url: "https://forms.gle/mUrc1mTt33pnvTiNA"
         },
         {
             type: "unspecified",
@@ -117,18 +116,17 @@ module.exports = {
         },
         {
             type: "unspecified",
-            title: "Portfolio Rubrid",
+            title: "Portfolio Rubric",
             tasks_id: 4,
             url:
-                "https://drive.google.com/file/d/1On275nNm5St9sF9a4w3Tkv-k6YmXKb9F/view"
+                "https://drive.google.com/file/d/1On275nNm5St9sF9a4w3Tkv-k6YmXKb9F/view?usp=sharing"
         },
         // resources for portfolio for all other tracks (not web)
         {
             type: "unspecified",
             title: "Request Your Free Domain Name",
             tasks_id: 5,
-            url:
-                "https://docs.google.com/forms/d/e/1FAIpQLSeOSmjjWpO5PmXCiiSwZGgS8jp4OxUI8h0HhU6ErjBZmvYs8w/viewform"
+            url: "https://forms.gle/mUrc1mTt33pnvTiNA"
         },
         // App for mobile devs
         {
@@ -149,7 +147,26 @@ module.exports = {
             title: "App Store/Google Play Store rubric",
             tasks_id: 6,
             url:
-                "https://drive.google.com/file/d/1RiMf5gFViTHKD0j6jrCApYi9XvVaERS-/view"
+                "https://drive.google.com/file/d/1RiMf5gFViTHKD0j6jrCApYi9XvVaERS-/view?usp=sharing"
+        },
+        // Portfolio for UX
+        {
+            type: "youtube_vid",
+            title: "UX portfolio series by Nick Basile: Pt I",
+            tasks_id: 7,
+            url: "https://youtu.be/JR0X02EsBoM"
+        },
+        {
+            type: "youtube_vid",
+            title: "UX portfolio series by Nick Basile: Pt II",
+            tasks_id: 7,
+            url: "https://youtu.be/7ILlmxLVLp4"
+        },
+        {
+            type: "youtube_vid",
+            title: "App Store/Google Play Store rubric",
+            tasks_id: 7,
+            url: "https://youtu.be/6lb2e0KPF0I"
         }
     ]
 }

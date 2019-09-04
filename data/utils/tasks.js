@@ -47,6 +47,14 @@ module.exports = {
             tasks_description:
                 "You must have an active application deployed to either the App Store or Google Play Store",
             is_endorsement_requirement: true
+        },
+        // 7
+        {
+            title: "Portfolio Website: UX",
+            is_required: true,
+            tasks_description:
+                "You must have an active online presence, including a portfolio site (buildable through Beautiful Jekyll, Wix, Squarespace, etc.) OR Medium/other blog highlighting your projects and skills",
+            is_endorsement_requirement: true
         }
     ]
 }

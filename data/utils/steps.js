@@ -166,6 +166,49 @@ module.exports = {
                 "Clear screenshots of your app and coherent description of what it does",
             is_required: true,
             tasks_id: 6
+        },
+        // Portfolio for UX
+        {
+            number: 1,
+            steps_description:
+                "Review UX portfolio series by Nick Basile: Pt I, Pt II, and Pt III",
+            is_required: true,
+            tasks_id: 7
+        },
+        {
+            number: 2,
+            steps_description:
+                "Create a website (Squarespace, Wix, etc. is ok) OR pdf document highlighting at least one (preferably 2-3) case studies using principles that Nick covers in his series",
+            is_required: true,
+            tasks_id: 7
+        },
+        {
+            number: 3,
+            steps_description:
+                "Your own domain name (no subdomains), purchased through namecheap or other site. Ask a career coach for a free purchase code to namecheap.com.",
+            is_required: true,
+            tasks_id: 7
+        },
+        {
+            number: 4,
+            steps_description:
+                "Long-form written descriptions of your projects and technical learning/progress",
+            is_required: true,
+            tasks_id: 7
+        },
+        {
+            number: 5,
+            steps_description:
+                "Links to LinkedIn, GitHub, Medium, and any other relevant artifacts",
+            is_required: true,
+            tasks_id: 7
+        },
+        {
+            number: 6,
+            steps_description:
+                "All Build Weeks and Labs projects with links to code in GitHub",
+            is_required: true,
+            tasks_id: 7
         }
     ]
 }
