@@ -55,19 +55,26 @@ module.exports = {
         {
             number: 1,
             steps_description:
-                "A clear headshot and and professional user handle",
+                "Check your contributions graph to make sure it’s green 4-5 days/week. Does it seem like your graph is missing contributions?",
             is_required: true,
             tasks_id: 3
         },
         {
             number: 2,
             steps_description:
-                "Top pinned projects should include any open source contributions and your Build Week or Labs projects",
+                "Include a clear headshot and and professional user handle",
             is_required: true,
             tasks_id: 3
         },
         {
             number: 3,
+            steps_description:
+                "Top pinned projects should include any open source contributions and your Build Week or Labs projects",
+            is_required: true,
+            tasks_id: 3
+        },
+        {
+            number: 4,
             steps_description:
                 "Weekly contributions, to show ongoing commitment to skills-building",
             is_required: true,
@@ -134,12 +141,27 @@ module.exports = {
         // Deployed Mobile App
         {
             number: 1,
-            steps_description: "Functioning, debugged, user-ready app",
+            steps_description:
+                "if you don’t already have an app launched, pick one that you want to highlight and make sure that it is fully functional, debugged, and user-ready",
             is_required: true,
             tasks_id: 6
         },
         {
             number: 2,
+            steps_description:
+                "Review Apple’s guidelines for submitting an app to the App Store or Android’s guidelines for submitting an app to the Google Play Store ",
+            is_required: true,
+            tasks_id: 6
+        },
+        {
+            number: 3,
+            steps_description:
+                "Use the App Store/Google Play Store rubric to make sure you’re including all required components in your published app",
+            is_required: true,
+            tasks_id: 6
+        },
+        {
+            number: 4,
             steps_description:
                 "Clear screenshots of your app and coherent description of what it does",
             is_required: true,

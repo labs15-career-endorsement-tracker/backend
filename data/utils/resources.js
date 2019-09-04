@@ -129,6 +129,27 @@ module.exports = {
             tasks_id: 5,
             url:
                 "https://docs.google.com/forms/d/e/1FAIpQLSeOSmjjWpO5PmXCiiSwZGgS8jp4OxUI8h0HhU6ErjBZmvYs8w/viewform"
+        },
+        // App for mobile devs
+        {
+            type: "unspecified",
+            title: "Apple’s guidelines for submitting an app to the App Store",
+            tasks_id: 6,
+            url: "https://developer.apple.com/ios/submit/"
+        },
+        {
+            type: "unspecified",
+            title:
+                "Android’s guidelines for submitting an app to the Google Play Store",
+            tasks_id: 6,
+            url: "https://developer.android.com/studio/publish"
+        },
+        {
+            type: "unspecified",
+            title: "App Store/Google Play Store rubric",
+            tasks_id: 6,
+            url:
+                "https://drive.google.com/file/d/1RiMf5gFViTHKD0j6jrCApYi9XvVaERS-/view"
         }
     ]
 }
