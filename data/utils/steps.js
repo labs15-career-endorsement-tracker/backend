@@ -130,6 +130,20 @@ module.exports = {
                 "All Build Weeks and Labs projects with links to code in GitHub",
             is_required: true,
             tasks_id: 5
+        },
+        // Deployed Mobile App
+        {
+            number: 1,
+            steps_description: "Functioning, debugged, user-ready app",
+            is_required: true,
+            tasks_id: 6
+        },
+        {
+            number: 2,
+            steps_description:
+                "Clear screenshots of your app and coherent description of what it does",
+            is_required: true,
+            tasks_id: 6
         }
     ]
 }
