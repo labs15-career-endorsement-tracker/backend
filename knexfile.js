@@ -14,6 +14,7 @@ const migrations = {
 }
 
 const seeds = { directory: resolvePath(__dirname, "./data/seeds") }
+const productionSeeds = { directory: resolvePath(__dirname, "./data/production-seeds") }
 
 const commonConfig = {
     client,
@@ -26,7 +27,7 @@ const commonConfig = {
 const development = commonConfig
 const staging = commonConfig
 const test = commonConfig
-const production = commonConfig
+const production = {...commonConfig, seeds: productionSeeds}
 
 module.exports = {
     development,
