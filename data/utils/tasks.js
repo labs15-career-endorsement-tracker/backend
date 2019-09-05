@@ -55,6 +55,22 @@ module.exports = {
             tasks_description:
                 "You must have an active online presence, including a portfolio site (buildable through Beautiful Jekyll, Wix, Squarespace, etc.) OR Medium/other blog highlighting your projects and skills",
             is_endorsement_requirement: true
+        },
+        // 8
+        {
+            title: "Cover letter boilerplate",
+            is_required: true,
+            tasks_description:
+                "You must have a cover letter boilerplate that you can use to adapt for individual job opportunities",
+            is_endorsement_requirement: true
+        },
+        // 9
+        {
+            title: "Case Study PDF",
+            is_required: true,
+            tasks_description:
+                "Well-designed PDF version of at least one case study that could be printed and shared in a live setting or shared via email",
+            is_endorsement_requirement: true
         }
     ]
 }

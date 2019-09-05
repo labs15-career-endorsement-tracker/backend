@@ -27,6 +27,10 @@ module.exports = {
         { tasks_id: 6, tracks_id: 2 },
         { tasks_id: 6, tracks_id: 4 },
         // Portfolio for UX
-        { tasks_id: 7, tracks_id: 5 }
+        { tasks_id: 7, tracks_id: 5 },
+        // Cover Letter for UX
+        { tasks_id: 8, tracks_id: 5 },
+        // Case Study for UX
+        { tasks_id: 9, tracks_id: 5 }
     ]
 }

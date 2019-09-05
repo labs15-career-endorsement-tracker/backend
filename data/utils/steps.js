@@ -209,6 +209,22 @@ module.exports = {
                 "All Build Weeks and Labs projects with links to code in GitHub",
             is_required: true,
             tasks_id: 7
+        },
+        // Cover Letter
+        {
+            number: 1,
+            steps_description:
+                "Find a cover letter template to help you get started",
+            is_required: true,
+            tasks_id: 8
+        },
+        // Cover Letter
+        {
+            number: 1,
+            steps_description:
+                "Complete well-designed PDF version of at least one case study that could be printed and shared in a live setting or shared via email",
+            is_required: true,
+            tasks_id: 9
         }
     ]
 }

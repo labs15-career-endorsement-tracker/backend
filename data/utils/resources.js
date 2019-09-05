@@ -2,6 +2,24 @@ module.exports = {
     resources: [
         // resources for resume
         {
+            type: "unspecified",
+            title: "Creddle",
+            tasks_id: 1,
+            url: "http://creddle.io/"
+        },
+        {
+            type: "unspecified",
+            title: "NovoResume",
+            tasks_id: 1,
+            url: "https://novoresume.com/resume-templates"
+        },
+        {
+            type: "unspecified",
+            title: "CV Compiler",
+            tasks_id: 1,
+            url: "https://cvcompiler.com/students/lambda"
+        },
+        {
             type: "google_doc",
             title: "Action verbs for technical resumes",
             tasks_id: 1,
@@ -167,6 +185,20 @@ module.exports = {
             title: "App Store/Google Play Store rubric",
             tasks_id: 7,
             url: "https://youtu.be/6lb2e0KPF0I"
+        },
+        {
+            type: "unspecified",
+            title: "Strong Case Study Examples",
+            tasks_id: 7,
+            url: "https://www.casestudy.club/case-studies"
+        },
+        // Cover Letter
+        {
+            type: "google_doc",
+            title: "Cover Letter Templates",
+            tasks_id: 7,
+            url:
+                "https://docs.google.com/document/d/1Qj5g85K8TEDEzXR5qthHPqOaisuPcgCfKKGkiF0Zb1s/edit?usp=sharing"
         }
     ]
 }
