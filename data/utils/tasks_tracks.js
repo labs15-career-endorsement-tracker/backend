@@ -31,6 +31,12 @@ module.exports = {
         // Cover Letter for UX
         { tasks_id: 8, tracks_id: 5 },
         // Case Study for UX
-        { tasks_id: 9, tracks_id: 5 }
+        { tasks_id: 9, tracks_id: 5 },
+        // Mock Interviews for all Tracks
+        { tasks_id: 10, tracks_id: 1 },
+        { tasks_id: 10, tracks_id: 2 },
+        { tasks_id: 10, tracks_id: 3 },
+        { tasks_id: 10, tracks_id: 4 },
+        { tasks_id: 10, tracks_id: 5 }
     ]
 }

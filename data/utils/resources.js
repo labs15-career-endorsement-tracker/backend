@@ -196,9 +196,30 @@ module.exports = {
         {
             type: "google_doc",
             title: "Cover Letter Templates",
-            tasks_id: 7,
+            tasks_id: 8,
             url:
                 "https://docs.google.com/document/d/1Qj5g85K8TEDEzXR5qthHPqOaisuPcgCfKKGkiF0Zb1s/edit?usp=sharing"
+        },
+        // Mock Interviews
+        {
+            type: "unspecified",
+            title: "Pramp",
+            tasks_id: 10,
+            url: "https://www.pramp.com/#/"
+        },
+        {
+            type: "google_doc",
+            title: "Technical Interview Prep Packet",
+            tasks_id: 10,
+            url:
+                "https://https://docs.google.com/document/d/1g9BkZOc2YSyYsa2q-qblXsXcvvU_xteuRt7IxTybAVU/edit?usp=sharingwww.pramp.com/#/"
+        },
+        {
+            type: "google_doc",
+            title: "STAR and common interview questions worksheet",
+            tasks_id: 10,
+            url:
+                "https://docs.google.com/document/d/12dqHqzFTSuHxADm0E_vxMQWqyYVKJyPLuvsM7lnHdYg/edit?usp=sharing"
         }
     ]
 }

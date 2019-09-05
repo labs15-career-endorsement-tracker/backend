@@ -225,6 +225,65 @@ module.exports = {
                 "Complete well-designed PDF version of at least one case study that could be printed and shared in a live setting or shared via email",
             is_required: true,
             tasks_id: 9
+        },
+        // Interviews
+        {
+            number: 1,
+            steps_description:
+                "You must get a token from a career coach for Skilled Inc. Keep in mind it may take a few weeks to set up your Skilled Inc interview",
+            is_required: true,
+            tasks_id: 10
+        },
+        {
+            number: 2,
+            steps_description: "Set up account in Pramp",
+            is_required: true,
+            tasks_id: 10
+        },
+        {
+            number: 3,
+            steps_description:
+                "Select the type of interview you want to prep for (if you do not see your track, complete a behavioral interview)",
+            is_required: true,
+            tasks_id: 10
+        },
+        {
+            number: 4,
+            steps_description:
+                "Schedule three mock interview with an anonymous peer, or invite a Lambda buddy to interview with using the “invite session” feature. Note we HIGHLY recommend scheduling your mock interviews on separate days so you have time to reflect and improve in between.",
+            is_required: true,
+            tasks_id: 10
+        },
+        {
+            number: 5,
+            steps_description: "Complete Skilled Inc Interview",
+            is_required: true,
+            tasks_id: 10
+        },
+        {
+            number: 6,
+            steps_description: "Complete First Pramp Interview",
+            is_required: true,
+            tasks_id: 10
+        },
+        {
+            number: 7,
+            steps_description: "Complete Second Pramp Interview",
+            is_required: true,
+            tasks_id: 10
+        },
+        {
+            number: 8,
+            steps_description: "Complete Third Pramp Interview",
+            is_required: true,
+            tasks_id: 10
+        },
+        {
+            number: 9,
+            steps_description:
+                "Screenshot your feedback to share with your coach",
+            is_required: true,
+            tasks_id: 10
         }
     ]
 }

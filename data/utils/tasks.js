@@ -71,6 +71,14 @@ module.exports = {
             tasks_description:
                 "Well-designed PDF version of at least one case study that could be printed and shared in a live setting or shared via email",
             is_endorsement_requirement: true
+        },
+        // 10
+        {
+            title: "Mock Interviews",
+            is_required: true,
+            tasks_description:
+                "Pass one SkilledInc. interview and completed three Pramp interviews",
+            is_endorsement_requirement: true
         }
     ]
 }
