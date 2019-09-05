@@ -1,38 +1,8 @@
 const bcrypt = require("bcryptjs")
+const { staticUser } = require("../../data/utils")
 
-const fakeUsers = [
-    {
-        first_name: "bob",
-        last_name: "ross",
-        email: "bob_ross@happylittlemistakes.com",
-        password: bcrypt.hashSync("Password1234!", 4),
-        tracks_id: 1
-    }
-]
+const fakeUsers = [staticUser]
 
-const fakeCoaches = [
-    {
-        first_name: "Alan",
-        last_name: "Turing",
-        email: "a_turing@gmail.com",
-        password: bcrypt.hashSync("Password1234!", 4),
-        is_admin: true
-    },
-    {
-        first_name: "Grace",
-        last_name: "Hopper",
-        email: "g_hopper@gmail.com",
-        password: bcrypt.hashSync("Password1234!", 4),
-        is_admin: true
-    },
-    {
-        first_name: "Ada",
-        last_name: "Lovelace",
-        email: "a_lovelace@gmail.com",
-        password: bcrypt.hashSync("Password1234!", 4),
-        is_admin: true
-    }
-]
 const fakeTracks = [{ title: "Web" }]
 const fakeTasks = [
     {
@@ -191,6 +161,5 @@ module.exports = {
     fakeTasksTracks,
     fakeTracks,
     fakeCompletedSteps,
-    fakeCoaches,
     fakeResources
 }
