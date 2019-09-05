@@ -182,7 +182,10 @@ Headers
 ##### REQUEST
 
 ```
-
+Headers
+{
+  authorization: bearer token
+}
 ```
 
 ##### RESPONSE
