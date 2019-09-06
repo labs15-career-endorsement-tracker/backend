@@ -1,7 +1,7 @@
 {
     "name": "backend",
     "version": "1.0.0",
-    "description": "Backend API for careerendorsement.com",
+    "description": "Backend API for endrsd.com",
     "main": "src",
     "scripts": {
         "dev": "nodemon -r dotenv/config .",
