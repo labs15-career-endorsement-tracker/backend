@@ -33,7 +33,6 @@ describe("GET /users", () => {
                 expect(usersList[0]).toHaveProperty("first_name")
                 expect(usersList[0]).toHaveProperty("last_name")
                 expect(usersList[0]).toHaveProperty("email")
-                expect(usersList[0]).toHaveProperty("password")
                 expect(usersList[0]).toHaveProperty("tracks_id")
                 done()
             })

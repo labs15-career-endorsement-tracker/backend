@@ -5,7 +5,15 @@ const { findRequirementsByTrack } = require("./requirements")
 const { findStepsByTask } = require("./steps")
 const { findCompletedRequirementStepsByUser } = require("./completedSteps")
 
-const findUsers = () => db("users")
+const findUsers = () =>
+    db("users").select(
+        "id",
+        "first_name",
+        "last_name",
+        "email",
+        "tracks_id",
+        "is_admin"
+    )
 
 const findUsersBy = filter => db("users").where(filter)
 
