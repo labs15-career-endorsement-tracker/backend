@@ -1,10 +1,26 @@
-# Career Endorsement Tracker App (Back-End Repo)
+<a href="https://lambdaschool.com/">
+    <img src="https://res.cloudinary.com/endrsd/image/upload/v1567546601/lambda_logo_ffimws.png" title="Lambda School Logo" width="200" align="right">
+</a>
 
-🚫 Note: All lines that start with 🚫 are instructions and should be deleted before this is posted to your portfolio. This is intended to be a guideline. Feel free to add your own flare to it.
+# The 'ENDRSD' Project
 
-🚫 The numbers 1️⃣ through 3️⃣ next to each item represent the week that part of the docs needs to be comepleted by. Make sure to delete the numbers by the end of Labs.
+![MIT](https://img.shields.io/badge/License-MIT-brightgreen.svg)
+![Express](https://img.shields.io/badge/Express-v4.17.1-blue)
+![Knex](https://img.shields.io/badge/Knex-v0.19.1-orange)
+![Code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg)
+[![GitHub issues](https://img.shields.io/github/issues/labs15-career-endorsement-tracker/frontend)](https://github.com/labs15-career-endorsement-tracker/frontend/issues)
+[![GitHub forks](https://img.shields.io/github/forks/labs15-career-endorsement-tracker/frontend)](https://github.com/labs15-career-endorsement-tracker/frontend/network)
+[![GitHub stars](https://img.shields.io/github/stars/labs15-career-endorsement-tracker/frontend)](https://github.com/labs15-career-endorsement-tracker/frontend/stargazers)
 
-🚫 Each student has a required minimum number of meaningful PRs each week per the rubric. Contributing to docs does NOT count as a PR to meet your weekly requirements.
+<p align="center">
+    <a href="#">
+        <img src="https://res.cloudinary.com/endrsd/image/upload/v1567546242/endrsd_logo_lodzmu.png" alt="ENDRSD logo" width="350">
+    </a>
+</p>
+
+## Project Overview
+
+"ENDRSD" is a capstone project that was built as a centralized location for Lambda School students to access track-specific career endorsement requirements, as well as provide students with a fun and engaging way to track their career endorsement progress.
 
 # API Documentation
 
@@ -12,37 +28,54 @@
 
 #### Backend delpoyed at PRODUCTION: [HEROKU](https://endrsd-api.herokuapp.com/) <br>
 
-## 1️⃣ Getting started
+## Getting started
 
 To get the server running locally:
 
-🚫 adjust these scripts to match your project
+1.  Clone this repo
+2.  **yarn install** to install all required dependencies
+3.  Create a local postgres database for development
+    -   Reference [this article](https://www.freecodecamp.org/news/how-to-get-started-with-postgresql-9d3bc1dd1b11/) or [this document](https://github.com/Lambda-School-Labs/Labs8-OfflineReader/wiki/Setting-up-a-PostgreSQL-database-for-local-testing) for help
+4.  **touch .env** environment variables:
+    -   DATABASE_URL
+    -   JWT_SECRET
+5.  Run migrations and seeds
+    -   migrations **yarn knex:migrate:latest**
+    -   seeds **yarn knex:seed:run**
+6.  **yarn dev** to run the server using the development environment
 
--   Clone this repo
--   **yarn install** to install all required dependencies
--   **yarn server** to start the local server
--   **yarn test** to start server using testing environment
+To run the test server
 
-### Backend framework goes here
+1. Create a database in your postgres server called test_endrsd
+2. Add environment variable to _.env_
+    - TEST_DATABASE_URL
+3. **yarn test** to start server using testing environment
 
-🚫 Why did you choose this framework?
+## Tech Stack
 
--   Point One
--   Point Two
--   Point Three
--   Point Four
+#### Node.js
 
-## 2️⃣ Endpoints
+-   Node.js offers easy scalability because it can handle a large number of simultaneous connections with high throughput.
+-   Using node.js allows developers who are familiar with JavaScript, to develop both the client-side and server-side applications using a single programming language.
+-   Node.js takes less time to learn because it utilizes an already popular client-side scripting language---JavaScript.
+-   Support for node.js is readily available because of the large and active community behind it.
+-   Node.js is able to take advantage of caching things within the appliation memory for faster load times.
 
-🚫This is a placeholder, replace the endpoints, access controll, and descriptioin to match your project
+#### PostgreSQL
 
-#### Organization Routes
+-   PostgreSQL is a type of relational database that is open source and freely available for anyone to use.
+-   SQL databases have a reputation for being more reliable because they have ben tried and tested longer than their NoSQL counterparts.
+-   The source code for PostgreSQL was developed by a large community that has created numerous online resources for support.
+-   The strongly-typed schemas with a SQL database leave very little room for errors.
 
-| Method | Endpoint                | Access Control | Description                                  |
-| ------ | ----------------------- | -------------- | -------------------------------------------- |
-| GET    | `/organizations/:orgId` | all users      | Returns the information for an organization. |
-| PUT    | `/organizatoins/:orgId` | owners         | Modify an existing organization.             |
-| DELETE | `/organizations/:orgId` | owners         | Delete an organization.                      |
+#### Knex.js
+
+-   A SQL query builder that integrates well with a PostgreSQL database.
+-   Allows for 'migragtions', which makes it easier to manage tables within the PostgreSQL database.
+-   It can create sequential files with timestamps and even manage table alterations.
+-   Allows for the creation of 'seeds', which can be used to consistently populate the database.
+
+## Endpoints
 
 #### User Routes
 
@@ -298,20 +331,16 @@ Headers
 
 # Data Model
 
-🚫This is just an example. Replace this with your data model
+[View on dbdesigner.net](https://app.dbdesigner.net/designer/schema/0-untitled-621fa2f2-75bd-4eb4-ab98-6f7a5914d0e4)
 
-#### 2️⃣ ORGANIZATIONS
+#### TRACKS
 
 ---
 
 ```
 {
-  id: UUID
-  name: STRING
-  industry: STRING
-  paid: BOOLEAN
-  customer_id: STRING
-  subscription_id: STRING
+  id: INT
+  title: STRING
 }
 ```
 
@@ -321,59 +350,143 @@ Headers
 
 ```
 {
-  id: UUID
-  organization_id: UUID foreign key in ORGANIZATIONS table
+  id: INT
+  tracks_id: INT foreign key in TRACKS table
   first_name: STRING
   last_name: STRING
-  role: STRING [ 'owner', 'supervisor', 'employee' ]
   email: STRING
-  phone: STRING
-  cal_visit: BOOLEAN
-  emp_visit: BOOLEAN
-  emailpref: BOOLEAN
-  phonepref: BOOLEAN
+  password: STRING
+  is_admin: BOOLEAN
 }
 ```
 
-## 2️⃣ Actions
+#### TASKS
 
-🚫 This is an example, replace this with the actions that pertain to your backend
+---
 
-`getOrgs()` -> Returns all organizations
+```
+{
+  id: INT
+  title: STRING
+  is_required: BOOLEAN
+  tasks_description: TEXT
+  is_endorsement_requirement: BOOLEAN
+}
+```
 
-`getOrg(orgId)` -> Returns a single organization by ID
+#### TASKS_TRACKS
 
-`addOrg(org)` -> Returns the created org
+---
 
-`updateOrg(orgId)` -> Update an organization by ID
+```
+{
+  id: INT
+  tracks_id: INT foreign key in TRACKS table
+  tasks_id: INT foreign key in TASKS table
+}
+```
 
-`deleteOrg(orgId)` -> Delete an organization by ID
-<br>
-<br>
-<br>
-`getUsers(orgId)` -> if no param all users
+#### RESOURCES
 
-`getUser(userId)` -> Returns a single user by user ID
+---
 
-`addUser(user object)` --> Creates a new user and returns that user. Also creates 7 availabilities defaulted to hours of operation for their organization.
+```
+{
+  id: INT
+  type: STRING
+  title: STRING
+  url: STRING
+  tasks_id: INT foreign key in TASKS table
+}
+```
 
-`updateUser(userId, changes object)` -> Updates a single user by ID.
+#### STEPS
 
-`deleteUser(userId)` -> deletes everything dependent on the user
+---
 
-## 3️⃣ Environment Variables
+```
+{
+  id: INT
+  number: INT
+  steps_description: TEXT
+  is_required: BOOLEAN
+  tasks_id: INT foreign key in TASKS table
+}
+```
+
+#### USER_STEPS_COMPLETED
+
+---
+
+```
+{
+  id: INT
+  user_id: INT foreign key in USER table
+  steps_id: INT foreign key in STEPS table
+  created_at: DATE
+}
+```
+
+## Actions
+
+### Users
+
+`findUsers()` -> Returns all users
+
+`findUsersBy(filter)` -> Returns a user or users by any filter
+
+`findUserNoPassword(userId)` -> Returns a user without their password, with a progress pro found by user id
+
+`getUserWithProgress(userId)` -> Returns a user without their password, found by user id
+
+`insertUser(newUserData)` -> Adds a user to the database, returns the new user's id
+
+### Tracks
+
+`findAllTracks()` -> Gets all tracks
+
+### Steps
+
+`findStepsByTask(userId)` -> Finds all the steps for a task
+`getFormattedSteps(taskId, userId)` -> Gets the steps for a task with completion flag
+
+### Resources
+
+`findResourcesForRequirement(taskId)` -> Gets all the resources for a requirement
+
+### Requirements
+
+`getRequirementProgress(userId, taskId)` -> Returns just an int, the progress a user has made on a requirement, calculated by completion of steps
+
+`findRequirementsByTrack(trackId)` -> find all the requirements (just endorsement requirements not including assignments) by track id
+
+`getRequirementsWithProgress(userId, trackId)` -> returns a list of requirements with a progress property
+
+`getRequirementsWithProgressAndResources(userId, trackId)` -> returns a list of requirements with a progress property and a resources property containing an array of resources
+
+### Completed Steps
+
+`findCompletedStepsForTaskByUser(userId, taskId)` -> returns completed steps for a specific task for a specific user
+
+`findCompletedStepsBy(filter)` -> returns steps from the user_steps_completed table either by user_id or steps_id
+
+`findCompletedRequirementStepsByUser(userId)` -> returns all the completed steps for JUST ENDORSEMENT REQUIREMENTS for just the user
+
+`markComplete(userId, stepId)` -> adds an entry to the user_steps_completed table, where userId and stepId
+
+`markIncomplete(userId, stepId)` -> deletes an entry from the user_steps_completed table, where userId and stepId
+
+## Environment Variables
 
 In order for the app to function correctly, the user must set up their own environment variables.
 
 create a .env file that includes the following:
 
-🚫 These are just examples, replace them with the specifics for your app
-
-_ STAGING_DB - optional development db for using functionality not available in SQLite
-_ NODE\*ENV - set to "development" until ready for "production"
-
--   JWT*SECRET - you can generate this by using a python shell and running import random''.join([random.SystemRandom().choice('abcdefghijklmnopqrstuvwxyz0123456789!@#\$%^&amp;*(-_=+)') for i in range(50)])
-    _ SENDGRID_API_KEY - this is generated in your Sendgrid account \* stripe_secret - this is generated in the Stripe dashboard
+_ DATABSE_URL - the postgres string for your local development postgres server, recommended format:
+`postgres://username:userpassword@localhost/dbname`
+_ NODE_ENV - set to "development" until ready for "production"
+\_TEST_DATABASE_URL - the postgres string for your testing enviroment, with the same format as your DATABASE_URL
+\_JWT_SECRET - you can generate this by using a python shell and running import random''.join([random.SystemRandom().choice('abcdefghijklmnopqrstuvwxyz0123456789!@#\$%^&amp;\*(-*=+)') for i in range(50)])
 
 ## Contributing
 
@@ -412,7 +525,15 @@ Remember that this project is licensed under the MIT license, and by submitting 
 
 These contribution guidelines have been adapted from [this good-Contributing.md-template](https://gist.github.com/PurpleBooth/b24679402957c63ec426).
 
+## Contributors
+
+|                                                                                                                    [Isaac Houle](https://github.com/clem9281)                                                                                                                    |                                                                                                                  [Adam Mathieson](https://github.com/adammathieson)                                                                                                                   |                                                                                                                   [Hunter Raffety](https://hunterraffety.io/)                                                                                                                   |                                                                                                             [Leilani Schi- mmelfennig](https://github.com/lschimm)                                                                                                              |                                                                                                                 [Mikis Woodwinter](https://github.com/miikis)                                                                                                                  |                                                                                                              [Tico Thep- sourinthone](https://heytico.com)                                                                                                               |
+| :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------: |
+| [<img src="https://media.licdn.com/dms/image/C5603AQEMgyFhyy-WOw/profile-displayphoto-shrink_200_200/0?e=1573084800&v=beta&t=sYDbGFkngXstWFpKYK3veQxx2eSmOkfAtJ3Jmm7tqu8" width= "110" height="auto" style="object-fit:cover; overflow:hidden;" />](https://github.com/clem9281) | [<img src="https://media.licdn.com/dms/image/C5603AQGhMHYDPQtOZw/profile-displayphoto-shrink_200_200/0?e=1573084800&v=beta&t=jw_OgUvsXguHXEfLJMUZOWibUXYBuGuk6OUW0zdzSkc" width= "110" height="auto" style="object-fit:cover; overflow:hidden;" />](https://github.com/adammathieson) | [<img src="https://media.licdn.com/dms/image/C5603AQHMP_uLd-zA2w/profile-displayphoto-shrink_200_200/0?e=1573084800&v=beta&t=7V72CSVPo8e5M0jpu5KdkOSaJxLGiJerdQbjKZXTwSk" width= "110" height="auto" style="object-fit:cover; overflow:hidden;"  />](https://hunterraffety.io/) | [<img src="https://media.licdn.com/dms/image/C4E03AQHAEef3W60uIA/profile-displayphoto-shrink_200_200/0?e=1573084800&v=beta&t=XzXK-HRJNkINx4rnNRCRsMdMrc1eo6P6stF4RW2OqKM" width= "110" height="auto" style="object-fit:cover; overflow:hidden;" />](https://github.com/lschimm) | [<img src="https://media.licdn.com/dms/image/C5603AQGm-tCUYO3Pog/profile-displayphoto-shrink_200_200/0?e=1573084800&v=beta&t=Mqz8GBXT-RvGmt5HynoQ9wBlvDOUyIv5eBexDfZPPME" width= "110" height="auto" style="object-fit:cover; overflow:hidden;" />](https://github.com/miikis) | [<img src="https://media.licdn.com/dms/image/C4E03AQGIjp9UmRoNXA/profile-displayphoto-shrink_200_200/0?e=1573084800&v=beta&t=p2pz2FMpiP7p40p6E2RHNglAjRz3HJI-W3vOUHAESuA" width= "110" height="auto" style="object-fit:cover; overflow:hidden;" />](https://heytico.com) |
+|                                                                                              [<img src="https://github.com/favicon.ico" width="25"> ](https://github.com/clem9281)                                                                                               |                                                                                              [<img src="https://github.com/favicon.ico" width="25"> ](https://github.com/adammathieson)                                                                                               |                                                                                           [<img src="https://github.com/favicon.ico" width="25"> ](https://github.com/hunterraffety)                                                                                            |                                                                                              [<img src="https://github.com/favicon.ico" width="25"> ](https://github.com/lschimm)                                                                                               |                                                                                              [<img src="https://github.com/favicon.ico" width="25"> ](https://github.com/miikis)                                                                                               |                                                                                          [<img src="https://github.com/favicon.ico" width="25"> ](https://github.com/ticotheps)                                                                                          |
+|                                                                      [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="25"> ](https://www.linkedin.com/in/isaac-houle-090020174/)                                                                      |                                                                       [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="25"> ](https://www.linkedin.com/in/adam-mathieson-b92369128/)                                                                       |                                                                         [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="25"> ](https://www.linkedin.com/in/huntersraffety/)                                                                         |                                                                [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="25"> ](https://www.linkedin.com/in/leilani-schimmelfennig-707477116/)                                                                |                                                                            [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="25"> ](https://www.linkedin.com/in/miikis/)                                                                             |                                                                        [ <img src="https://static.licdn.com/sc/h/al2o9zrvru7aqj8e1x2rzsrca" width="25"> ](https://www.linkedin.com/in/ticotheps/)                                                                        |
+
 ## Documentation
 
-See [Frontend Documentation](🚫link to your frontend readme here) for details on the fronend of our project.
-🚫 Add DS iOS and/or Andriod links here if applicable.
+See [Frontend Documentation](https://github.com/labs15-career-endorsement-tracker/frontend) for details on the frontend of our project.
+See [iOS Documentation](https://github.com/labs15-career-endorsement-tracker/iOS) for details on the iOS app of our project.
