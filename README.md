@@ -329,6 +329,60 @@ Headers
 }
 ```
 
+#### GET /api/v0/users
+
+##### REQUEST
+
+```
+Headers
+{
+  authorization: bearer token
+}
+```
+
+##### RESPONSE
+
+```
+[
+    {
+        "id": 1,
+        "first_name": "bob",
+        "last_name": "ross",
+        "email": "bob_ross@happylittlemistakes.com",
+        "device_token": null,
+        "is_admin": false,
+        "tracks_id": 1
+    },
+    {
+        "id": 2,
+        "first_name": "Cora",
+        "last_name": "Trantow",
+        "email": "cora.trantow56@hotmail.com",
+        "device_token": null,
+        "is_admin": false,
+        "tracks_id": 2
+    },
+    {
+        "id": 3,
+        "first_name": "Shanie",
+        "last_name": "Streich",
+        "email": "shanie_streich@gmail.com",
+        "device_token": null,
+        "is_admin": false,
+        "tracks_id": 4
+    },
+    {
+        "id": 4,
+        "first_name": "Jillian",
+        "last_name": "Terry",
+        "email": "jillian_terry@yahoo.com",
+        "device_token": null,
+        "is_admin": false,
+        "tracks_id": 5
+    }
+]
+```
+
 # Data Model
 
 [View on dbdesigner.net](https://app.dbdesigner.net/designer/schema/0-untitled-621fa2f2-75bd-4eb4-ab98-6f7a5914d0e4)
