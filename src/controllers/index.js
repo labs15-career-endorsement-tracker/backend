@@ -13,5 +13,10 @@ const getUsers = async (req, res, next) => {
 module.exports = {
     getUsers,
     login: require("./login"),
-    viewEndorsementRequirements: require("./viewEndorsementRequirements")
+    addUser: require("./add-user"),
+    viewEndorsementRequirements: require("./viewEndorsementRequirements"),
+    viewTracks: require("./tracks"),
+    getSteps: require("./get-steps"),
+    markSteps: require("./mark-steps"),
+    getAllProgressForUser: require("./get-all-progress")
 }

@@ -1,4 +1,7 @@
-exports.up = function(knex) {
+exports.up = async knex => {
+    const hasTable = await knex.schema.hasTable("tasks_tracks")
+    if (hasTable) return
+
     return knex.schema.createTable("tasks_tracks", tbl => {
         tbl.increments()
         tbl.integer("tracks_id")

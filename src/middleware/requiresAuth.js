@@ -8,8 +8,9 @@ const requiresAuth = (req, res, next) => {
         : null
     const error401 = Unauthorized(`Bad or no token`)
     try {
-        const userId = extractJwt(token)
+        const { userId, isAdmin } = extractJwt(token)
         res.locals.userId = userId
+        res.locals.isAdmin = isAdmin
         next()
     } catch (error) {
         next(error401)

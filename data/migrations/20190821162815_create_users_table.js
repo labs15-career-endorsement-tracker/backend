@@ -1,4 +1,7 @@
-exports.up = function(knex) {
+exports.up = async knex => {
+    const hasTable = await knex.schema.hasTable("users")
+    if (hasTable) return
+
     return knex.schema.createTable("users", users => {
         users.increments()
 
@@ -9,6 +12,11 @@ exports.up = function(knex) {
             .notNullable()
             .unique()
         users.string("password", 255)
+        users.string("device_token").unique()
+        users
+            .boolean("is_admin")
+            .notNullable()
+            .defaultTo(false)
         users
             .integer("tracks_id")
             .unsigned()

@@ -1,18 +1,46 @@
-const db = require("../../data")
 const {
     findRequirementsByTrack,
-    getRequirementsWithProgress
+    getRequirementProgress,
+    getRequirementsWithProgress,
+    getRequirementsWithProgressAndResources
 } = require("./requirements")
+const { findAllTracks } = require("./tracks")
+const {
+    findUsers,
+    findUsersBy,
+    insertUser,
+    getUserWithProgress,
+    findUserNoPassword
+} = require("./users")
+const { findStepsByTask, getFormattedSteps } = require("./steps")
 
-const { findCompletedStepsBy, findStepsByTask } = require("./steps")
+const {
+    findCompletedStepsBy,
+    markComplete,
+    markIncomplete,
+    findCompletedRequirementStepsByUser,
+    findCompletedStepsForTaskByUser
+} = require("./completedSteps")
 
-const findUsers = () => db("users")
-
-const findUsersBy = filter => db("users").where(filter)
-
+const { findResourcesForRequirement } = require("./resources")
 module.exports = {
     findUsers,
     findUsersBy,
+    insertUser,
+    getUserWithProgress,
+    findUserNoPassword,
     findRequirementsByTrack,
-    getRequirementsWithProgress
+    findAllTracks,
+    insertUser,
+    findStepsByTask,
+    findCompletedStepsBy,
+    getFormattedSteps,
+    markComplete,
+    markIncomplete,
+    findCompletedRequirementStepsByUser,
+    findCompletedStepsForTaskByUser,
+    getRequirementProgress,
+    getRequirementsWithProgress,
+    findResourcesForRequirement,
+    getRequirementsWithProgressAndResources
 }

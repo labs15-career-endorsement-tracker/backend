@@ -9,7 +9,7 @@ const {
     fakeSteps,
     fakeTasksTracks,
     fakeTracks,
-    fakeResources
+    fakeCompletedSteps
 } = require("../fixtures")
 
 describe("GET /requirements", () => {
@@ -22,7 +22,7 @@ describe("GET /requirements", () => {
         await db("tasks").insert(fakeTasks)
         await db("tasks_tracks").insert(fakeTasksTracks)
         await db("steps").insert(fakeSteps)
-        await db("resources").insert(fakeResources)
+        await db("user_steps_completed").insert(fakeCompletedSteps)
         // login, you need a token!
         const res = await request(app)
             .post(`/api/v${version}/login`)
@@ -41,7 +41,7 @@ describe("GET /requirements", () => {
 
     it("should return status 401 when no token is present", done => {
         request(app)
-            .get(`/api/v${version}/requirements`)
+            .get(`/api/v${version}/requirements/1/steps`)
             .set("Accept", "application/json")
             .expect("Content-Type", /json/)
             .expect(401)
@@ -49,16 +49,25 @@ describe("GET /requirements", () => {
     })
     it("should return status 401 when bad token is present", done => {
         request(app)
-            .get(`/api/v${version}/requirements`)
+            .get(`/api/v${version}/requirements/1/steps`)
             .set("Accept", "application/json")
             .set("authorization", `trash can token`)
             .expect("Content-Type", /json/)
             .expect(401)
             .then(res => done())
     })
+    it("should return status 404 when a non-existent requirement id is given", done => {
+        request(app)
+            .get(`/api/v${version}/requirements/100/steps`)
+            .set("Accept", "application/json")
+            .set("authorization", `bearer ${token}`)
+            .expect("Content-Type", /json/)
+            .expect(404)
+            .then(res => done())
+    })
     it("should return status 200 when token is present", done => {
         return request(app)
-            .get(`/api/v${version}/requirements`)
+            .get(`/api/v${version}/requirements/1/steps`)
             .set("Accept", "application/json")
             .set("authorization", `bearer ${token}`)
             .expect("Content-Type", /json/)
@@ -67,7 +76,7 @@ describe("GET /requirements", () => {
     })
     it("should return an array of objects", done => {
         return request(app)
-            .get(`/api/v${version}/requirements`)
+            .get(`/api/v${version}/requirements/1/steps`)
             .set("Accept", "application/json")
             .set("authorization", `bearer ${token}`)
             .expect("Content-Type", /json/)
@@ -78,9 +87,9 @@ describe("GET /requirements", () => {
                 done()
             })
     })
-    it("should return an array of objects with shape: {id (int), is_endorsement_requirement (bool), is_required (bool), tasks_id (int), title (string), tracks_id (int),  tasks_description (String), resource (Array)} ", done => {
+    it("should return an array of objects with shape: {id (int), number (int), is_required (bool), tasks_id (int), is_complete (bool)} ", done => {
         return request(app)
-            .get(`/api/v${version}/requirements`)
+            .get(`/api/v${version}/requirements/1/steps`)
             .set("Accept", "application/json")
             .set("authorization", `bearer ${token}`)
             .expect("Content-Type", /json/)
@@ -89,65 +98,28 @@ describe("GET /requirements", () => {
                 expect(res.body[0]).toEqual(
                     expect.objectContaining({
                         id: expect.any(Number),
-                        is_endorsement_requirement: expect.any(Boolean),
                         is_required: expect.any(Boolean),
                         tasks_id: expect.any(Number),
-                        title: expect.any(String),
-                        tracks_id: expect.any(Number),
-                        tasks_description: expect.any(String),
-                        progress: expect.any(Number),
-                        resources: expect.any(Array)
+                        steps_description: expect.any(String),
+                        number: expect.any(Number),
+                        is_complete: expect.any(Boolean)
                     })
                 )
                 done()
             })
     })
-    it("should have this object as it's first element: {title: 'Requirement 1',is_required: true, tasks_description: 'Requirement 1 description',is_endorsement_requirement: true, resources: ARRAY },", done => {
+    it("should have this object as it's first element: { number: 1, steps_description: 'Requirement 1 step 1', is_required: true, tasks_id: 1, is_complete: true },", done => {
         return request(app)
-            .get(`/api/v${version}/requirements`)
+            .get(`/api/v${version}/requirements/1/steps`)
             .set("Accept", "application/json")
             .set("authorization", `bearer ${token}`)
             .expect("Content-Type", /json/)
             .expect(200)
             .then(res => {
                 expect(res.body[0]).toEqual({
+                    ...fakeSteps[0],
                     id: 1,
-                    is_endorsement_requirement: true,
-                    is_required: true,
-                    tasks_id: 1,
-                    title: "Requirement 1",
-                    tracks_id: 1,
-                    tasks_description: "Requirement 1 description",
-                    progress: 0,
-                    resources: [
-                        {
-                            id: 1,
-                            type: "google_doc",
-                            title: "Action verbs for technical resumes",
-                            url:
-                                "https://docs.google.com/document/d/1wZkDPBWtQZDGGdvStD61iRx_jOWVlIyyQl9UOYHtZgA/edit",
-                            description: null,
-                            tasks_id: 1
-                        },
-                        {
-                            id: 2,
-                            type: "google_doc",
-                            title: "Power statement article",
-                            url:
-                                "https://www.linkedin.com/pulse/20140929001534-24454816-my-personal-formula-for-a-better-resume/",
-                            description: null,
-                            tasks_id: 1
-                        },
-                        {
-                            id: 3,
-                            type: "google_doc",
-                            title: "'Lambda is…' paragraphs",
-                            url:
-                                "https://docs.google.com/document/d/19OxIgJYkLMq4c1o5zHu1Na4a3PYcyutOosVfg6a03RI/edit",
-                            description: null,
-                            tasks_id: 1
-                        }
-                    ]
+                    is_complete: true
                 })
                 done()
             })

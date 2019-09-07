@@ -1,10 +1,17 @@
-const { findRequirementsByTrack, findUsersBy } = require("../model")
+const {
+    findRequirementsByTrack,
+    findUsersBy,
+    getRequirementsWithProgressAndResources
+} = require("../model")
 
 const viewEndorsementRequirements = async (req, res, next) => {
     const id = res.locals.userId
     try {
         const { tracks_id } = await findUsersBy({ id }).first()
-        const requirements = await findRequirementsByTrack(tracks_id)
+        const requirements = await getRequirementsWithProgressAndResources(
+            id,
+            tracks_id
+        )
         res.json(requirements)
     } catch (error) {
         console.log(error)

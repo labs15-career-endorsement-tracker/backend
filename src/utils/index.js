@@ -10,7 +10,7 @@ const extractJwt = token => {
         if (err) {
             throw err
         } else {
-            return decoded.userId
+            return decoded
         }
     })
 }
