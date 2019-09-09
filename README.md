@@ -14,7 +14,7 @@
 
 <p align="center">
     <a href="#">
-        <img src="https://res.cloudinary.com/endrsd/image/upload/v1567546242/endrsd_logo_lodzmu.png" alt="ENDRSD logo" width="350">
+        <img src="https://res.cloudinary.com/endrsd/image/upload/v1568002293/new_logo_ltlpkr.png" alt="New ENDRSD logo" width="400">
     </a>
 </p>
 
@@ -81,17 +81,17 @@ To run the test server
 
 | Method | Endpoint                              | Access Control | Description                                                                                                                                                                 |
 | ------ | ------------------------------------- | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| GET    | `/api/v0/requirements`                | all users      | Returns a list of the user's endorsement requirements                                                                                                                       |
-| POST   | `/api/v0/users`                       | all users      | Returns `{userId: Int, token: String }`                                                                                                                                     |
-| POST   | `/api/v0/login`                       | all users      | Returns an object with token and userId.                                                                                                                                    |
-| GET    | `/api/v0/tracks`                      | all users      | Returns a list of all available tracks                                                                                                                                      |
+| GET    | `/api/v1/requirements`                | all users      | Returns a list of the user's endorsement requirements                                                                                                                       |
+| POST   | `/api/v1/users`                       | all users      | Returns `{userId: Int, token: String }`                                                                                                                                     |
+| POST   | `/api/v1/login`                       | all users      | Returns an object with token and userId.                                                                                                                                    |
+| GET    | `/api/v1/tracks`                      | all users      | Returns a list of all available tracks                                                                                                                                      |
 | GET    | `/requirements/:requirementsId/steps` | all users      | Gets a list of the steps for a given requirement, ordered by step number, with flag for completion                                                                          |
 | PUT    | `/requirements/:requirementsId/steps` | all users      | Mark a step complete or incomplete: send the current state of the step. If its is_complete flag is currently true, send {is_complete:true} and it will be marked incomplete |
 | GET    | `/users/:userId`                      | all users      | Get a user object with progress propery indicatin completion of all user requirements                                                                                       |
 
 ## Endpoint Examples
 
-#### POST /api/v0/login
+#### POST /api/v1/login
 
 ##### REQUEST
 
@@ -112,7 +112,7 @@ Body
 }
 ```
 
-#### GET /api/v0/requirements
+#### GET /api/v1/requirements
 
 ##### REQUEST
 
@@ -177,7 +177,7 @@ Headers
 ]
 ```
 
-#### GET /api/v0/tracks
+#### GET /api/v1/tracks
 
 ##### REQUEST
 
@@ -212,7 +212,7 @@ Headers
 ]
 ```
 
-#### GET /api/v0/requirements/:requirementsId/steps
+#### GET /api/v1/requirements/:requirementsId/steps
 
 ##### REQUEST
 
@@ -254,7 +254,7 @@ Headers
 ]
 ```
 
-#### PUT /api/v0/requirements/:requirementsId/steps/:stepsId
+#### PUT /api/v1/requirements/:requirementsId/steps/:stepsId
 
 ##### REQUEST
 
@@ -303,7 +303,7 @@ Body
 ]
 ```
 
-#### GET /api/v0/user/:userId
+#### GET /api/v1/user/:userId
 
 ##### REQUEST
 
@@ -329,7 +329,7 @@ Headers
 }
 ```
 
-#### GET /api/v0/users
+#### GET /api/v1/users
 
 ##### REQUEST
 
