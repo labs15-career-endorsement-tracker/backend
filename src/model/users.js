@@ -57,10 +57,19 @@ const insertUser = async userData => {
         .returning(["id"])
 }
 
+const updateUser = async (id, user) => {
+    const password = await hash(user.password, 10)
+    user.password = password
+    return db("users")
+        .where('id', id)
+        .update(user)
+}
+
 module.exports = {
     findUsers,
     findUsersBy,
     insertUser,
     findUserNoPassword,
-    getUserWithProgress
+    getUserWithProgress,
+    updateUser
 }
