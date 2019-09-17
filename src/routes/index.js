@@ -19,6 +19,8 @@ api.get("/users", requiresAuth, getUsers)
 
 api.post("/users", addUser)
 
+api.put("/users", updateUser)
+
 api.get("/users/:userId", requiresAuth, getAllProgressForUser)
 
 api.post("/login", login)
