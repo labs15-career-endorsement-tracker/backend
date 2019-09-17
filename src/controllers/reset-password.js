@@ -11,7 +11,7 @@ const configureUrl = (
     url = emailConfig.resetPasswordUrl,
     secret = emailConfig.secret
 ) => {
-    const jwt = generateJwt(payload, secret)
+    const jwt = generateJwt(payload, secret, "15m")
     return url + `?token=${jwt}`
 }
 
