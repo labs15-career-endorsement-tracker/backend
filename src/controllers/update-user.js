@@ -1,17 +1,28 @@
+const { userUpdate } = require("../model")
 
-const { validatePassword } = require("../middleware")
+const { 
+    validateEmail,
+    validatePassword,
+    validateFirstName,
+    validateLastName,
+    validateTrackId, 
+} = require("../middleware")
 
 const updateUser = async (req, res, next) => {
     const { password, resetToken } = req.body
 
     try {
-        const [updatedUser] = await updatePassword(id, password)
+        const [updatedUser] = await userUpdate(id, user)
     } catch (error) {
         next(error)
     }
 }
 
 module.exports = [
-    validatePassword, 
+    validateEmail,
+    validatePassword,
+    validateFirstName,
+    validateLastName,
+    validateTrackId, 
     updateUser
 ]
