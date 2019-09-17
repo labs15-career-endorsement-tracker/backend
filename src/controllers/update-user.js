@@ -5,13 +5,13 @@ const {
     validatePassword,
     validateFirstName,
     validateLastName,
-    validateTrackId, 
+    validateTrackId,
 } = require("../middleware")
 
 const updateUser = async (req, res, next) => {
     const { password, resetToken } = req.body
     // need to get the user to update from the token sent on req?
- 
+
     try {
         const [updatedUser] = await userUpdate(id, user)
         
