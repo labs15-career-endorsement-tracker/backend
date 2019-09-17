@@ -2,11 +2,12 @@ const jwt = require("jsonwebtoken")
 
 const { jwtSecret } = require("../config")
 
-const generateJwt = payload => {
-    return jwt.sign(payload, jwtSecret, { expiresIn: "1d" })
+const generateJwt = (payload, secret = jwtSecret, expiresIn = "1d") => {
+    return jwt.sign(payload, secret, { expiresIn })
 }
-const extractJwt = token => {
-    return jwt.verify(token, jwtSecret, (err, decoded) => {
+
+const extractJwt = (token, secret = jwtSecret) => {
+    return jwt.verify(token, secret, (err, decoded) => {
         if (err) {
             throw err
         } else {

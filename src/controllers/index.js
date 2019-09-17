@@ -18,5 +18,6 @@ module.exports = {
     viewTracks: require("./tracks"),
     getSteps: require("./get-steps"),
     markSteps: require("./mark-steps"),
-    getAllProgressForUser: require("./get-all-progress")
+    getAllProgressForUser: require("./get-all-progress"),
+    resetPassword: require("./reset-password")
 }
