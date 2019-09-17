@@ -9,6 +9,7 @@ const {
     findUsers,
     findUsersBy,
     insertUser,
+    userUpdate,
     getUserWithProgress,
     findUserNoPassword
 } = require("./users")
@@ -27,6 +28,7 @@ module.exports = {
     findUsers,
     findUsersBy,
     insertUser,
+    userUpdate,
     getUserWithProgress,
     findUserNoPassword,
     findRequirementsByTrack,

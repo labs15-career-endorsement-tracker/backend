@@ -1,19 +1,16 @@
 const { userUpdate } = require("../model")
 
 const { 
-    validateEmail,
-    validatePassword,
-    validateFirstName,
-    validateLastName,
-    validateTrackId,
+    validatePassword
 } = require("../middleware")
 
 const updateUser = async (req, res, next) => {
-    const { password, resetToken } = req.body
-    // need to get the user to update from the token sent on req?
+    const { password } = req.body
+    const id = res.locals.userId
 
     try {
-        const [updatedUser] = await userUpdate(id, user)
+        await userUpdate(id, {password})
+        res.sendStatus(200)
         
     } catch (error) {
         next(error)
@@ -21,10 +18,6 @@ const updateUser = async (req, res, next) => {
 }
 
 module.exports = [
-    validateEmail,
     validatePassword,
-    validateFirstName,
-    validateLastName,
-    validateTrackId, 
     updateUser
 ]

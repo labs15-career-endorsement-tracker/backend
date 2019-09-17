@@ -57,12 +57,12 @@ const insertUser = async userData => {
         .returning(["id"])
 }
 
-const userUpdate = async (id, user) => {
-    const password = await hash(user.password, 10)
-    user.password = password
+const userUpdate = async (id, userData) => {
+    const password = await hash(userData.password, 10)
+    userData.password = password
     return db("users")
         .where('id', id)
-        .update(user)
+        .update(userData)
 }
 
 module.exports = {
