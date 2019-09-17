@@ -3,6 +3,7 @@ const { Router } = require("express")
 const {
     getUsers,
     addUser,
+    updateUser,
     login,
     viewEndorsementRequirements,
     viewTracks,
