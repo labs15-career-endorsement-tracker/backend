@@ -17,7 +17,7 @@ describe("POST /reset-password", () => {
     })
 
     beforeEach(async done => {
-        token = generateJwt({ userId: 1}, emailConfig.secret)
+        token = generateJwt({ userId: 1 }, emailConfig.secret)
         done()
     })
 
@@ -30,7 +30,7 @@ describe("POST /reset-password", () => {
         request(app)
             .put(`/api/v${version}/users`)
             .set("authorization", `bearer ${token}`)
-            .send({ password: 'Password1234'})
+            .send({ password: "Password1234" })
             .expect(200)
             .then(_ => done())
     })

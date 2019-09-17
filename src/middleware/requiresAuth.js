@@ -24,6 +24,5 @@ const requiresAuth = (req, res, next) => {
         }
         // next(error)
     }
-   
 }
 module.exports = requiresAuth

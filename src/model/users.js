@@ -61,7 +61,7 @@ const userUpdate = async (id, userData) => {
     const password = await hash(userData.password, 10)
     userData.password = password
     return db("users")
-        .where('id', id)
+        .where("id", id)
         .update(userData)
 }
 

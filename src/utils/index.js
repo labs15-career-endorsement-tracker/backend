@@ -7,22 +7,21 @@ const generateJwt = (payload, secret = jwtSecret, expiresIn = "1d") => {
 }
 
 const extractJwt = (token, secret = jwtSecret) => {
-
-//    if (secret) {
-       return jwt.verify(token, secret, (err, decoded) => {
+    //    if (secret) {
+    return jwt.verify(token, secret, (err, decoded) => {
         if (err) {
             throw err
-        } 
+        }
         return decoded
     })
-//    } else {
-//     return jwt.verify(token, emailSecret, (err, decoded) => {
-//         if (err) {
-//             throw err
-//         } else {
-//             return decoded
-//         }
-//     })
-//    }
+    //    } else {
+    //     return jwt.verify(token, emailSecret, (err, decoded) => {
+    //         if (err) {
+    //             throw err
+    //         } else {
+    //             return decoded
+    //         }
+    //     })
+    //    }
 }
 module.exports = { generateJwt, extractJwt }
