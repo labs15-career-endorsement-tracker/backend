@@ -8,7 +8,8 @@ const {
     viewTracks,
     getSteps,
     markSteps,
-    getAllProgressForUser
+    getAllProgressForUser,
+    resetPassword
 } = require("../controllers")
 
 const { requiresAuth } = require("../middleware")
@@ -22,6 +23,8 @@ api.post("/users", addUser)
 api.get("/users/:userId", requiresAuth, getAllProgressForUser)
 
 api.post("/login", login)
+
+api.post("/reset-password", resetPassword)
 
 api.get("/requirements", requiresAuth, viewEndorsementRequirements)
 
