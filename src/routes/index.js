@@ -3,6 +3,7 @@ const { Router } = require("express")
 const {
     getUsers,
     addUser,
+    updateUser,
     login,
     viewEndorsementRequirements,
     viewTracks,
@@ -19,6 +20,8 @@ const api = Router()
 api.get("/users", requiresAuth, getUsers)
 
 api.post("/users", addUser)
+
+api.put("/users", requiresAuth, updateUser)
 
 api.get("/users/:userId", requiresAuth, getAllProgressForUser)
 

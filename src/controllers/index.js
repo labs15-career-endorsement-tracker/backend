@@ -14,6 +14,7 @@ module.exports = {
     getUsers,
     login: require("./login"),
     addUser: require("./add-user"),
+    updateUser: require("./update-user"),
     viewEndorsementRequirements: require("./viewEndorsementRequirements"),
     viewTracks: require("./tracks"),
     getSteps: require("./get-steps"),
