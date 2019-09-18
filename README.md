@@ -88,6 +88,9 @@ To run the test server
 | GET    | `/requirements/:requirementsId/steps` | all users      | Gets a list of the steps for a given requirement, ordered by step number, with flag for completion                                                                          |
 | PUT    | `/requirements/:requirementsId/steps` | all users      | Mark a step complete or incomplete: send the current state of the step. If its is_complete flag is currently true, send {is_complete:true} and it will be marked incomplete |
 | GET    | `/users/:userId`                      | all users      | Get a user object with progress propery indicatin completion of all user requirements                                                                                       |
+| POST   | `/api/v1/reset-password`              | all users      | Sends a reset password email to the user                                                                                                                                    |
+| PUT    | `/api/v1/users`                       | all users      | Updates the user info                                                                                                                                                       |
+| DELETE | `/api/v1/users`                       | all users      | Deletes the user                                                                                                                                                            |
 
 ## Endpoint Examples
 
@@ -383,6 +386,54 @@ Headers
 ]
 ```
 
+#### POST /api/v1/reset-password
+
+##### REQUEST
+
+```
+
+```
+
+##### RESPONSE
+
+```
+OK
+```
+
+#### PUT /api/v1/users
+
+##### REQUEST
+
+```
+Headers
+{
+  authorization: bearer token
+}
+```
+
+##### RESPONSE
+
+```
+OK
+```
+
+#### DELETE /api/v1/users
+
+##### REQUEST
+
+```
+Headers
+{
+  authorization: bearer token
+}
+```
+
+##### RESPONSE
+
+```
+OK
+```
+
 # Data Model
 
 [View on dbdesigner.net](https://app.dbdesigner.net/designer/schema/0-untitled-621fa2f2-75bd-4eb4-ab98-6f7a5914d0e4)
@@ -494,6 +545,10 @@ Headers
 `getUserWithProgress(userId)` -> Returns a user without their password, found by user id
 
 `insertUser(newUserData)` -> Adds a user to the database, returns the new user's id
+
+`deleteUserById(userId)` -> Deletes a user at the given id
+
+`userUpdate(userId, userData)` -> Updates the user info for the given id
 
 ### Tracks
 

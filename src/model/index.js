@@ -11,7 +11,8 @@ const {
     insertUser,
     userUpdate,
     getUserWithProgress,
-    findUserNoPassword
+    findUserNoPassword,
+    deleteUserById
 } = require("./users")
 const { findStepsByTask, getFormattedSteps } = require("./steps")
 
@@ -44,5 +45,6 @@ module.exports = {
     getRequirementProgress,
     getRequirementsWithProgress,
     findResourcesForRequirement,
-    getRequirementsWithProgressAndResources
+    getRequirementsWithProgressAndResources,
+    deleteUserById
 }

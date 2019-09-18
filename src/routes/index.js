@@ -10,7 +10,8 @@ const {
     getSteps,
     markSteps,
     getAllProgressForUser,
-    resetPassword
+    resetPassword,
+    deleteUser
 } = require("../controllers")
 
 const { requiresAuth } = require("../middleware")
@@ -37,4 +38,5 @@ api.get("/requirements/:requirementsId/steps", requiresAuth, getSteps)
 
 api.put("/requirements/:requirementsId/steps/:stepsId", requiresAuth, markSteps)
 
+api.delete("/users", requiresAuth, deleteUser)
 module.exports = api
