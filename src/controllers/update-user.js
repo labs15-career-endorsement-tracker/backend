@@ -7,7 +7,7 @@ const updateUser = async (req, res, next) => {
     const id = res.locals.userId
 
     try {
-        await userUpdate(id, {password} )
+        await userUpdate(id, { password })
         res.sendStatus(200)
     } catch (error) {
         next(error)

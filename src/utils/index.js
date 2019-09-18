@@ -7,7 +7,6 @@ const generateJwt = (payload, secret = jwtSecret, expiresIn = "1d") => {
 }
 
 const extractJwt = (token, secret = jwtSecret) => {
-    
     return jwt.verify(token, secret, (err, decoded) => {
         if (err) {
             throw err
