@@ -20,6 +20,7 @@ const {
 const environment = NODE_ENV || "development"
 const isTesting = environment === "test"
 const isProduction = environment === "production"
+const isStaging = environment === "staging"
 const dbUrl = isTesting ? TEST_DATABASE_URL : DATABASE_URL
 const port = PORT || 5000
 
@@ -27,6 +28,7 @@ module.exports = {
     environment,
     isTesting,
     isProduction,
+    isStaging,
     dbUrl,
     port,
     version: version.split(".")[0],

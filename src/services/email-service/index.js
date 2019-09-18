@@ -3,7 +3,7 @@ const path = require("path")
 const nodemailer = require("nodemailer")
 const Email = require("email-templates")
 
-const { emailConfig, isProduction } = require("../../config")
+const { emailConfig, isProduction, isStaging } = require("../../config")
 
 const transporter = nodemailer.createTransport({
     service: "gmail",
@@ -15,7 +15,7 @@ const transporter = nodemailer.createTransport({
 
 const email = new Email({
     message: { from: emailConfig.sender },
-    send: isProduction,
+    send: isProduction || isStaging,
     transport: transporter
 })
 
