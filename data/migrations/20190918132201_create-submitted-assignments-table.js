@@ -20,7 +20,7 @@ exports.up = function(knex) {
         tbl.boolean("is_approved").defaultTo(false)
         tbl.timestamp("created_at", { useTz: true }).defaultTo(knex.fn.now())
         tbl.timestamp("updated_at", { useTz: true }).defaultTo(knex.fn.now())
-        tbl.unique(["title", "user_id"])
+        tbl.unique(["tasks_id", "user_id"])
     })
 }
 
