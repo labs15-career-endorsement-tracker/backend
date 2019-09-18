@@ -20,5 +20,6 @@ module.exports = {
     getSteps: require("./get-steps"),
     markSteps: require("./mark-steps"),
     getAllProgressForUser: require("./get-all-progress"),
-    resetPassword: require("./reset-password")
+    resetPassword: require("./reset-password"),
+    deleteUser: require("./delete-user")
 }

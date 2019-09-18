@@ -65,7 +65,7 @@ const userUpdate = async (id, userData) => {
         .update(userData)
 }
 
-const deleteUser = async id => {
+const deleteUserById = async id => {
     return db("users")
         .where("id", id)
         .del()
@@ -78,5 +78,5 @@ module.exports = {
     findUserNoPassword,
     getUserWithProgress,
     userUpdate,
-    deleteUser
+    deleteUserById
 }
