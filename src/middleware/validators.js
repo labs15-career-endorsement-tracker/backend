@@ -33,7 +33,7 @@ const validatePassword = async (req, _res, next) => {
 
     try {
         await check(fieldName)
-            .isLength({ min: 8, max: 16 })
+            .isLength({ min: 8, max: 255 })
             .withMessage(`Password must be 8 to 16 characters`)
             .run(req)
     } catch (error) {
