@@ -16,14 +16,13 @@ const login = async (req, res, next) => {
 
         const isCorrectPassword = await compare(password, user.password)
 
-        const defaultPassword = await compare('newPassword', user.password)
-        console.log(defaultPassword)
+        const isDefaultPassword = await compare('coachPassword1', user.password)
 
         if (!isCorrectPassword) throw error401
 
         const userId = user.id
         const isAdmin = user.is_admin
-        res.json({ token: generateJwt({ userId, isAdmin }), userId, defaultPassword })
+        res.json({ token: generateJwt({ userId, isAdmin }), userId, isDefaultPassword })
     } catch (error) {
         next(error)
     }
