@@ -16,9 +16,11 @@ exports.up = function(knex) {
             .onDelete("CASCADE")
             .onUpdate("CASCADE")
         tbl.string("url").notNullable()
+        tbl.string("title").notNullable()
         tbl.boolean("is_approved").defaultTo(false)
         tbl.timestamp("created_at", { useTz: true }).defaultTo(knex.fn.now())
         tbl.timestamp("updated_at", { useTz: true }).defaultTo(knex.fn.now())
+        tbl.unique(["title", "user_id"])
     })
 }
 
