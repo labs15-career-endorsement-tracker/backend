@@ -25,7 +25,8 @@ const login = async (req, res, next) => {
         res.json({
             token: generateJwt({ userId, isAdmin }),
             userId,
-            isDefaultPassword
+            isDefaultPassword,
+            isAdmin
         })
     } catch (error) {
         next(error)
