@@ -17,9 +17,8 @@ console.log(query.searchStr)
             "is_admin"
         )
     if (query.searchStr) {
-        knexQuery.where(`searchIndex @@ to_tsquery(${query.searchStr})`)
+        knexQuery.where('last_name', query.searchStr)
     }
-
     return knexQuery
 }
 const findUsersBy = filter => db("users").where(filter)
