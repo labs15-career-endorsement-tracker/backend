@@ -17,7 +17,7 @@ console.log(query.searchStr)
             "is_admin"
         )
     if (query.searchStr) {
-        knexQuery.where('first_name', query.searchStr)
+        knexQuery.where(`searchIndex @@ to_tsquery(${query.searchStr})`)
     }
 
     return knexQuery
