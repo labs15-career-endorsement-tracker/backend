@@ -32,7 +32,7 @@ describe("GET /users?searchStr", () => {
     })
 
     it("returns a specific user by last_name field", done => {
-        const searchStr = '?searchStr=ross'
+        const searchStr = "?searchStr=ross"
         request(app)
             .get(`/api/v${version}/users${searchStr}`)
             .set("authorization", `bearer ${token}`)

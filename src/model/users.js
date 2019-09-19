@@ -6,18 +6,17 @@ const { findStepsByTask } = require("./steps")
 const { findCompletedRequirementStepsByUser } = require("./completedSteps")
 
 const findUsers = query => {
-console.log(query.searchStr)
-    const knexQuery = db("users")
-        .select(
-            "id",
-            "first_name",
-            "last_name",
-            "email",
-            "tracks_id",
-            "is_admin"
-        )
+    console.log(query.searchStr)
+    const knexQuery = db("users").select(
+        "id",
+        "first_name",
+        "last_name",
+        "email",
+        "tracks_id",
+        "is_admin"
+    )
     if (query.searchStr) {
-        knexQuery.where('last_name', query.searchStr)
+        knexQuery.where("last_name", query.searchStr)
     }
     return knexQuery
 }
