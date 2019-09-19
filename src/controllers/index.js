@@ -1,10 +1,10 @@
 const { findUsers } = require("../model")
 
 const getUsers = async (req, res, next) => {
-    const searchStr = req.body.searchStr
-    console.log(searchStr)
+    const { searchStr }  = req.query
+    console.log({searchStr})
     try {
-        const users = await findUsers(searchStr)
+        const users = await findUsers({searchStr})
         res.json(users)
     } catch (error) {
         console.log(error)
