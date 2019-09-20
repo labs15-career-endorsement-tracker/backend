@@ -14,15 +14,10 @@ const { findCompletedRequirementStepsByUser } = require("./completedSteps")
 const searchUsers = queryString =>
     db("users")
         .select("first_name", "last_name", "email")
-        .where(
-            knex.raw("document_with_weights @@ plainto_tsquery('?')", [
-                queryString
-            ])
-        )
-        .orderByRaw(
-            "ts_rank(document_with_weights, plainto_tsquery('?')) desc",
-            [queryString]
-        )
+        .whereRaw("full_text_weighted @@ plainto_tsquery('?')", [queryString])
+// .orderByRaw("ts_rank(full_text_weighted, plainto_tsquery('?')) desc", [
+//     queryString
+// ])
 
 const findUsers = () =>
     db("users").select(
