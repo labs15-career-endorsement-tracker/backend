@@ -2,9 +2,17 @@ const db = require("../../data")
 
 const getPinnedStudents = coachId => {
     return db("pinned_students as p_s")
-            .where("users.id", Number(coachId))
-            .join("users", "users.id", "p_s.coach_id")
-            // .join("users", "users.id", "p_s.student_id")
+        .where("coach_id", Number(coachId))
+        .join("users", "users.id", "p_s.student_id")
+        .select(
+            "users.id",
+            "users.first_name",
+            "users.last_name",
+            "users.email",
+            "users.is_admin",
+            "users.tracks_id",
+            "users.calendly_link"
+        )
 }
 
 const coachPinStudent = (coachId, studentId) => {
