@@ -5,8 +5,9 @@ const { findRequirementsByTrack } = require("./requirements")
 const { findStepsByTask } = require("./steps")
 const { findCompletedRequirementStepsByUser } = require("./completedSteps")
 
-const findUsers = () =>
-    db("users").select(
+const findUsers = query => {
+    console.log(query.searchStr)
+    const knexQuery = db("users").select(
         "id",
         "first_name",
         "last_name",
@@ -14,7 +15,11 @@ const findUsers = () =>
         "tracks_id",
         "is_admin"
     )
-
+    if (query.searchStr) {
+        knexQuery.where("last_name", query.searchStr)
+    }
+    return knexQuery
+}
 const findUsersBy = filter => db("users").where(filter)
 
 const findUserNoPassword = userId => {
