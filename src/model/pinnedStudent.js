@@ -21,14 +21,22 @@ const coachPinStudent = (coachId, studentId) => {
             .returning(["id"])
 }
 
-const coachUnpinStudent = (coachId, studentId) => {
+const coachUnpinStudent = studentId => {
     return db("pinned_students")
-        .where({ coach_id: coachId, student_id: studentId })
+        .where({ student_id: studentId })
         .del()
 }
+const isStudentPinned = async studentId => {
+    const foundStudent = await db("pinned_students")
+        .where({ student_id: studentId }).first()
+
+    return foundStudent ? true : false
+}
+
 
 module.exports = { 
     coachPinStudent,
     coachUnpinStudent,
-    getPinnedStudents
+    getPinnedStudents,
+    isStudentPinned
 }

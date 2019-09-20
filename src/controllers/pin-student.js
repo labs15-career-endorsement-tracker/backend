@@ -1,4 +1,4 @@
-const { coachPinStudent, getPinnedStudents } = require('../model')
+const { coachPinStudent, getPinnedStudents, isStudentPinned, coachUnpinStudent } = require('../model')
 const { Forbidden } = require("http-errors")
 
 const getStudents = async (req, res, next) => {
@@ -23,8 +23,13 @@ const pinStudent = async (req, res, next) => {
     try {
         // if (!res.locals.isAdmin)
         //     return next(Forbidden("Unauthorized content"))
-        const pinnedStudent = await coachPinStudent(coachId, studentId)
-        res.status(201).json(pinnedStudent)
+        const isPinned = await isStudentPinned(studentId)
+        if (isPinned){
+            await coachUnpinStudent(studentId)
+            return res.sendStatus(200)
+        }
+        await coachPinStudent(coachId, studentId)
+        res.sendStatus(200)
     } catch (error) {
         next(error)
     }

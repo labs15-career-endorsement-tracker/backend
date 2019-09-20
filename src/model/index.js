@@ -30,7 +30,8 @@ const { findResourcesForRequirement } = require("./resources")
 const { 
     coachPinStudent, 
     coachUnpinStudent, 
-    getPinnedStudents 
+    getPinnedStudents,
+    isStudentPinned
 } = require("./pinnedStudent")
 
 module.exports = {
@@ -58,5 +59,6 @@ module.exports = {
     deleteUserById,
     coachPinStudent,
     coachUnpinStudent, 
-    getPinnedStudents 
+    getPinnedStudents,
+    isStudentPinned
 }
