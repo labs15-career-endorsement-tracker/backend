@@ -1,4 +1,4 @@
-const { getStudents, pinStudent} = require("./pin-student")
+const { getStudents, pinStudent } = require("./pin-student")
 
 module.exports = {
     getUsers: require("./get-users"),

@@ -27,9 +27,9 @@ const {
 
 const { findResourcesForRequirement } = require("./resources")
 
-const { 
-    coachPinStudent, 
-    coachUnpinStudent, 
+const {
+    coachPinStudent,
+    coachUnpinStudent,
     getPinnedStudents,
     isStudentPinned
 } = require("./pinnedStudent")
@@ -58,7 +58,7 @@ module.exports = {
     getRequirementsWithProgressAndResources,
     deleteUserById,
     coachPinStudent,
-    coachUnpinStudent, 
+    coachUnpinStudent,
     getPinnedStudents,
     isStudentPinned
 }

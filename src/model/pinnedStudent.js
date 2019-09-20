@@ -17,8 +17,8 @@ const getPinnedStudents = coachId => {
 
 const coachPinStudent = (coachId, studentId) => {
     return db("pinned_students")
-            .insert({ coach_id: Number(coachId), student_id: Number(studentId) })
-            .returning(["id"])
+        .insert({ coach_id: Number(coachId), student_id: Number(studentId) })
+        .returning(["id"])
 }
 
 const coachUnpinStudent = studentId => {
@@ -28,13 +28,13 @@ const coachUnpinStudent = studentId => {
 }
 const isStudentPinned = async studentId => {
     const foundStudent = await db("pinned_students")
-        .where({ student_id: studentId }).first()
+        .where({ student_id: studentId })
+        .first()
 
     return foundStudent ? true : false
 }
 
-
-module.exports = { 
+module.exports = {
     coachPinStudent,
     coachUnpinStudent,
     getPinnedStudents,
