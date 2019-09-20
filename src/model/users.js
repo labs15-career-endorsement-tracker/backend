@@ -1,9 +1,28 @@
 const { hash } = require("bcryptjs")
+const knex = require("knex")
 
 const db = require("../../data")
 const { findRequirementsByTrack } = require("./requirements")
 const { findStepsByTask } = require("./steps")
 const { findCompletedRequirementStepsByUser } = require("./completedSteps")
+
+// SELECT first_name, last_name, email
+// FROM public.users
+// WHERE document_with_weights @@ plainto_tsquery('Mikis')
+// ORDER BY ts_rank(document_with_weights, plainto_tsquery('Mikis')) desc;
+
+const searchUsers = queryString =>
+    db("users")
+        .select("first_name", "last_name", "email")
+        .where(
+            knex.raw("document_with_weights @@ plainto_tsquery('?')", [
+                queryString
+            ])
+        )
+        .orderByRaw(
+            "ts_rank(document_with_weights, plainto_tsquery('?')) desc",
+            [queryString]
+        )
 
 const findUsers = () =>
     db("users").select(
@@ -72,6 +91,7 @@ const deleteUserById = async id => {
 }
 
 module.exports = {
+    searchUsers,
     findUsers,
     findUsersBy,
     insertUser,
