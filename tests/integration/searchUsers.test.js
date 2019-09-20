@@ -59,4 +59,15 @@ describe("User.searchUsers", () => {
                 done(error)
             })
     })
+
+    it("returns an empty array when there is no query string", done => {
+        searchUsers()
+            .then(users => {
+                expect(users).toHaveLength(0)
+                done()
+            })
+            .catch(error => {
+                done(error)
+            })
+    })
 })

@@ -6,6 +6,7 @@ const {
 } = require("./requirements")
 const { findAllTracks } = require("./tracks")
 const {
+    searchUsers,
     findUsers,
     findUsersBy,
     insertUser,
@@ -26,6 +27,7 @@ const {
 
 const { findResourcesForRequirement } = require("./resources")
 module.exports = {
+    searchUsers,
     findUsers,
     findUsersBy,
     insertUser,

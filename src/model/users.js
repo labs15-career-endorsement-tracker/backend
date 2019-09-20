@@ -11,7 +11,7 @@ const { findCompletedRequirementStepsByUser } = require("./completedSteps")
 // WHERE document_with_weights @@ plainto_tsquery('Mikis')
 // ORDER BY ts_rank(document_with_weights, plainto_tsquery('Mikis')) desc;
 
-const searchUsers = queryString =>
+const searchUsers = (queryString = "") =>
     db("users")
         .select("first_name", "last_name", "email")
         .whereRaw("full_text_weighted @@ plainto_tsquery(?)", queryString)
