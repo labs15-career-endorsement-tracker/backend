@@ -26,6 +26,8 @@ const {
 } = require("./completedSteps")
 
 const { findResourcesForRequirement } = require("./resources")
+
+const { coachPinStudent } = require("./pinnedStudent")
 module.exports = {
     searchUsers,
     findUsers,
@@ -48,5 +50,6 @@ module.exports = {
     getRequirementsWithProgress,
     findResourcesForRequirement,
     getRequirementsWithProgressAndResources,
-    deleteUserById
+    deleteUserById,
+    coachPinStudent
 }
