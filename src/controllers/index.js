@@ -9,5 +9,6 @@ module.exports = {
     markSteps: require("./mark-steps"),
     getAllProgressForUser: require("./get-all-progress"),
     resetPassword: require("./reset-password"),
-    deleteUser: require("./delete-user")
+    deleteUser: require("./delete-user"),
+    pinStudent: require("./pin-student")
 }
