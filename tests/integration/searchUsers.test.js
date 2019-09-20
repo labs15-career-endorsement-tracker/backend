@@ -26,13 +26,8 @@ const createCustomUser = (index, first_name, last_name) => {
     }
 }
 
-describe.only("User.searchUsers", () => {
+describe("User.searchUsers", () => {
     let users
-
-    // beforeAll(async done => {
-    //     await db.destroy()
-    //     done()
-    // })
 
     beforeEach(async done => {
         users = createMany(createUser, 100)
@@ -54,7 +49,7 @@ describe.only("User.searchUsers", () => {
         done()
     })
 
-    it.only("finds the Jabroniguy", done => {
+    it("finds the Jabroniguy", done => {
         searchUsers("Jabroniguy")
             .then(users => {
                 expect(users).toHaveLength(5)
