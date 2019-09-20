@@ -13,7 +13,7 @@ const { findCompletedRequirementStepsByUser } = require("./completedSteps")
 
 const searchUsers = (queryString = "") =>
     db("users")
-        .select("first_name", "last_name", "email")
+        .select("first_name", "last_name", "email", "tracks_id")
         .whereRaw("full_text_weighted @@ plainto_tsquery(?)", queryString)
         .orderByRaw(
             "ts_rank(full_text_weighted, plainto_tsquery(?)) desc",

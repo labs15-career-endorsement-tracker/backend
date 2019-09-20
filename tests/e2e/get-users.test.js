@@ -36,6 +36,7 @@ describe("GET /users", () => {
             .get(`/api/v${version}/users`)
             .set("authorization", `bearer ${token}`)
             .set("Accept", "application/json")
+            .query({ search: "Bob" })
             .expect("Content-Type", /json/)
             .expect(200)
             .then(res => {
