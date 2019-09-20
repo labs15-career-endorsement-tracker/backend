@@ -1,13 +1,27 @@
 const { hash } = require("bcryptjs")
+const knex = require("knex")
 
 const db = require("../../data")
 const { findRequirementsByTrack } = require("./requirements")
 const { findStepsByTask } = require("./steps")
 const { findCompletedRequirementStepsByUser } = require("./completedSteps")
 
-const findUsers = query => {
-    console.log(query.searchStr)
-    const knexQuery = db("users").select(
+// SELECT first_name, last_name, email
+// FROM public.users
+// WHERE document_with_weights @@ plainto_tsquery('Mikis')
+// ORDER BY ts_rank(document_with_weights, plainto_tsquery('Mikis')) desc;
+
+const searchUsers = (queryString = "") =>
+    db("users")
+        .select("first_name", "last_name", "email", "tracks_id")
+        .whereRaw("full_text_weighted @@ plainto_tsquery(?)", queryString)
+        .orderByRaw(
+            "ts_rank(full_text_weighted, plainto_tsquery(?)) desc",
+            queryString
+        )
+
+const findUsers = () =>
+    db("users").select(
         "id",
         "first_name",
         "last_name",
@@ -15,11 +29,7 @@ const findUsers = query => {
         "tracks_id",
         "is_admin"
     )
-    if (query.searchStr) {
-        knexQuery.where("last_name", query.searchStr)
-    }
-    return knexQuery
-}
+
 const findUsersBy = filter => db("users").where(filter)
 
 const findUserNoPassword = userId => {
@@ -77,6 +87,7 @@ const deleteUserById = async id => {
 }
 
 module.exports = {
+    searchUsers,
     findUsers,
     findUsersBy,
     insertUser,

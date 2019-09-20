@@ -2,6 +2,9 @@ exports.up = async function(knex) {
     const hasTable = await knex.schema.hasTable("users")
     if (!hasTable) return
 
+    const hasColumn = await knex.schema.hasColumn("users", "calendly_link")
+    if (hasColumn) return
+
     return knex.schema.table("users", tbl => {
         tbl.string("calendly_link")
 

@@ -1,19 +1,5 @@
-const { findUsers } = require("../model")
-
-const getUsers = async (req, res, next) => {
-    const { searchStr } = req.query
-    console.log({ searchStr })
-    try {
-        const users = await findUsers({ searchStr })
-        res.json(users)
-    } catch (error) {
-        console.log(error)
-        next(error)
-    }
-}
-
 module.exports = {
-    getUsers,
+    getUsers: require("./get-users"),
     login: require("./login"),
     addUser: require("./add-user"),
     updateUser: require("./update-user"),
