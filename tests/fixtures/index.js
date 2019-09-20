@@ -154,6 +154,13 @@ const fakeResources = [
     }
 ]
 
+const fakePinnedStudents = [
+    {
+        id: 1,
+        coach_id: 1002
+    }
+]
+
 module.exports = {
     fakeUsers,
     fakeTasks,

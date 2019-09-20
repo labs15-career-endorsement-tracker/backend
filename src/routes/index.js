@@ -12,6 +12,7 @@ const {
     getAllProgressForUser,
     resetPassword,
     deleteUser,
+    getStudents,
     pinStudent
 } = require("../controllers")
 
@@ -41,6 +42,8 @@ api.put("/requirements/:requirementsId/steps/:stepsId", requiresAuth, markSteps)
 
 api.delete("/users", requiresAuth, deleteUser)
 
-api.post("/pin-student/:userId", requiresAuth, pinStudent)
+api.get("/students", requiresAuth, getStudents)
+
+api.put("/students/:userId", requiresAuth, pinStudent)
 
 module.exports = api
