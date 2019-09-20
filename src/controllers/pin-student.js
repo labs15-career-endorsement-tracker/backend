@@ -25,8 +25,8 @@ const pinStudent = async (req, res, next) => {
     console.log(studentId, coachId)
 
     try {
-        // if (!res.locals.isAdmin)
-        //     return next(Forbidden("Unauthorized content"))
+        if (!res.locals.isAdmin)
+            return next(Forbidden("Unauthorized content"))
         const isPinned = await isStudentPinned(studentId)
         if (isPinned) {
             await coachUnpinStudent(studentId)
