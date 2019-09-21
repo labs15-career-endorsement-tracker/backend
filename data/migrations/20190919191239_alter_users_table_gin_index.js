@@ -44,11 +44,9 @@ exports.up = async function(knex) {
 
 exports.down = async function(knex) {
     const hasColumn = await knex.schema.hasColumn("users", "full_text_weighted")
-
     await knex.schema.table("users", async tbl => {
         if (hasColumn) {
             tbl.dropColumn("full_text_weighted")
-            // tbl.dropIndex("full_text_weighted", "full_text_weighted_index")
         }
     })
     return knex.schema.raw(removeUserIndex)
