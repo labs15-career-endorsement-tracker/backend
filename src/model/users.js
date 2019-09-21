@@ -15,7 +15,7 @@ const searchUsers = queryString => {
         .select("first_name", "last_name", "email", "tracks_id")
         .whereRaw("full_text_weighted @@ to_tsquery('simple', ?)", formattedQs)
         .orderByRaw(
-            "ts_rank(full_text_weighted, to_tsquery('simple', ?)) desc",
+            "ts_rank(full_text_weighted, to_tsquery('simple', ?)) ASC",
             formattedQs
         )
 }
