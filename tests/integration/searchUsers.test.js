@@ -70,4 +70,15 @@ describe("User.searchUsers", () => {
                 done(error)
             })
     })
+
+    it("returns a 'Jabroniguy' when search query is 'Ja'", done => {
+        searchUsers("Ja")
+            .then(users => {
+                expect(users.length).toBeGreaterThanOrEqual(5)
+                done()
+            })
+            .catch(error => {
+                done(error)
+            })
+    })
 })
