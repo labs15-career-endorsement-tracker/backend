@@ -81,4 +81,15 @@ describe("User.searchUsers", () => {
                 done(error)
             })
     })
+
+    it("returns a 'Jabroni Mandude' when search query is 'Ja Ma'", done => {
+        searchUsers("Ja Ma")
+            .then(users => {
+                expect(users.length).toBeGreaterThanOrEqual(1)
+                done()
+            })
+            .catch(error => {
+                done(error)
+            })
+    })
 })

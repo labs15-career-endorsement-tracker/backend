@@ -9,15 +9,14 @@ const { findCompletedRequirementStepsByUser } = require("./completedSteps")
 const searchUsers = queryString => {
     if (!queryString) return Promise.resolve([])
 
+    const formattedQs = queryString.replace(/\s/, ":* & ") + ":*"
+
     return db("users")
         .select("first_name", "last_name", "email", "tracks_id")
-        .whereRaw(
-            "full_text_weighted @@ to_tsquery('simple', ?)",
-            queryString + ":*"
-        )
+        .whereRaw("full_text_weighted @@ to_tsquery('simple', ?)", formattedQs)
         .orderByRaw(
             "ts_rank(full_text_weighted, to_tsquery('simple', ?)) desc",
-            queryString + ":*"
+            formattedQs
         )
 }
 
