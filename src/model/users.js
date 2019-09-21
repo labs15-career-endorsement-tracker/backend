@@ -6,19 +6,20 @@ const { findRequirementsByTrack } = require("./requirements")
 const { findStepsByTask } = require("./steps")
 const { findCompletedRequirementStepsByUser } = require("./completedSteps")
 
-// SELECT first_name, last_name, email
-// FROM public.users
-// WHERE document_with_weights @@ plainto_tsquery('Mikis')
-// ORDER BY ts_rank(document_with_weights, plainto_tsquery('Mikis')) desc;
+const searchUsers = queryString => {
+    if (!queryString) return Promise.resolve([])
 
-const searchUsers = (queryString = "") =>
-    db("users")
+    return db("users")
         .select("first_name", "last_name", "email", "tracks_id")
-        .whereRaw("full_text_weighted @@ to_tsquery(?)", queryString)
-        .orderByRaw(
-            "ts_rank(full_text_weighted, to_tsquery(?)) desc",
-            queryString
+        .whereRaw(
+            "full_text_weighted @@ to_tsquery('simple', ?)",
+            queryString + ":*"
         )
+        .orderByRaw(
+            "ts_rank(full_text_weighted, to_tsquery('simple', ?)) desc",
+            queryString + ":*"
+        )
+}
 
 const findUsers = () =>
     db("users").select(
