@@ -44,7 +44,6 @@ exports.up = async function(knex) {
 
 exports.down = async function(knex) {
     const hasColumn = await knex.schema.hasColumn("users", "full_text_weighted")
-
     await knex.schema.table("users", async tbl => {
         if (hasColumn) {
             tbl.dropColumn("full_text_weighted")
