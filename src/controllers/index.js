@@ -1,3 +1,5 @@
+const { getStudents, pinStudent } = require("./pin-student")
+
 module.exports = {
     getUsers: require("./get-users"),
     login: require("./login"),
@@ -9,5 +11,7 @@ module.exports = {
     markSteps: require("./mark-steps"),
     getAllProgressForUser: require("./get-all-progress"),
     resetPassword: require("./reset-password"),
-    deleteUser: require("./delete-user")
+    deleteUser: require("./delete-user"),
+    getStudents,
+    pinStudent
 }
