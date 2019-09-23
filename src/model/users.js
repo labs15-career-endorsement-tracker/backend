@@ -85,6 +85,14 @@ const userUpdate = async (id, userData) => {
         .update(userData)
 }
 
+const calendlyUpdate = async (id, userData) => {
+    const password = await hash(userData.password, 10)
+    userData.password = password
+    return db("users")
+        .where("id", id)
+        .update(userData)
+}
+
 const deleteUserById = async id => {
     return db("users")
         .where("id", id)
@@ -99,6 +107,7 @@ module.exports = {
     findUserNoPassword,
     getUserWithProgress,
     userUpdate,
+    calendlyUpdate,
     deleteUserById,
     getProgress
 }
