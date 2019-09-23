@@ -25,9 +25,9 @@ const pinStudent = async (req, res, next) => {
         const isPinned = await isStudentPinned(studentId)
         if (isPinned) {
             await coachUnpinStudent(studentId)
-            return res.sendStatus(200)
+        } else {
+            await coachPinStudent(coachId, studentId)
         }
-        await coachPinStudent(coachId, studentId)
         const updatedStudentList = await getPinnedStudents(coachId)
         res.status(200).json(updatedStudentList)
     } catch (error) {
