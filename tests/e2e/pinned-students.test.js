@@ -14,7 +14,7 @@ const {
     fakeCompletedSteps
 } = require("../fixtures")
 
-describe("GET pinned students", () => {
+describe("pinned students", () => {
     let token
     beforeAll(async done => {
         await db.migrate.rollback(null, true)
@@ -42,65 +42,129 @@ describe("GET pinned students", () => {
         await db.destroy()
         done()
     })
-    // we have alredy pinned the bob user to the grace coach
-    it("should return status 401 when no token is present", done => {
-        request(app)
-            .get(`/api/v${version}/students`)
-            .expect("Content-Type", /json/)
-            .expect(401)
-            .then(res => done())
+    describe("GET pinned students", () => {
+        // we have alredy pinned the bob user to the grace coach
+        it("should return status 401 when no token is present", done => {
+            request(app)
+                .get(`/api/v${version}/students`)
+                .expect("Content-Type", /json/)
+                .expect(401)
+                .then(res => done())
+        })
+        it("should return status 401 when bad token is present", done => {
+            request(app)
+                .get(`/api/v${version}/students`)
+                .set("authorization", `trash can token`)
+                .send({ is_complete: true })
+                .expect("Content-Type", /json/)
+                .expect(401)
+                .then(res => done())
+        })
+        it("should return status 200 when good token is present", done => {
+            request(app)
+                .get(`/api/v${version}/students`)
+                .set("authorization", `bearer ${token}`)
+                .expect("Content-Type", /json/)
+                .expect(200)
+                .then(res => done())
+        })
+        it("should return an array with user objects", done => {
+            request(app)
+                .get(`/api/v${version}/students`)
+                .set("Accept", "application/json")
+                .set("authorization", `bearer ${token}`)
+                .expect("Content-Type", /json/)
+                .expect(200)
+                .then(res => {
+                    expect(res.body).toEqual(expect.any(Array))
+                    expect(res.body).toContainEqual(expect.any(Object))
+                    expect(res.body[0]).toEqual(
+                        expect.objectContaining({
+                            id: expect.any(Number),
+                            first_name: expect.any(String),
+                            last_name: expect.any(String),
+                            email: expect.any(String),
+                            is_admin: expect.any(Boolean),
+                            tracks_id: expect.any(Number),
+                            progress: expect.any(Number)
+                        })
+                    )
+                    done()
+                })
+        })
+        it("should calculate progress accurately)", done => {
+            request(app)
+                .get(`/api/v${version}/students`)
+                .set("Accept", "application/json")
+                .set("authorization", `bearer ${token}`)
+                .expect("Content-Type", /json/)
+                .expect(200)
+                .then(res => {
+                    expect(res.body[0].progress).toBe(50)
+                    done()
+                })
+        })
     })
-    it("should return status 401 when bad token is present", done => {
-        request(app)
-            .get(`/api/v${version}/students`)
-            .set("authorization", `trash can token`)
-            .send({ is_complete: true })
-            .expect("Content-Type", /json/)
-            .expect(401)
-            .then(res => done())
-    })
-    it("should return status 200 when good token is present", done => {
-        request(app)
-            .get(`/api/v${version}/students`)
-            .set("authorization", `bearer ${token}`)
-            .expect("Content-Type", /json/)
-            .expect(200)
-            .then(res => done())
-    })
-    it("should return an array with user objects", done => {
-        request(app)
-            .get(`/api/v${version}/students`)
-            .set("Accept", "application/json")
-            .set("authorization", `bearer ${token}`)
-            .expect("Content-Type", /json/)
-            .expect(200)
-            .then(res => {
-                expect(res.body).toEqual(expect.any(Array))
-                expect(res.body).toContainEqual(expect.any(Object))
-                expect(res.body[0]).toEqual(
-                    expect.objectContaining({
-                        id: expect.any(Number),
-                        first_name: expect.any(String),
-                        last_name: expect.any(String),
-                        email: expect.any(String),
-                        is_admin: expect.any(Boolean),
-                        tracks_id: expect.any(Number),
-                        progress: expect.any(Number)
-                    })
-                )
-                done()
-            })
-    })
-    it("should calculate progress accurately)", done => {
-        request(app)
-            .get(`/api/v${version}/students`)
-            .set("Accept", "application/json")
-            .set("authorization", `bearer ${token}`)
-            .expect("Content-Type", /json/)
-            .expect(200)
-            .then(res => {
-                expect(res.body[0].progress).toBe(50)
-                done()
-            })
+    describe("PUT pinned-students", () => {
+        it("should return status 401 when no token is present", done => {
+            request(app)
+                .put(`/api/v${version}/students/1`)
+                .expect("Content-Type", /json/)
+                .expect(401)
+                .then(res => done())
+        })
+        it("should return status 401 when bad token is present", done => {
+            request(app)
+                .put(`/api/v${version}/students/1`)
+                .set("authorization", `trash can token`)
+                .send({ is_complete: true })
+                .expect("Content-Type", /json/)
+                .expect(401)
+                .then(res => done())
+        })
+        // Bob is currently pinned to grace, this request unpins him
+        it("should return status 200 when good token is present", done => {
+            request(app)
+                .put(`/api/v${version}/students/1`)
+                .set("authorization", `bearer ${token}`)
+                .expect("Content-Type", /json/)
+                .expect(200)
+                .then(res => done())
+        })
+        // Pin Bob
+        it("should return a list of pinned students", done => {
+            request(app)
+                .put(`/api/v${version}/students/1`)
+                .set("authorization", `bearer ${token}`)
+                .expect("Content-Type", /json/)
+                .expect(200)
+                .then(res => {
+                    expect(res.body).toEqual([
+                        {
+                            calendly_link: null,
+                            email: "bob_ross@happylittlemistakes.com",
+                            first_name: "bob",
+                            id: 1,
+                            is_admin: false,
+                            last_name: "ross",
+                            progress: 50,
+                            tracks_id: 1
+                        }
+                    ])
+                    done()
+                })
+        })
+        // Unpin Bob
+        it("should return a list of pinned students", done => {
+            request(app)
+                .put(`/api/v${version}/students/1`)
+                .set("authorization", `bearer ${token}`)
+                .expect("Content-Type", /json/)
+                .expect(200)
+                .then(res => {
+                    expect(res.body).toEqual([])
+                    done()
+                })
+        })
     })
 })
