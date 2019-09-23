@@ -99,5 +99,6 @@ module.exports = {
     findUserNoPassword,
     getUserWithProgress,
     userUpdate,
-    deleteUserById
+    deleteUserById,
+    getProgress
 }
