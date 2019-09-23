@@ -12,7 +12,7 @@ const searchUsers = queryString => {
     const formattedQs = queryString.replace(/\s/, ":* & ") + ":*"
 
     return db("users")
-        .select("first_name", "last_name", "email", "tracks_id")
+        .select("first_name", "last_name", "email", "tracks_id", "id")
         .whereRaw("full_text_weighted @@ to_tsquery('simple', ?)", formattedQs)
         .orderByRaw(
             "ts_rank(full_text_weighted, to_tsquery('simple', ?)) ASC",
@@ -35,7 +35,7 @@ const findUsersBy = filter => db("users").where(filter)
 const findUserNoPassword = userId => {
     return db("users")
         .where({ "users.id": userId })
-        .join("tracks", "tracks.id", "users.tracks_id")
+        .leftJoin("tracks", "tracks.id", "users.tracks_id")
         .select(
             "first_name",
             "last_name",
