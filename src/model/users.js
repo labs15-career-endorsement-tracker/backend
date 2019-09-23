@@ -12,7 +12,7 @@ const searchUsers = queryString => {
     const formattedQs = queryString.replace(/\s/, ":* & ") + ":*"
 
     return db("users")
-        .select("id", "first_name", "last_name", "email", "tracks_id")
+        .select("first_name", "last_name", "email", "tracks_id")
         .whereRaw("full_text_weighted @@ to_tsquery('simple', ?)", formattedQs)
         .orderByRaw(
             "ts_rank(full_text_weighted, to_tsquery('simple', ?)) ASC",
