@@ -8,8 +8,6 @@ const { Forbidden } = require("http-errors")
 
 const getStudents = async (req, res, next) => {
     const coachId = res.locals.userId
-    console.log(coachId)
-
     try {
         const students = await getPinnedStudents(coachId)
         res.status(200).json(students)
@@ -22,18 +20,16 @@ const getStudents = async (req, res, next) => {
 const pinStudent = async (req, res, next) => {
     const studentId = req.params.userId
     const coachId = res.locals.userId
-    console.log(studentId, coachId)
-
     try {
-        if (!res.locals.isAdmin)
-            return next(Forbidden("Unauthorized content"))
+        if (!res.locals.isAdmin) return next(Forbidden("Unauthorized content"))
         const isPinned = await isStudentPinned(studentId)
         if (isPinned) {
             await coachUnpinStudent(studentId)
-            return res.sendStatus(200)
+        } else {
+            await coachPinStudent(coachId, studentId)
         }
-        await coachPinStudent(coachId, studentId)
-        res.sendStatus(200)
+        const updatedStudentList = await getPinnedStudents(coachId)
+        res.status(200).json(updatedStudentList)
     } catch (error) {
         next(error)
     }

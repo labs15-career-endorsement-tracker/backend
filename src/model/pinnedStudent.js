@@ -1,7 +1,8 @@
 const db = require("../../data")
+const { getProgress } = require("./users")
 
-const getPinnedStudents = coachId => {
-    return db("pinned_students as p_s")
+const getPinnedStudents = async coachId => {
+    const students = await db("pinned_students as p_s")
         .where("coach_id", Number(coachId))
         .join("users", "users.id", "p_s.student_id")
         .select(
@@ -13,6 +14,16 @@ const getPinnedStudents = coachId => {
             "users.tracks_id",
             "users.calendly_link"
         )
+    const studentsWithProgress = await Promise.all(
+        students.map(async student => {
+            const progress = await getProgress(student)
+            return {
+                ...student,
+                progress
+            }
+        })
+    )
+    return studentsWithProgress
 }
 
 const coachPinStudent = (coachId, studentId) => {

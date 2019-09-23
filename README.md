@@ -91,6 +91,8 @@ To run the test server
 | POST   | `/api/v1/reset-password`              | all users      | Sends a reset password email to the user                                                                                                                                    |
 | PUT    | `/api/v1/users`                       | all users      | Updates the user info                                                                                                                                                       |
 | DELETE | `/api/v1/users`                       | all users      | Deletes the user                                                                                                                                                            |
+| GET    | `/api/v1/students`                    | coaches        | Returns a list of the students that the coach has pinned                                                                                                                    |
+| PUT    | `/api/v1/students/:studentId`         | coaches        | Pins/unpins a student to a coach, returns the updated list of pinned students                                                                                               |
 
 ## Endpoint Examples
 
@@ -434,6 +436,62 @@ Headers
 OK
 ```
 
+#### GET /api/v1/students
+
+##### REQUEST
+
+```
+Headers
+{
+  authorization: bearer token
+}
+```
+
+##### RESPONSE
+
+```
+[
+    {
+        "id": 2,
+        "first_name": "Johnny",
+        "last_name": "Schumm",
+        "email": "johnny_schumm23@hotmail.com",
+        "is_admin": false,
+        "tracks_id": 1,
+        "calendly_link": null,
+        "progress": 0
+    }
+]
+```
+
+#### PUT /api/v1/students/:studentId
+
+##### REQUEST
+
+```
+Headers
+{
+  authorization: bearer token
+}
+```
+
+##### RESPONSE
+
+```
+[
+    {
+        "id": 2,
+        "first_name": "Johnny",
+        "last_name": "Schumm",
+        "email": "johnny_schumm23@hotmail.com",
+        "is_admin": false,
+        "tracks_id": 1,
+        "calendly_link": null,
+        "progress": 0
+    }
+]
+```
+
 # Data Model
 
 [View on dbdesigner.net](https://app.dbdesigner.net/designer/schema/0-untitled-621fa2f2-75bd-4eb4-ab98-6f7a5914d0e4)
@@ -461,7 +519,9 @@ OK
   last_name: STRING
   email: STRING
   password: STRING
-  is_admin: BOOLEAN
+  is_admin: BOOLEAN,
+  calendly_link: STRING,
+  created_at: DATE with TIMEZONE
 }
 ```
 
@@ -532,6 +592,20 @@ OK
 }
 ```
 
+#### PINNED STUDENTS
+
+---
+
+```
+{
+  id: INT
+  coach_id: INT foriegn ket in USER table
+  student_id: INT foriegn ket in USER table
+  created_at: DATE with TIMEZONE
+  updated_at: DATE with TIMEZONE
+}
+```
+
 ## Actions
 
 ### Users
@@ -540,9 +614,11 @@ OK
 
 `findUsersBy(filter)` -> Returns a user or users by any filter
 
-`findUserNoPassword(userId)` -> Returns a user without their password, with a progress pro found by user id
+`findUserNoPassword(userId)` -> Returns a user without their password, found by user id
 
-`getUserWithProgress(userId)` -> Returns a user without their password, found by user id
+`getProgress(user)` -> Gets a users overall progress by their id
+
+`getUserWithProgress(userId)` -> Returns a user without their password, found by user id, with a progress property
 
 `insertUser(newUserData)` -> Adds a user to the database, returns the new user's id
 
