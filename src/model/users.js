@@ -27,7 +27,8 @@ const findUsers = () =>
         "last_name",
         "email",
         "tracks_id",
-        "is_admin"
+        "is_admin",
+        "calendly_link"
     )
 
 const findUsersBy = filter => db("users").where(filter)
