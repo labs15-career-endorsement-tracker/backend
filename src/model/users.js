@@ -43,7 +43,8 @@ const findUserNoPassword = userId => {
             "tracks_id",
             "is_admin",
             "tracks.title as tracks_title",
-            "users.id"
+            "users.id",
+            "calendly_link"
         )
         .first()
 }
@@ -78,8 +79,10 @@ const insertUser = async userData => {
 }
 
 const userUpdate = async (id, userData) => {
-    const password = await hash(userData.password, 10)
-    userData.password = password
+    if (userData.password) {
+        const password = await hash(userData.password, 10)
+        userData.password = password
+    }
     return db("users")
         .where("id", id)
         .update(userData)
