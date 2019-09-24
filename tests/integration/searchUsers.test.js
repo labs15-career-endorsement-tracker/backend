@@ -92,4 +92,14 @@ describe("User.searchUsers", () => {
                 done(error)
             })
     })
+    it("has isPinnedBy property on the 'Jabroni Mandude' user when search query is 'Ja Ma'", done => {
+        searchUsers("Ja Ma")
+            .then(users => {
+                expect(users[0]).toHaveProperty("isPinnedBy", null)
+                done()
+            })
+            .catch(error => {
+                done(error)
+            })
+    })
 })
