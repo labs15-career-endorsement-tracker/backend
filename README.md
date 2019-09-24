@@ -79,20 +79,21 @@ To run the test server
 
 #### User Routes
 
-| Method | Endpoint                              | Access Control | Description                                                                                                                                                                 |
-| ------ | ------------------------------------- | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| GET    | `/api/v1/requirements`                | all users      | Returns a list of the user's endorsement requirements                                                                                                                       |
-| POST   | `/api/v1/users`                       | all users      | Returns `{userId: Int, token: String }`                                                                                                                                     |
-| POST   | `/api/v1/login`                       | all users      | Returns an object with token and userId.                                                                                                                                    |
-| GET    | `/api/v1/tracks`                      | all users      | Returns a list of all available tracks                                                                                                                                      |
-| GET    | `/requirements/:requirementsId/steps` | all users      | Gets a list of the steps for a given requirement, ordered by step number, with flag for completion                                                                          |
-| PUT    | `/requirements/:requirementsId/steps` | all users      | Mark a step complete or incomplete: send the current state of the step. If its is_complete flag is currently true, send {is_complete:true} and it will be marked incomplete |
-| GET    | `/users/:userId`                      | all users      | Get a user object with progress propery indicatin completion of all user requirements                                                                                       |
-| POST   | `/api/v1/reset-password`              | all users      | Sends a reset password email to the user                                                                                                                                    |
-| PUT    | `/api/v1/users`                       | all users      | Updates the user info                                                                                                                                                       |
-| DELETE | `/api/v1/users`                       | all users      | Deletes the user                                                                                                                                                            |
-| GET    | `/api/v1/students`                    | coaches        | Returns a list of the students that the coach has pinned                                                                                                                    |
-| PUT    | `/api/v1/students/:studentId`         | coaches        | Pins/unpins a student to a coach, returns the updated list of pinned students                                                                                               |
+| Method | Endpoint                                | Access Control | Description                                                                                                                                                                 |
+| ------ | --------------------------------------- | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| GET    | `/api/v1/requirements`                  | all users      | Returns a list of the user's endorsement requirements                                                                                                                       |
+| POST   | `/api/v1/users`                         | all users      | Returns `{userId: Int, token: String }`                                                                                                                                     |
+| POST   | `/api/v1/login`                         | all users      | Returns an object with token and userId.                                                                                                                                    |
+| GET    | `/api/v1/tracks`                        | all users      | Returns a list of all available tracks                                                                                                                                      |
+| GET    | `/requirements/:requirementsId/steps`   | all users      | Gets a list of the steps for a given requirement, ordered by step number, with flag for completion                                                                          |
+| PUT    | `/requirements/:requirementsId/steps`   | all users      | Mark a step complete or incomplete: send the current state of the step. If its is_complete flag is currently true, send {is_complete:true} and it will be marked incomplete |
+| GET    | `/users/:userId`                        | all users      | Get a user object with progress propery indicatin completion of all user requirements                                                                                       |
+| POST   | `/api/v1/reset-password`                | all users      | Sends a reset password email to the user                                                                                                                                    |
+| PUT    | `/api/v1/users`                         | all users      | Updates the user info                                                                                                                                                       |
+| DELETE | `/api/v1/users`                         | all users      | Deletes the user                                                                                                                                                            |
+| GET    | `/api/v1/students`                      | coaches        | Returns a list of the students that the coach has pinned                                                                                                                    |
+| PUT    | `/api/v1/students/:studentId`           | coaches        | Pins/unpins a student to a coach, returns the updated list of pinned students                                                                                               |
+| GET    | `/api/v1/users/:studentId/requirements` | coaches        | Gets a list of a user's requirements with progress and resources                                                                                                            |
 
 ## Endpoint Examples
 
@@ -488,6 +489,80 @@ Headers
         "tracks_id": 1,
         "calendly_link": null,
         "progress": 0
+    }
+]
+```
+
+#### GET /api/v1/users/:userId/requirements
+
+##### REQUEST
+
+```
+Headers
+{
+  authorization: bearer token
+}
+```
+
+##### RESPONSE
+
+```
+[
+    {
+        "id": 1,
+        "tracks_id": 1,
+        "tasks_id": 1,
+        "title": "Update Resume",
+        "is_required": true,
+        "tasks_description": "Update your resume to include your recent work history",
+        "is_endorsement_requirement": true,
+        "progress": 0,
+        "resources": [
+            {
+                "id": 1,
+                "type": "unspecified",
+                "title": "Creddle",
+                "url": "http://creddle.io/",
+                "description": null,
+                "tasks_id": 1
+            },
+            {
+                "id": 2,
+                "type": "unspecified",
+                "title": "NovoResume",
+                "url": "https://novoresume.com/resume-templates",
+                "description": null,
+                "tasks_id": 1
+            }
+        ]
+    },
+    {
+        "id": 2,
+        "tracks_id": 1,
+        "tasks_id": 2,
+        "title": "LinkedIn Profile",
+        "is_required": true,
+        "tasks_description": "You must have an updated LinkedIn profile including a clear headshot and cover photo, personal summary. Reference your portfolio site here, work experiences, with descriptions (only include Lambda under work if you were a PM), projects.",
+        "is_endorsement_requirement": true,
+        "progress": 0,
+        "resources": [
+            {
+                "id": 13,
+                "type": "unspecified",
+                "title": "LinkedIn Rubric",
+                "url": "https://drive.google.com/file/d/1fgBBDBSoZwCB8exoRSFy20MpGZxNd6zq/view?usp=sharing",
+                "description": null,
+                "tasks_id": 2
+            },
+            {
+                "id": 14,
+                "type": "google_doc",
+                "title": "LinkedIn Deep Dive",
+                "url": "https://docs.google.com/document/d/1Gp4ZjEwRUY2a1dcbXK0Ml5LE4ZzWRnUjHa9pJnNFIpo/edit?usp=sharing",
+                "description": null,
+                "tasks_id": 2
+            }
+        ]
     }
 ]
 ```
