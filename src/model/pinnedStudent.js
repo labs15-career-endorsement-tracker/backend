@@ -37,11 +37,14 @@ const coachUnpinStudent = studentId => {
         .where({ student_id: studentId })
         .del()
 }
-const isStudentPinned = async studentId => {
-    const foundStudent = await db("pinned_students")
+
+const getPinnedStudent = studentId => {
+    return db("pinned_students")
         .where({ student_id: studentId })
         .first()
-
+}
+const isStudentPinned = async studentId => {
+    const foundStudent = await getPinnedStudent(studentId)
     return foundStudent ? true : false
 }
 
@@ -49,5 +52,6 @@ module.exports = {
     coachPinStudent,
     coachUnpinStudent,
     getPinnedStudents,
-    isStudentPinned
+    isStudentPinned,
+    getPinnedStudent
 }

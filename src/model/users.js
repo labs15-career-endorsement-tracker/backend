@@ -5,33 +5,7 @@ const db = require("../../data")
 const { findRequirementsByTrack } = require("./requirements")
 const { findStepsByTask } = require("./steps")
 const { findCompletedRequirementStepsByUser } = require("./completedSteps")
-
-const searchUsers = queryString => {
-    if (!queryString) return Promise.resolve([])
-
-    const formattedQs = queryString.replace(/\s/, ":* & ") + ":*"
-
-    return db("users")
-        .select("first_name", "last_name", "email", "tracks_id", "id")
-        .whereRaw("full_text_weighted @@ to_tsquery('simple', ?)", formattedQs)
-        .orderByRaw(
-            "ts_rank(full_text_weighted, to_tsquery('simple', ?)) ASC",
-            formattedQs
-        )
-}
-
-const findUsers = () =>
-    db("users").select(
-        "id",
-        "first_name",
-        "last_name",
-        "email",
-        "tracks_id",
-        "is_admin",
-        "calendly_link"
-    )
-
-const findUsersBy = filter => db("users").where(filter)
+const { getPinnedStudent } = require("./pinnedStudent")
 
 const findUserNoPassword = userId => {
     return db("users")
@@ -49,6 +23,50 @@ const findUserNoPassword = userId => {
         )
         .first()
 }
+
+const searchUsers = async queryString => {
+    if (!queryString) return Promise.resolve([])
+
+    const formattedQs = queryString.replace(/\s/, ":* & ") + ":*"
+
+    const students = await db("users")
+        .select("first_name", "last_name", "email", "tracks_id", "id")
+        .whereRaw("full_text_weighted @@ to_tsquery('simple', ?)", formattedQs)
+        .orderByRaw(
+            "ts_rank(full_text_weighted, to_tsquery('simple', ?)) ASC",
+            formattedQs
+        )
+    const studentsWithPinnedFlag = await Promise.all(
+        students.map(async student => {
+            const pinnedStudent = await getPinnedStudent(student.id)
+            if (pinnedStudent) {
+                let coach = await findUserNoPassword(pinnedStudent.coach_id)
+                return {
+                    ...student,
+                    isPinnedBy: `${coach.first_name} ${coach.last_name}`
+                }
+            }
+            return {
+                ...student,
+                isPinnedBy: null
+            }
+        })
+    )
+    return studentsWithPinnedFlag
+}
+
+const findUsers = () =>
+    db("users").select(
+        "id",
+        "first_name",
+        "last_name",
+        "email",
+        "tracks_id",
+        "is_admin",
+        "calendly_link"
+    )
+
+const findUsersBy = filter => db("users").where(filter)
 
 const getProgress = async user => {
     const allSteps = []
