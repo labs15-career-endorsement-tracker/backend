@@ -12,8 +12,8 @@ describe("User.userUpdate", () => {
                 email: "lucythep@gmail.com",
                 password: "Password1234!",
                 is_admin: true,
-                tracks_id: null
-                // calendly_link: null
+                tracks_id: null,
+                calendly_link: null
             }
         ])
         done()
