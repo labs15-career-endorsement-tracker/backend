@@ -15,6 +15,7 @@ const {
     findUserNoPassword,
     deleteUserById
 } = require("./users")
+const { getProgress } = require("./progress")
 const { findStepsByTask, getFormattedSteps } = require("./steps")
 
 const {
@@ -31,7 +32,8 @@ const {
     coachPinStudent,
     coachUnpinStudent,
     getPinnedStudents,
-    isStudentPinned
+    isStudentPinned,
+    getPinnedStudent
 } = require("./pinnedStudent")
 
 module.exports = {
@@ -60,5 +62,7 @@ module.exports = {
     coachPinStudent,
     coachUnpinStudent,
     getPinnedStudents,
-    isStudentPinned
+    isStudentPinned,
+    getPinnedStudent,
+    getProgress
 }
