@@ -1,5 +1,5 @@
 const db = require("../../data")
-const { getProgress } = require("./users")
+const { getProgress } = require("./progress")
 
 const getPinnedStudents = async coachId => {
     const students = await db("pinned_students as p_s")

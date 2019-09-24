@@ -2,10 +2,9 @@ const { hash } = require("bcryptjs")
 const knex = require("knex")
 
 const db = require("../../data")
-const { findRequirementsByTrack } = require("./requirements")
-const { findStepsByTask } = require("./steps")
-const { findCompletedRequirementStepsByUser } = require("./completedSteps")
+
 const { getPinnedStudent } = require("./pinnedStudent")
+const { getProgress } = require("./progress")
 
 const findUserNoPassword = userId => {
     return db("users")
@@ -68,18 +67,6 @@ const findUsers = () =>
 
 const findUsersBy = filter => db("users").where(filter)
 
-const getProgress = async user => {
-    const allSteps = []
-    const requirements = await findRequirementsByTrack(user.tracks_id)
-    for (requirement of requirements) {
-        const steps = await findStepsByTask(requirement.id)
-        allSteps.push(...steps)
-    }
-    const completedSteps = await findCompletedRequirementStepsByUser(user.id)
-    const progress = Math.round((completedSteps.length / allSteps.length) * 100)
-    return progress
-}
-
 const getUserWithProgress = async userId => {
     const user = await findUserNoPassword(userId)
     const progress = await getProgress(user)
@@ -121,6 +108,5 @@ module.exports = {
     findUserNoPassword,
     getUserWithProgress,
     userUpdate,
-    deleteUserById,
-    getProgress
+    deleteUserById
 }
