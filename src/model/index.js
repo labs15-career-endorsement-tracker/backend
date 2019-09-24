@@ -11,7 +11,6 @@ const {
     findUsersBy,
     insertUser,
     userUpdate,
-    calendlyUpdate,
     getUserWithProgress,
     findUserNoPassword,
     deleteUserById
@@ -41,7 +40,6 @@ module.exports = {
     findUsersBy,
     insertUser,
     userUpdate,
-    calendlyUpdate,
     getUserWithProgress,
     findUserNoPassword,
     findRequirementsByTrack,

@@ -5,7 +5,6 @@ module.exports = {
     login: require("./login"),
     addUser: require("./add-user"),
     updateUser: require("./update-user"),
-    updateCalendly: require("./update-calendly-link"),
     viewEndorsementRequirements: require("./viewEndorsementRequirements"),
     viewTracks: require("./tracks"),
     getSteps: require("./get-steps"),

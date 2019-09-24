@@ -4,7 +4,6 @@ const {
     getUsers,
     addUser,
     updateUser,
-    updateCalendly,
     login,
     viewEndorsementRequirements,
     viewTracks,
@@ -26,8 +25,6 @@ api.get("/users", requiresAuth, getUsers)
 api.post("/users", addUser)
 
 api.put("/users", requiresAuth, updateUser)
-
-api.put("/users/update-calendly-link", requiresAuth, updateCalendly)
 
 api.get("/users/:userId", requiresAuth, getAllProgressForUser)
 
