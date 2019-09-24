@@ -13,7 +13,6 @@ const getUsers = async (req, res, next) => {
         const users = await searchUsers(search)
         res.json(users)
     } catch (error) {
-        console.log(error)
         next(error)
     }
 }

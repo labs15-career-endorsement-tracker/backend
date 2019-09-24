@@ -21,7 +21,6 @@ describe("GET /users", () => {
             })
         token = res.body.token
         done()
-        done()
     })
     beforeEach(async done => {
         done()

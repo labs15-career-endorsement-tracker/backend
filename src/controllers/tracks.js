@@ -5,7 +5,6 @@ const viewTracks = async (req, res, next) => {
         const tracks = await findAllTracks()
         res.json(tracks)
     } catch (error) {
-        console.log(error)
         next(error)
     }
 }

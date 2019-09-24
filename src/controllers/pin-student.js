@@ -12,7 +12,6 @@ const getStudents = async (req, res, next) => {
         const students = await getPinnedStudents(coachId)
         res.status(200).json(students)
     } catch (error) {
-        console.log(error)
         next(error)
     }
 }
