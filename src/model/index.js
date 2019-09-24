@@ -31,7 +31,8 @@ const {
     coachPinStudent,
     coachUnpinStudent,
     getPinnedStudents,
-    isStudentPinned
+    isStudentPinned,
+    getPinnedStudent
 } = require("./pinnedStudent")
 
 module.exports = {
@@ -60,5 +61,6 @@ module.exports = {
     coachPinStudent,
     coachUnpinStudent,
     getPinnedStudents,
-    isStudentPinned
+    isStudentPinned,
+    getPinnedStudent
 }
