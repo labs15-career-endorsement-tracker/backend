@@ -13,5 +13,6 @@ module.exports = {
     resetPassword: require("./reset-password"),
     deleteUser: require("./delete-user"),
     getStudents,
-    pinStudent
+    pinStudent,
+    getReqsForUser: require("./get-reqs-for-user")
 }

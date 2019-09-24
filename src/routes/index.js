@@ -13,7 +13,8 @@ const {
     resetPassword,
     deleteUser,
     getStudents,
-    pinStudent
+    pinStudent,
+    getReqsForUser
 } = require("../controllers")
 
 const { requiresAuth } = require("../middleware")
@@ -27,6 +28,8 @@ api.post("/users", addUser)
 api.put("/users", requiresAuth, updateUser)
 
 api.get("/users/:userId", requiresAuth, getAllProgressForUser)
+
+api.get("/users/:userId/requirements", requiresAuth, getReqsForUser)
 
 api.post("/login", login)
 
