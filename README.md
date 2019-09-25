@@ -87,7 +87,7 @@ To run the test server
 | GET    | `/api/v1/tracks`                        | all users      | Returns a list of all available tracks                                                                                                                                      |
 | GET    | `/requirements/:requirementsId/steps`   | all users      | Gets a list of the steps for a given requirement, ordered by step number, with flag for completion                                                                          |
 | PUT    | `/requirements/:requirementsId/steps`   | all users      | Mark a step complete or incomplete: send the current state of the step. If its is_complete flag is currently true, send {is_complete:true} and it will be marked incomplete |
-| GET    | `/users/:userId`                        | all users      | Get a user object with progress propery indicatin completion of all user requirements                                                                                       |
+| GET    | `/users/:userId`                        | all users      | Get a user object with progress propery indicatin completion of all user requirements, and a coach property indicating if the the user is pinned by a coach                 |
 | POST   | `/api/v1/reset-password`                | all users      | Sends a reset password email to the user                                                                                                                                    |
 | PUT    | `/api/v1/users`                         | all users      | Updates the user info                                                                                                                                                       |
 | DELETE | `/api/v1/users`                         | all users      | Deletes the user                                                                                                                                                            |
@@ -324,14 +324,25 @@ Headers
 
 ```
 {
-    "first_name": "bob",
-    "last_name": "ross",
-    "email": "bob_ross@happylittlemistakes.com",
+    "first_name": "Bob",
+    "last_name": "Ross",
+    "email": "bob_ross11@gmail.com",
     "tracks_id": 1,
     "is_admin": false,
-    "id": 1,
-    "progress": 50,
-    "tracks_title": "Fullstack Web"
+    "tracks_title": "Full-Stack Web",
+    "id": 1011,
+    "calendly_link": null,
+    "progress": 0,
+    "coach": {
+        "first_name": "admin",
+        "last_name": "admin",
+        "email": "admin@admin.com",
+        "tracks_id": null,
+        "is_admin": true,
+        "tracks_title": null,
+        "id": 1010,
+        "calendly_link": null
+    }
 }
 ```
 
