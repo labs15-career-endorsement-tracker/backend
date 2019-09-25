@@ -132,7 +132,8 @@ describe("MODEL all progress", () => {
                     id: 1,
                     progress: 0,
                     tracks_title: "Web",
-                    calendly_link: null
+                    calendly_link: null,
+                    coach: null
                 })
                 done()
             })

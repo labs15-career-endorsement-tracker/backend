@@ -6,6 +6,7 @@ const db = require("../../data")
 const { getPinnedStudent } = require("./pinnedStudent")
 const { getProgress } = require("./progress")
 
+// Get the user object without the password property
 const findUserNoPassword = userId => {
     return db("users")
         .where({ "users.id": userId })
@@ -70,9 +71,15 @@ const findUsersBy = filter => db("users").where(filter)
 const getUserWithProgress = async userId => {
     const user = await findUserNoPassword(userId)
     const progress = await getProgress(user)
+    const pinnedStudent = await getPinnedStudent(userId)
+    let coach = null
+    if (pinnedStudent) {
+        coach = await findUserNoPassword(pinnedStudent.coach_id)
+    }
     return {
         ...user,
-        progress
+        progress,
+        coach
     }
 }
 
