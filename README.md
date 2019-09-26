@@ -81,23 +81,23 @@ To run the test server
 
 | Method | Endpoint                                | Access Control | Description                                                                                                                                                                 |
 | ------ | --------------------------------------- | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| GET    | `/api/v1/requirements`                  | all users      | Returns a list of the user's endorsement requirements                                                                                                                       |
-| POST   | `/api/v1/users`                         | all users      | Returns `{userId: Int, token: String }`                                                                                                                                     |
-| POST   | `/api/v1/login`                         | all users      | Returns an object with token and userId.                                                                                                                                    |
-| GET    | `/api/v1/tracks`                        | all users      | Returns a list of all available tracks                                                                                                                                      |
+| GET    | `/api/v2/requirements`                  | all users      | Returns a list of the user's endorsement requirements                                                                                                                       |
+| POST   | `/api/v2/users`                         | all users      | Returns `{userId: Int, token: String }`                                                                                                                                     |
+| POST   | `/api/v2/login`                         | all users      | Returns an object with token and userId.                                                                                                                                    |
+| GET    | `/api/v2/tracks`                        | all users      | Returns a list of all available tracks                                                                                                                                      |
 | GET    | `/requirements/:requirementsId/steps`   | all users      | Gets a list of the steps for a given requirement, ordered by step number, with flag for completion                                                                          |
 | PUT    | `/requirements/:requirementsId/steps`   | all users      | Mark a step complete or incomplete: send the current state of the step. If its is_complete flag is currently true, send {is_complete:true} and it will be marked incomplete |
 | GET    | `/users/:userId`                        | all users      | Get a user object with progress propery indicatin completion of all user requirements, and a coach property indicating if the the user is pinned by a coach                 |
-| POST   | `/api/v1/reset-password`                | all users      | Sends a reset password email to the user                                                                                                                                    |
-| PUT    | `/api/v1/users`                         | all users      | Updates the user info                                                                                                                                                       |
-| DELETE | `/api/v1/users`                         | all users      | Deletes the user                                                                                                                                                            |
-| GET    | `/api/v1/students`                      | coaches        | Returns a list of the students that the coach has pinned                                                                                                                    |
-| PUT    | `/api/v1/students/:studentId`           | coaches        | Pins/unpins a student to a coach, returns the updated list of pinned students                                                                                               |
-| GET    | `/api/v1/users/:studentId/requirements` | coaches        | Gets a list of a user's requirements with progress and resources                                                                                                            |
+| POST   | `/api/v2/reset-password`                | all users      | Sends a reset password email to the user                                                                                                                                    |
+| PUT    | `/api/v2/users`                         | all users      | Updates the user info                                                                                                                                                       |
+| DELETE | `/api/v2/users`                         | all users      | Deletes the user                                                                                                                                                            |
+| GET    | `/api/v2/students`                      | coaches        | Returns a list of the students that the coach has pinned                                                                                                                    |
+| PUT    | `/api/v2/students/:studentId`           | coaches        | Pins/unpins a student to a coach, returns the updated list of pinned students                                                                                               |
+| GET    | `/api/v2/users/:studentId/requirements` | coaches        | Gets a list of a user's requirements with progress and resources                                                                                                            |
 
 ## Endpoint Examples
 
-#### POST /api/v1/login
+#### POST /api/v2/login
 
 ##### REQUEST
 
@@ -118,7 +118,7 @@ Body
 }
 ```
 
-#### GET /api/v1/requirements
+#### GET /api/v2/requirements
 
 ##### REQUEST
 
@@ -183,7 +183,7 @@ Headers
 ]
 ```
 
-#### GET /api/v1/tracks
+#### GET /api/v2/tracks
 
 ##### REQUEST
 
@@ -218,7 +218,7 @@ Headers
 ]
 ```
 
-#### GET /api/v1/requirements/:requirementsId/steps
+#### GET /api/v2/requirements/:requirementsId/steps
 
 ##### REQUEST
 
@@ -260,7 +260,7 @@ Headers
 ]
 ```
 
-#### PUT /api/v1/requirements/:requirementsId/steps/:stepsId
+#### PUT /api/v2/requirements/:requirementsId/steps/:stepsId
 
 ##### REQUEST
 
@@ -309,7 +309,7 @@ Body
 ]
 ```
 
-#### GET /api/v1/user/:userId
+#### GET /api/v2/user/:userId
 
 ##### REQUEST
 
@@ -346,7 +346,7 @@ Headers
 }
 ```
 
-#### GET /api/v1/users
+#### GET /api/v2/users
 
 ##### REQUEST
 
@@ -400,7 +400,7 @@ Headers
 ]
 ```
 
-#### POST /api/v1/reset-password
+#### POST /api/v2/reset-password
 
 ##### REQUEST
 
@@ -414,24 +414,7 @@ Headers
 OK
 ```
 
-#### PUT /api/v1/users
-
-##### REQUEST
-
-```
-Headers
-{
-  authorization: bearer token
-}
-```
-
-##### RESPONSE
-
-```
-OK
-```
-
-#### DELETE /api/v1/users
+#### PUT /api/v2/users
 
 ##### REQUEST
 
@@ -448,7 +431,24 @@ Headers
 OK
 ```
 
-#### GET /api/v1/students
+#### DELETE /api/v2/users
+
+##### REQUEST
+
+```
+Headers
+{
+  authorization: bearer token
+}
+```
+
+##### RESPONSE
+
+```
+OK
+```
+
+#### GET /api/v2/students
 
 ##### REQUEST
 
@@ -476,7 +476,7 @@ Headers
 ]
 ```
 
-#### PUT /api/v1/students/:studentId
+#### PUT /api/v2/students/:studentId
 
 ##### REQUEST
 
@@ -504,7 +504,7 @@ Headers
 ]
 ```
 
-#### GET /api/v1/users/:userId/requirements
+#### GET /api/v2/users/:userId/requirements
 
 ##### REQUEST
 
