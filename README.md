@@ -38,7 +38,11 @@ To get the server running locally:
     -   Reference [this article](https://www.freecodecamp.org/news/how-to-get-started-with-postgresql-9d3bc1dd1b11/) or [this document](https://github.com/Lambda-School-Labs/Labs8-OfflineReader/wiki/Setting-up-a-PostgreSQL-database-for-local-testing) for help
 4.  **touch .env** environment variables:
     -   DATABASE_URL
-    -   JWT_SECRET
+    -   AUTH_JWT_SECRET
+    -   EMAIL_JWT_SECRET
+    -   EMAIL_ADDRESS_SENDER
+    -   EMAIL_ADDRESS_PASSWORD
+    -   EMAIL_URL_RESET_PASSWORD
 5.  Run migrations and seeds
     -   migrations **yarn knex:migrate:latest**
     -   seeds **yarn knex:seed:run**
