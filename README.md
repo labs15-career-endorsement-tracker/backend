@@ -98,6 +98,7 @@ To run the test server
 | GET    | `/api/v2/students`                      | coaches        | Returns a list of the students that the coach has pinned                                                                                                                    |
 | PUT    | `/api/v2/students/:studentId`           | coaches        | Pins/unpins a student to a coach, returns the updated list of pinned students                                                                                               |
 | GET    | `/api/v2/users/:studentId/requirements` | coaches        | Gets a list of a user's requirements with progress and resources                                                                                                            |
+| GET    | `/api/v2/users/:studentId/requirements` | coaches        | Gets a list of a user's requirements with progress and resources                                                                                                            |
 
 ## Endpoint Examples
 
