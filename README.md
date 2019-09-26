@@ -46,12 +46,12 @@ To get the server running locally:
 5.  Run migrations and seeds
     -   migrations **yarn knex:migrate:latest**
     -   seeds **yarn knex:seed:run**
-6.  **yarn dev** to run the server using the development environment
+6.  Run **yarn dev** to connect to your local server, using the development environment
 
 To run the test server
 
 1. Create a database in your postgres server called `test_endrsd`
-2. Add environment variable to _.env_
+2. Add the following environment variable to the _.env_ file:
     - TEST_DATABASE_URL
 3. **yarn test** to start server using testing environment
 
