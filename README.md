@@ -33,10 +33,10 @@
 To get the server running locally:
 
 1.  Clone this repo
-2.  **yarn install** to install all required dependencies
-3.  Create a local postgres database for development
+2.  Run **yarn install** in the terminal, while in the root directory, to install all the required dependencies
+3.  Create a local PostgreSQL database for development
     -   Reference [this article](https://www.freecodecamp.org/news/how-to-get-started-with-postgresql-9d3bc1dd1b11/) or [this document](https://github.com/Lambda-School-Labs/Labs8-OfflineReader/wiki/Setting-up-a-PostgreSQL-database-for-local-testing) for help
-4.  **touch .env** environment variables:
+4.  Run **touch .env** in the terminal, while in the root directory, to create a file for your environment variables:
     -   DATABASE_URL
     -   AUTH_JWT_SECRET
     -   EMAIL_JWT_SECRET
@@ -50,7 +50,7 @@ To get the server running locally:
 
 To run the test server
 
-1. Create a database in your postgres server called test_endrsd
+1. Create a database in your postgres server called `test_endrsd`
 2. Add environment variable to _.env_
     - TEST_DATABASE_URL
 3. **yarn test** to start server using testing environment
