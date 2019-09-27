@@ -85,7 +85,7 @@ To run the test server
 
 | Method | Endpoint                                              | Access Control | Description                                                                                                                                                                               |
 | ------ | ----------------------------------------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| POST   | `/api/v2/login`                                       | all users      | Allows a user to login with email & password                                                                                                                                              |
+| POST   | `/api/v2/login`                                       | all users      | Allows a user to login with an email & password                                                                                                                                           |
 | POST   | `/api/v2/reset-password`                              | all users      | Sends a 'password-reset' email to the provided email address                                                                                                                              |
 | POST   | `/api/v2/users`                                       | all users      | Creates a new user                                                                                                                                                                        |
 | GET    | `/api/v2/requirements/:requirementsId/steps`          | all users      | Returns a list of the steps for a given requirement, ordered by step number, with a flag for completion                                                                                   |
@@ -141,7 +141,7 @@ Headers
     content-type: application/json
 }
 
-Body
+Body    raw(application/json)
 {
     "email": "bob_ross@happylittlemistakes.com"
 }
@@ -151,6 +151,78 @@ Body
 
 ```
 OK
+```
+
+#### POST /api/v2/users
+
+##### REQUEST
+
+```
+Headers
+{
+    content-type: application/json
+}
+
+
+Body    raw(application/json)
+{
+    "first_name": "Bob",
+	"last_name": "Ross",
+	"email": "bob_ross@happylittlemistakes.com",
+	"password": "Password1234!",
+	"tracks_id": 2
+}
+```
+
+##### RESPONSE
+
+```
+{
+    "token": "eyQiOjEsImlhdCI6MTU2NjkyODU0MywiZXhwIjoxNTY3MDE0O",
+    "userId": 1002
+}
+```
+
+#### GET /api/v2/requirements/:requirementsId/steps
+
+##### REQUEST
+
+```
+Headers
+{
+    authorization: bearer token
+}
+```
+
+##### RESPONSE
+
+```
+[
+    {
+        "id": 1,
+        "number": 1,
+        "steps_description": "Get started with Creddle or Novoresume as a template. You can also use your own, but Creddle and Novoresume look great and take the guesswork out of formatting!",
+        "is_required": true,
+        "tasks_id": 1,
+        "is_complete": true
+    },
+    {
+        "id": 2,
+        "number": 2,
+        "steps_description": "Use the resume rubric and resume deep-dive to make sure you’re including all required sections in your resume",
+        "is_required": true,
+        "tasks_id": 1,
+        "is_complete": true
+    },
+    {
+        "id": 3,
+        "number": 3,
+        "steps_description": "Submit your resume for a free review through CV Compiler",
+        "is_required": true,
+        "tasks_id": 1,
+        "is_complete": false
+    }
+]
 ```
 
 #### GET /api/v2/requirements
@@ -253,48 +325,6 @@ Headers
 ]
 ```
 
-#### GET /api/v2/requirements/:requirementsId/steps
-
-##### REQUEST
-
-```
-Headers
-{
-    authorization: bearer token
-}
-```
-
-##### RESPONSE
-
-```
-[
-    {
-        "id": 1,
-        "number": 1,
-        "steps_description": "Get started with Creddle or Novoresume as a template. You can also use your own, but Creddle and Novoresume look great and take the guesswork out of formatting!",
-        "is_required": true,
-        "tasks_id": 1,
-        "is_complete": true
-    },
-    {
-        "id": 2,
-        "number": 2,
-        "steps_description": "Use the resume rubric and resume deep-dive to make sure you’re including all required sections in your resume",
-        "is_required": true,
-        "tasks_id": 1,
-        "is_complete": true
-    },
-    {
-        "id": 3,
-        "number": 3,
-        "steps_description": "Submit your resume for a free review through CV Compiler",
-        "is_required": true,
-        "tasks_id": 1,
-        "is_complete": false
-    }
-]
-```
-
 #### PUT /api/v2/requirements/:requirementsId/steps/:stepsId
 
 ##### REQUEST
@@ -340,6 +370,34 @@ Body
         "is_required": true,
         "tasks_id": 1,
         "is_complete": false
+    }
+]
+```
+
+### GET /api/v2/students
+
+##### REQUEST
+
+```
+Headers
+{
+    authorization: bearer token
+}
+```
+
+##### RESPONSE
+
+```
+[
+    {
+        "id": 2,
+        "first_name": "Bob",
+        "last_name": "Ross",
+        "email": "bob_ross@hotmail.com",
+        "is_admin": false,
+        "tracks_id": 1,
+        "calendly_link": null,
+        "progress": 0
     }
 ]
 ```
@@ -467,34 +525,6 @@ Headers
 
 ```
 OK
-```
-
-#### GET /api/v2/students
-
-##### REQUEST
-
-```
-Headers
-{
-    authorization: bearer token
-}
-```
-
-##### RESPONSE
-
-```
-[
-    {
-        "id": 2,
-        "first_name": "Johnny",
-        "last_name": "Schumm",
-        "email": "johnny_schumm23@hotmail.com",
-        "is_admin": false,
-        "tracks_id": 1,
-        "calendly_link": null,
-        "progress": 0
-    }
-]
 ```
 
 #### PUT /api/v2/students/:studentId
