@@ -109,10 +109,13 @@ To run the test server
 ##### REQUEST
 
 ```
-Body
+Headers
+Content-Type                application/json
+
+Body    raw(application/json)
 {
-        email: "bob_ross@happylittlemistakes.com",
-        password: "Password1234!"
+        "email": "bob_ross@happylittlemistakes.com",
+        "password": "Password1234!"
 }
 ```
 
@@ -120,9 +123,29 @@ Body
 
 ```
 {
-  "token": "eyQiOjEsImlhdCI6MTU2NjkyODU0MywiZXhwIjoxNTY3MDE0O",
-  "userId": 1
+        "token": "eyQiOjEsImlhdCI6MTU2NjkyODU0MywiZXhwIjoxNTY3MDE0O",
+        "userId": 1
 }
+```
+
+#### POST /api/v2/reset-password
+
+##### REQUEST
+
+```
+Headers
+Content-Type                application/json
+
+Body
+{
+        email: "bob_ross@happylittlemistakes.com"
+}
+```
+
+##### RESPONSE
+
+```
+OK
 ```
 
 #### GET /api/v2/requirements
@@ -405,20 +428,6 @@ Headers
         "tracks_id": 5
     }
 ]
-```
-
-#### POST /api/v2/reset-password
-
-##### REQUEST
-
-```
-
-```
-
-##### RESPONSE
-
-```
-OK
 ```
 
 #### PUT /api/v2/users
