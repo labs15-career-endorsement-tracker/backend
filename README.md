@@ -33,21 +33,25 @@
 To get the server running locally:
 
 1.  Clone this repo
-2.  **yarn install** to install all required dependencies
-3.  Create a local postgres database for development
+2.  Run **yarn install** in the terminal, while in the root directory, to install all the required dependencies
+3.  Create a local PostgreSQL database for development
     -   Reference [this article](https://www.freecodecamp.org/news/how-to-get-started-with-postgresql-9d3bc1dd1b11/) or [this document](https://github.com/Lambda-School-Labs/Labs8-OfflineReader/wiki/Setting-up-a-PostgreSQL-database-for-local-testing) for help
-4.  **touch .env** environment variables:
+4.  Run **touch .env** in the terminal, while in the root directory, to create a file for your environment variables:
     -   DATABASE_URL
-    -   JWT_SECRET
+    -   AUTH_JWT_SECRET
+    -   EMAIL_JWT_SECRET
+    -   EMAIL_ADDRESS_SENDER
+    -   EMAIL_ADDRESS_PASSWORD
+    -   EMAIL_URL_RESET_PASSWORD
 5.  Run migrations and seeds
     -   migrations **yarn knex:migrate:latest**
     -   seeds **yarn knex:seed:run**
-6.  **yarn dev** to run the server using the development environment
+6.  Run **yarn dev** to connect to your local server, using the development environment
 
 To run the test server
 
-1. Create a database in your postgres server called test_endrsd
-2. Add environment variable to _.env_
+1. Create a database in your postgres server called `test_endrsd`
+2. Add the following environment variable to the _.env_ file:
     - TEST_DATABASE_URL
 3. **yarn test** to start server using testing environment
 
@@ -79,33 +83,42 @@ To run the test server
 
 #### User Routes
 
-| Method | Endpoint                                | Access Control | Description                                                                                                                                                                 |
-| ------ | --------------------------------------- | -------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| GET    | `/api/v1/requirements`                  | all users      | Returns a list of the user's endorsement requirements                                                                                                                       |
-| POST   | `/api/v1/users`                         | all users      | Returns `{userId: Int, token: String }`                                                                                                                                     |
-| POST   | `/api/v1/login`                         | all users      | Returns an object with token and userId.                                                                                                                                    |
-| GET    | `/api/v1/tracks`                        | all users      | Returns a list of all available tracks                                                                                                                                      |
-| GET    | `/requirements/:requirementsId/steps`   | all users      | Gets a list of the steps for a given requirement, ordered by step number, with flag for completion                                                                          |
-| PUT    | `/requirements/:requirementsId/steps`   | all users      | Mark a step complete or incomplete: send the current state of the step. If its is_complete flag is currently true, send {is_complete:true} and it will be marked incomplete |
-| GET    | `/users/:userId`                        | all users      | Get a user object with progress propery indicatin completion of all user requirements, and a coach property indicating if the the user is pinned by a coach                 |
-| POST   | `/api/v1/reset-password`                | all users      | Sends a reset password email to the user                                                                                                                                    |
-| PUT    | `/api/v1/users`                         | all users      | Updates the user info                                                                                                                                                       |
-| DELETE | `/api/v1/users`                         | all users      | Deletes the user                                                                                                                                                            |
-| GET    | `/api/v1/students`                      | coaches        | Returns a list of the students that the coach has pinned                                                                                                                    |
-| PUT    | `/api/v1/students/:studentId`           | coaches        | Pins/unpins a student to a coach, returns the updated list of pinned students                                                                                               |
-| GET    | `/api/v1/users/:studentId/requirements` | coaches        | Gets a list of a user's requirements with progress and resources                                                                                                            |
+| Method | Endpoint                                              | Access Control | Description                                                                                                                                                                               |
+| ------ | ----------------------------------------------------- | -------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| POST   | `/api/v2/login`                                       | all users      | Allows a user to login with an email & password                                                                                                                                           |
+| POST   | `/api/v2/reset-password`                              | all users      | Sends a 'password-reset' email to the provided email address                                                                                                                              |
+| POST   | `/api/v2/users`                                       | all users      | Creates a new user                                                                                                                                                                        |
+| GET    | `/api/v2/requirements`                                | all users      | Returns a list of requirements by the track id                                                                                                                                            |
+| GET    | `/api/v2/requirements/:requirementsId/steps`          | all users      | Returns a list of the steps for a given requirement, ordered by step number, with a flag for completion                                                                                   |
+| GET    | `/api/v2/students`                                    | coaches        | Returns a list of students that the coach has pinned                                                                                                                                      |
+| GET    | `/api/v2/tracks`                                      | all users      | Returns a list of all available tracks                                                                                                                                                    |
+| GET    | `/api/v2/users`                                       | all users      | Searches for students via a query string                                                                                                                                                  |
+| GET    | `/api/v2/users/:userId`                               | all users      | Returns a user object with a progress property indicating completion of all user requirements, as well as a coach property indicating if the the user is pinned by a coach                |
+| GET    | `/api/v2/users/:userId/requirements`                  | all users      | Returns a student's requirements, progress, and resources, by the user's id                                                                                                               |
+| PUT    | `/api/v2/requirements/:requirementsId/steps/:stepsId` | all users      | Marks a step complete or incomplete by sending the current state of the step. If the `is_complete` flag is currently `true`, send `{is_complete:true}` and it will be marked `incomplete` |
+| PUT    | `/api/v2/students/:studentId`                         | all users      | Toggles a student `pinned` or `not_pinned`; returns an updated list of pinned students                                                                                                    |
+| PUT    | `/api/v2/users`                                       | all users      | Updates the user's information                                                                                                                                                            |
+| DELETE | `/api/v2/users`                                       | all users      | Deletes the user's account                                                                                                                                                                |
+
+<br/>
 
 ## Endpoint Examples
 
-#### POST /api/v1/login
+#### POST /api/v2/login
 
 ##### REQUEST
 
 ```
-Body
+Headers
 {
-        email: "bob_ross@happylittlemistakes.com",
-        password: "Password1234!"
+    content-type: application/json
+}
+
+
+Body    raw(application/json)
+{
+    "email": "bob_ross@happylittlemistakes.com",
+    "password": "Password1234!"
 }
 ```
 
@@ -113,19 +126,71 @@ Body
 
 ```
 {
-  "token": "eyQiOjEsImlhdCI6MTU2NjkyODU0MywiZXhwIjoxNTY3MDE0O",
-  "userId": 1
+    "token": "eyQiOjEsImlhdCI6MTU2NjkyODU0MywiZXhwIjoxNTY3MDE0O",
+    "userId": 1
 }
 ```
 
-#### GET /api/v1/requirements
+#### POST /api/v2/reset-password
 
 ##### REQUEST
 
 ```
 Headers
 {
-  authorization: bearer token
+    content-type: application/json
+}
+
+Body    raw(application/json)
+{
+    "email": "bob_ross@happylittlemistakes.com"
+}
+```
+
+##### RESPONSE
+
+```
+OK
+```
+
+#### POST /api/v2/users
+
+##### REQUEST
+
+```
+Headers
+{
+    content-type: application/json
+}
+
+
+Body    raw(application/json)
+{
+    "first_name": "Bob",
+	"last_name": "Ross",
+	"email": "bob_ross@happylittlemistakes.com",
+	"password": "Password1234!",
+	"tracks_id": 2
+}
+```
+
+##### RESPONSE
+
+```
+{
+    "token": "eyQiOjEsImlhdCI6MTU2NjkyODU0MywiZXhwIjoxNTY3MDE0O",
+    "userId": 1002
+}
+```
+
+#### GET /api/v2/requirements
+
+##### REQUEST
+
+```
+Headers
+{
+    authorization: bearer token
 }
 ```
 
@@ -183,7 +248,77 @@ Headers
 ]
 ```
 
-#### GET /api/v1/tracks
+#### GET /api/v2/requirements/:requirementsId/steps
+
+##### REQUEST
+
+```
+Headers
+{
+    authorization: bearer token
+}
+```
+
+##### RESPONSE
+
+```
+[
+    {
+        "id": 1,
+        "number": 1,
+        "steps_description": "Get started with Creddle or Novoresume as a template. You can also use your own, but Creddle and Novoresume look great and take the guesswork out of formatting!",
+        "is_required": true,
+        "tasks_id": 1,
+        "is_complete": true
+    },
+    {
+        "id": 2,
+        "number": 2,
+        "steps_description": "Use the resume rubric and resume deep-dive to make sure you’re including all required sections in your resume",
+        "is_required": true,
+        "tasks_id": 1,
+        "is_complete": true
+    },
+    {
+        "id": 3,
+        "number": 3,
+        "steps_description": "Submit your resume for a free review through CV Compiler",
+        "is_required": true,
+        "tasks_id": 1,
+        "is_complete": false
+    }
+]
+```
+
+#### GET /api/v2/students
+
+##### REQUEST
+
+```
+Headers
+{
+    authorization: bearer token
+}
+```
+
+##### RESPONSE
+
+```
+[
+    {
+        "id": 2,
+        "first_name": "Bob",
+        "last_name": "Ross",
+        "email": "bob_ross@happylittlemistakes.com",
+        "is_admin": false,
+        "tracks_id": 1,
+        "calendly_link": null,
+        "progress": 0
+    }
+]
+```
+
+#### GET /api/v2/tracks
 
 ##### REQUEST
 
@@ -218,142 +353,19 @@ Headers
 ]
 ```
 
-#### GET /api/v1/requirements/:requirementsId/steps
+#### GET /api/v2/users
 
 ##### REQUEST
 
 ```
 Headers
 {
-  authorization: bearer token
+    authorization: bearer token
 }
-```
 
-##### RESPONSE
-
-```
-[
-    {
-        "id": 1,
-        "number": 1,
-        "steps_description": "Get started with Creddle or Novoresume as a template. You can also use your own, but Creddle and Novoresume look great and take the guesswork out of formatting!",
-        "is_required": true,
-        "tasks_id": 1,
-        "is_complete": true
-    },
-    {
-        "id": 2,
-        "number": 2,
-        "steps_description": "Use the resume rubric and resume deep-dive to make sure you’re including all required sections in your resume",
-        "is_required": true,
-        "tasks_id": 1,
-        "is_complete": true
-    },
-    {
-        "id": 3,
-        "number": 3,
-        "steps_description": "Submit your resume for a free review through CV Compiler",
-        "is_required": true,
-        "tasks_id": 1,
-        "is_complete": false
-    }
-]
-```
-
-#### PUT /api/v1/requirements/:requirementsId/steps/:stepsId
-
-##### REQUEST
-
-```
-Headers
+Params
 {
-  authorization: bearer token
-}
-```
-
-```
-Body
-{
-	"is_complete": false
-}
-```
-
-##### RESPONSE
-
-```
-[
-    {
-        "id": 1,
-        "number": 1,
-        "steps_description": "Get started with Creddle or Novoresume as a template. You can also use your own, but Creddle and Novoresume look great and take the guesswork out of formatting!",
-        "is_required": true,
-        "tasks_id": 1,
-        "is_complete": true
-    },
-    {
-        "id": 2,
-        "number": 2,
-        "steps_description": "Use the resume rubric and resume deep-dive to make sure you’re including all required sections in your resume",
-        "is_required": true,
-        "tasks_id": 1,
-        "is_complete": true
-    },
-    {
-        "id": 3,
-        "number": 3,
-        "steps_description": "Submit your resume for a free review through CV Compiler",
-        "is_required": true,
-        "tasks_id": 1,
-        "is_complete": false
-    }
-]
-```
-
-#### GET /api/v1/user/:userId
-
-##### REQUEST
-
-```
-Headers
-{
-  authorization: bearer token
-}
-```
-
-##### RESPONSE
-
-```
-{
-    "first_name": "Bob",
-    "last_name": "Ross",
-    "email": "bob_ross11@gmail.com",
-    "tracks_id": 1,
-    "is_admin": false,
-    "tracks_title": "Full-Stack Web",
-    "id": 1011,
-    "calendly_link": null,
-    "progress": 0,
-    "coach": {
-        "first_name": "admin",
-        "last_name": "admin",
-        "email": "admin@admin.com",
-        "tracks_id": null,
-        "is_admin": true,
-        "tracks_title": null,
-        "id": 1010,
-        "calendly_link": null
-    }
-}
-```
-
-#### GET /api/v1/users
-
-##### REQUEST
-
-```
-Headers
-{
-  authorization: bearer token
+    search: "bob"
 }
 ```
 
@@ -400,118 +412,51 @@ Headers
 ]
 ```
 
-#### POST /api/v1/reset-password
-
-##### REQUEST
-
-```
-
-```
-
-##### RESPONSE
-
-```
-OK
-```
-
-#### PUT /api/v1/users
+#### GET /api/v2/user/:userId
 
 ##### REQUEST
 
 ```
 Headers
 {
-  authorization: bearer token
+    authorization: bearer token
 }
 ```
 
 ##### RESPONSE
 
 ```
-OK
-```
-
-#### DELETE /api/v1/users
-
-##### REQUEST
-
-```
-Headers
 {
-  authorization: bearer token
-}
-```
-
-##### RESPONSE
-
-```
-OK
-```
-
-#### GET /api/v1/students
-
-##### REQUEST
-
-```
-Headers
-{
-  authorization: bearer token
-}
-```
-
-##### RESPONSE
-
-```
-[
-    {
-        "id": 2,
-        "first_name": "Johnny",
-        "last_name": "Schumm",
-        "email": "johnny_schumm23@hotmail.com",
-        "is_admin": false,
-        "tracks_id": 1,
-        "calendly_link": null,
-        "progress": 0
+    "first_name": "Bob",
+    "last_name": "Ross",
+    "email": "bob_ross11@gmail.com",
+    "tracks_id": 1,
+    "is_admin": false,
+    "tracks_title": "Full-Stack Web",
+    "id": 1011,
+    "calendly_link": null,
+    "progress": 0,
+    "coach": {
+        "first_name": "admin",
+        "last_name": "admin",
+        "email": "admin@admin.com",
+        "tracks_id": null,
+        "is_admin": true,
+        "tracks_title": null,
+        "id": 1010,
+        "calendly_link": null
     }
-]
-```
-
-#### PUT /api/v1/students/:studentId
-
-##### REQUEST
-
-```
-Headers
-{
-  authorization: bearer token
 }
 ```
 
-##### RESPONSE
-
-```
-[
-    {
-        "id": 2,
-        "first_name": "Johnny",
-        "last_name": "Schumm",
-        "email": "johnny_schumm23@hotmail.com",
-        "is_admin": false,
-        "tracks_id": 1,
-        "calendly_link": null,
-        "progress": 0
-    }
-]
-```
-
-#### GET /api/v1/users/:userId/requirements
+#### GET /api/v2/users/:userId/requirements
 
 ##### REQUEST
 
 ```
 Headers
 {
-  authorization: bearer token
+    authorization: bearer token
 }
 ```
 
@@ -576,6 +521,118 @@ Headers
         ]
     }
 ]
+```
+
+#### PUT /api/v2/requirements/:requirementsId/steps/:stepsId
+
+##### REQUEST
+
+```
+Headers
+{
+    authorization: bearer token,
+    content-type: application/json
+}
+```
+
+```
+Body    raw(application/json)
+{
+	"is_complete": false
+}
+```
+
+##### RESPONSE
+
+```
+[
+    {
+        "id": 1,
+        "number": 1,
+        "steps_description": "Get started with Creddle or Novoresume as a template. You can also use your own, but Creddle and Novoresume look great and take the guesswork out of formatting!",
+        "is_required": true,
+        "tasks_id": 1,
+        "is_complete": true
+    },
+    {
+        "id": 2,
+        "number": 2,
+        "steps_description": "Use the resume rubric and resume deep-dive to make sure you’re including all required sections in your resume",
+        "is_required": true,
+        "tasks_id": 1,
+        "is_complete": true
+    },
+    {
+        "id": 3,
+        "number": 3,
+        "steps_description": "Submit your resume for a free review through CV Compiler",
+        "is_required": true,
+        "tasks_id": 1,
+        "is_complete": false
+    }
+]
+```
+
+#### PUT /api/v2/students/:studentId
+
+##### REQUEST
+
+```
+Headers
+{
+    authorization: bearer token
+}
+```
+
+##### RESPONSE
+
+```
+[
+    {
+        "id": 2,
+        "first_name": "Johnny",
+        "last_name": "Schumm",
+        "email": "johnny_schumm23@hotmail.com",
+        "is_admin": false,
+        "tracks_id": 1,
+        "calendly_link": null,
+        "progress": 0
+    }
+]
+```
+
+#### PUT /api/v2/users
+
+##### REQUEST
+
+```
+Headers
+{
+    authorization: bearer token
+}
+```
+
+##### RESPONSE
+
+```
+OK
+```
+
+#### DELETE /api/v2/users
+
+##### REQUEST
+
+```
+Headers
+{
+    authorization: bearer token
+}
+```
+
+##### RESPONSE
+
+```
+OK
 ```
 
 # Data Model
