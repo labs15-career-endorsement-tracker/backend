@@ -92,9 +92,8 @@ To run the test server
 | GET    | `/api/v2/students`                                    | coaches        | Returns a list of students that the coach has pinned                                                                                                                                      |
 | GET    | `/api/v2/tracks`                                      | all users      | Returns a list of all available tracks                                                                                                                                                    |
 | GET    | `/api/v2/users`                                       | all users      | Searches for students via a query string                                                                                                                                                  |
-| GET    | `/api/v2/users/:studentId/requirements`               | coaches        | Returns a student's requirements, progress, and resources, by the student's id                                                                                                            |
 | GET    | `/api/v2/users/:userId`                               | all users      | Returns a user object with a progress property indicating completion of all user requirements, as well as a coach property indicating if the the user is pinned by a coach                |
-| GET    | `/api/v2/users/:userId/requirements`                  | coaches        | Returns a list of requirements for a student, by the student's id                                                                                                                         |  |
+| GET    | `/api/v2/users/:userId/requirements`                  | all users      | Returns a student's requirements, progress, and resources, by the user's id                                                                                                               |
 | PUT    | `/api/v2/requirements/:requirementsId/steps/:stepsId` | all users      | Marks a step complete or incomplete by sending the current state of the step. If the `is_complete` flag is currently `true`, send `{is_complete:true}` and it will be marked `incomplete` |
 | PUT    | `/api/v2/students/:studentId`                         | all users      | Toggles a student `pinned` or `not_pinned`; returns an updated list of pinned students                                                                                                    |
 | PUT    | `/api/v2/users`                                       | all users      | Updates the user's information                                                                                                                                                            |
@@ -225,7 +224,7 @@ Headers
 ]
 ```
 
-#### GET /api/v2/requirements
+### GET /api/v2/students
 
 ##### REQUEST
 
@@ -241,51 +240,14 @@ Headers
 ```
 [
     {
-        "id": 1,
+        "id": 2,
+        "first_name": "Bob",
+        "last_name": "Ross",
+        "email": "bob_ross@happylittlemistakes.com",
+        "is_admin": false,
         "tracks_id": 1,
-        "tasks_id": 1,
-        "title": "Update Resume",
-        "is_required": true,
-        "tasks_description": "Update your resume to include your recent work history",
-        "is_endorsement_requirement": true,
-        "progress": 67,
-        "resources": [
-            {
-                "id": 1,
-                "type": "google_doc",
-                "title": "Action verbs for technical resumes",
-                "url": "https://docs.google.com/document/d/1wZkDPBWtQZDGGdvStD61iRx_jOWVlIyyQl9UOYHtZgA/edit",
-                "description": null,
-                "tasks_id": 1
-            },
-            {
-                "id": 2,
-                "type": "google_doc",
-                "title": "Power statement article",
-                "url": "https://www.linkedin.com/pulse/20140929001534-24454816-my-personal-formula-for-a-better-resume/",
-                "description": null,
-                "tasks_id": 1
-            },
-            {
-                "id": 3,
-                "type": "google_doc",
-                "title": "'Lambda is…' paragraphs",
-                "url": "https://docs.google.com/document/d/19OxIgJYkLMq4c1o5zHu1Na4a3PYcyutOosVfg6a03RI/edit",
-                "description": null,
-                "tasks_id": 1
-            }
-        ]
-    },
-    {
-        "id": 5,
-        "tracks_id": 1,
-        "tasks_id": 5,
-        "title": "Green GitHub with quality contributions",
-        "is_required": true,
-        "tasks_description": "You should have quality contributions in your git hub",
-        "is_endorsement_requirement": true,
-        "progress": 67,
-        "resources": []
+        "calendly_link": null,
+        "progress": 0
     }
 ]
 ```
@@ -325,120 +287,6 @@ Headers
 ]
 ```
 
-#### PUT /api/v2/requirements/:requirementsId/steps/:stepsId
-
-##### REQUEST
-
-```
-Headers
-{
-    authorization: bearer token
-}
-```
-
-```
-Body
-{
-	"is_complete": false
-}
-```
-
-##### RESPONSE
-
-```
-[
-    {
-        "id": 1,
-        "number": 1,
-        "steps_description": "Get started with Creddle or Novoresume as a template. You can also use your own, but Creddle and Novoresume look great and take the guesswork out of formatting!",
-        "is_required": true,
-        "tasks_id": 1,
-        "is_complete": true
-    },
-    {
-        "id": 2,
-        "number": 2,
-        "steps_description": "Use the resume rubric and resume deep-dive to make sure you’re including all required sections in your resume",
-        "is_required": true,
-        "tasks_id": 1,
-        "is_complete": true
-    },
-    {
-        "id": 3,
-        "number": 3,
-        "steps_description": "Submit your resume for a free review through CV Compiler",
-        "is_required": true,
-        "tasks_id": 1,
-        "is_complete": false
-    }
-]
-```
-
-### GET /api/v2/students
-
-##### REQUEST
-
-```
-Headers
-{
-    authorization: bearer token
-}
-```
-
-##### RESPONSE
-
-```
-[
-    {
-        "id": 2,
-        "first_name": "Bob",
-        "last_name": "Ross",
-        "email": "bob_ross@hotmail.com",
-        "is_admin": false,
-        "tracks_id": 1,
-        "calendly_link": null,
-        "progress": 0
-    }
-]
-```
-
-#### GET /api/v2/user/:userId
-
-##### REQUEST
-
-```
-Headers
-{
-    authorization: bearer token
-}
-```
-
-##### RESPONSE
-
-```
-{
-    "first_name": "Bob",
-    "last_name": "Ross",
-    "email": "bob_ross11@gmail.com",
-    "tracks_id": 1,
-    "is_admin": false,
-    "tracks_title": "Full-Stack Web",
-    "id": 1011,
-    "calendly_link": null,
-    "progress": 0,
-    "coach": {
-        "first_name": "admin",
-        "last_name": "admin",
-        "email": "admin@admin.com",
-        "tracks_id": null,
-        "is_admin": true,
-        "tracks_title": null,
-        "id": 1010,
-        "calendly_link": null
-    }
-}
-```
-
 #### GET /api/v2/users
 
 ##### REQUEST
@@ -447,6 +295,11 @@ Headers
 Headers
 {
     authorization: bearer token
+}
+
+Params
+{
+    search: "bob"
 }
 ```
 
@@ -493,7 +346,7 @@ Headers
 ]
 ```
 
-#### PUT /api/v2/users
+#### GET /api/v2/user/:userId
 
 ##### REQUEST
 
@@ -507,52 +360,27 @@ Headers
 ##### RESPONSE
 
 ```
-OK
-```
-
-#### DELETE /api/v2/users
-
-##### REQUEST
-
-```
-Headers
 {
-    authorization: bearer token
-}
-```
-
-##### RESPONSE
-
-```
-OK
-```
-
-#### PUT /api/v2/students/:studentId
-
-##### REQUEST
-
-```
-Headers
-{
-    authorization: bearer token
-}
-```
-
-##### RESPONSE
-
-```
-[
-    {
-        "id": 2,
-        "first_name": "Johnny",
-        "last_name": "Schumm",
-        "email": "johnny_schumm23@hotmail.com",
-        "is_admin": false,
-        "tracks_id": 1,
-        "calendly_link": null,
-        "progress": 0
+    "first_name": "Bob",
+    "last_name": "Ross",
+    "email": "bob_ross11@gmail.com",
+    "tracks_id": 1,
+    "is_admin": false,
+    "tracks_title": "Full-Stack Web",
+    "id": 1011,
+    "calendly_link": null,
+    "progress": 0,
+    "coach": {
+        "first_name": "admin",
+        "last_name": "admin",
+        "email": "admin@admin.com",
+        "tracks_id": null,
+        "is_admin": true,
+        "tracks_title": null,
+        "id": 1010,
+        "calendly_link": null
     }
-]
+}
 ```
 
 #### GET /api/v2/users/:userId/requirements
@@ -627,6 +455,118 @@ Headers
         ]
     }
 ]
+```
+
+#### PUT /api/v2/requirements/:requirementsId/steps/:stepsId
+
+##### REQUEST
+
+```
+Headers
+{
+    authorization: bearer token,
+    content-type: application/json
+}
+```
+
+```
+Body    raw(application/json)
+{
+	"is_complete": false
+}
+```
+
+##### RESPONSE
+
+```
+[
+    {
+        "id": 1,
+        "number": 1,
+        "steps_description": "Get started with Creddle or Novoresume as a template. You can also use your own, but Creddle and Novoresume look great and take the guesswork out of formatting!",
+        "is_required": true,
+        "tasks_id": 1,
+        "is_complete": true
+    },
+    {
+        "id": 2,
+        "number": 2,
+        "steps_description": "Use the resume rubric and resume deep-dive to make sure you’re including all required sections in your resume",
+        "is_required": true,
+        "tasks_id": 1,
+        "is_complete": true
+    },
+    {
+        "id": 3,
+        "number": 3,
+        "steps_description": "Submit your resume for a free review through CV Compiler",
+        "is_required": true,
+        "tasks_id": 1,
+        "is_complete": false
+    }
+]
+```
+
+#### PUT /api/v2/students/:studentId
+
+##### REQUEST
+
+```
+Headers
+{
+    authorization: bearer token
+}
+```
+
+##### RESPONSE
+
+```
+[
+    {
+        "id": 2,
+        "first_name": "Johnny",
+        "last_name": "Schumm",
+        "email": "johnny_schumm23@hotmail.com",
+        "is_admin": false,
+        "tracks_id": 1,
+        "calendly_link": null,
+        "progress": 0
+    }
+]
+```
+
+#### PUT /api/v2/users
+
+##### REQUEST
+
+```
+Headers
+{
+    authorization: bearer token
+}
+```
+
+##### RESPONSE
+
+```
+OK
+```
+
+#### DELETE /api/v2/users
+
+##### REQUEST
+
+```
+Headers
+{
+    authorization: bearer token
+}
+```
+
+##### RESPONSE
+
+```
+OK
 ```
 
 # Data Model
