@@ -88,6 +88,7 @@ To run the test server
 | POST   | `/api/v2/login`                                       | all users      | Allows a user to login with an email & password                                                                                                                                           |
 | POST   | `/api/v2/reset-password`                              | all users      | Sends a 'password-reset' email to the provided email address                                                                                                                              |
 | POST   | `/api/v2/users`                                       | all users      | Creates a new user                                                                                                                                                                        |
+| GET    | `/api/v2/requirements`                                | all users      | Returns a list of requirements by the track id                                                                                                                                            |
 | GET    | `/api/v2/requirements/:requirementsId/steps`          | all users      | Returns a list of the steps for a given requirement, ordered by step number, with a flag for completion                                                                                   |
 | GET    | `/api/v2/students`                                    | coaches        | Returns a list of students that the coach has pinned                                                                                                                                      |
 | GET    | `/api/v2/tracks`                                      | all users      | Returns a list of all available tracks                                                                                                                                                    |
@@ -180,6 +181,71 @@ Body    raw(application/json)
     "token": "eyQiOjEsImlhdCI6MTU2NjkyODU0MywiZXhwIjoxNTY3MDE0O",
     "userId": 1002
 }
+```
+
+#### GET /api/v2/requirements
+
+##### REQUEST
+
+```
+Headers
+{
+    authorization: bearer token
+}
+```
+
+##### RESPONSE
+
+```
+[
+    {
+        "id": 1,
+        "tracks_id": 1,
+        "tasks_id": 1,
+        "title": "Update Resume",
+        "is_required": true,
+        "tasks_description": "Update your resume to include your recent work history",
+        "is_endorsement_requirement": true,
+        "progress": 67,
+        "resources": [
+            {
+                "id": 1,
+                "type": "google_doc",
+                "title": "Action verbs for technical resumes",
+                "url": "https://docs.google.com/document/d/1wZkDPBWtQZDGGdvStD61iRx_jOWVlIyyQl9UOYHtZgA/edit",
+                "description": null,
+                "tasks_id": 1
+            },
+            {
+                "id": 2,
+                "type": "google_doc",
+                "title": "Power statement article",
+                "url": "https://www.linkedin.com/pulse/20140929001534-24454816-my-personal-formula-for-a-better-resume/",
+                "description": null,
+                "tasks_id": 1
+            },
+            {
+                "id": 3,
+                "type": "google_doc",
+                "title": "'Lambda is…' paragraphs",
+                "url": "https://docs.google.com/document/d/19OxIgJYkLMq4c1o5zHu1Na4a3PYcyutOosVfg6a03RI/edit",
+                "description": null,
+                "tasks_id": 1
+            }
+        ]
+    },
+    {
+        "id": 5,
+        "tracks_id": 1,
+        "tasks_id": 5,
+        "title": "Green GitHub with quality contributions",
+        "is_required": true,
+        "tasks_description": "You should have quality contributions in your git hub",
+        "is_endorsement_requirement": true,
+        "progress": 67,
+        "resources": []
+    }
+]
 ```
 
 #### GET /api/v2/requirements/:requirementsId/steps
