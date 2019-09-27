@@ -1,5 +1,4 @@
 const {
-    findRequirementsByTrack,
     findUsersBy,
     getRequirementsWithProgressAndResources
 } = require("../model")
@@ -14,7 +13,6 @@ const viewEndorsementRequirements = async (req, res, next) => {
         )
         res.json(requirements)
     } catch (error) {
-        console.log(error)
         next(error)
     }
 }

@@ -38,57 +38,66 @@ const fakeTasksTracks = [
 
 const fakeSteps = [
     // Only these first three steps belong to a REQUIREMENT
+    // 1
     {
         number: 1,
         steps_description: "Requirement 1 step 1",
         is_required: true,
         tasks_id: 1
     },
+    // 2
     {
         number: 3,
         steps_description: "Requirement 1 step 3",
         is_required: true,
         tasks_id: 1
     },
+    // 3
     {
         number: 2,
         steps_description: "Requirement 1 step 2",
         is_required: true,
         tasks_id: 1
     },
+    // 4
     {
         number: 1,
-        steps_description: "Requirement 2 step 1",
+        steps_description: "Requirement 3 step 1",
         is_required: true,
         tasks_id: 3
     },
+    // 5
     {
         number: 2,
-        steps_description: "Requirement 2 step 2",
+        steps_description: "Requirement 3 step 2",
         is_required: true,
         tasks_id: 3
     },
+    // 6
     {
         number: 3,
         steps_description: "Requirement 3 step 3",
         is_required: true,
         tasks_id: 3
     },
+    // 7
     {
         number: 1,
-        steps_description: "Requirement 2 step 1",
+        steps_description: "Requirement 4 step 1",
         is_required: true,
         tasks_id: 4
     },
+    // 8
     {
         number: 2,
-        steps_description: "Requirement 2 step 2",
+        steps_description: "Requirement 4 step 2",
         is_required: true,
         tasks_id: 4
     },
+    // 9
     {
         number: 3,
-        steps_description: "Requirement 3 step 3",
+        steps_description: "Requirement 4 step 3",
         is_required: true,
         tasks_id: 4
     }
@@ -154,6 +163,22 @@ const fakeResources = [
     }
 ]
 
+const fakePinnedStudents = [
+    {
+        coach_id: 2,
+        student_id: 1
+    }
+]
+
+const fakeCoaches = [
+    {
+        first_name: "Grace",
+        last_name: "Hopper",
+        email: "ghopper@gmail.com",
+        password: bcrypt.hashSync("coachPassword1", 4),
+        is_admin: true
+    }
+]
 module.exports = {
     fakeUsers,
     fakeTasks,
@@ -161,5 +186,7 @@ module.exports = {
     fakeTasksTracks,
     fakeTracks,
     fakeCompletedSteps,
-    fakeResources
+    fakeResources,
+    fakeCoaches,
+    fakePinnedStudents
 }

@@ -46,20 +46,22 @@ describe("MODEL all progress", () => {
             })
         })
         it("should return an object with shape: {id (int), first_name (string), last_name (string), email (string), tracks_id (int), is_admin (bool), tracks_title (string)} ", done => {
-            findUserNoPassword(1).then(res => {
-                expect(res).toEqual(
-                    expect.objectContaining({
-                        id: expect.any(Number),
-                        first_name: expect.any(String),
-                        last_name: expect.any(String),
-                        email: expect.any(String),
-                        tracks_id: expect.any(Number),
-                        is_admin: expect.any(Boolean),
-                        tracks_title: expect.any(String)
-                    })
-                )
-                done()
-            })
+            findUserNoPassword(1)
+                .then(res => {
+                    expect(res).toHaveProperty("first_name", "bob")
+                    expect(res).toHaveProperty("last_name", "ross")
+                    expect(res).toHaveProperty(
+                        "email",
+                        "bob_ross@happylittlemistakes.com"
+                    )
+                    expect(res).toHaveProperty("tracks_id", 1)
+                    expect(res).toHaveProperty("is_admin", false)
+                    expect(res).toHaveProperty("id", 1)
+                    expect(res).toHaveProperty("tracks_title", "Web")
+                    expect(res).toHaveProperty("calendly_link", null)
+                    done()
+                })
+                .catch(done)
         })
         it("should not have a password field ", done => {
             findUserNoPassword(1).then(res => {
@@ -80,7 +82,8 @@ describe("MODEL all progress", () => {
                     tracks_id: 1,
                     is_admin: false,
                     id: 1,
-                    tracks_title: "Web"
+                    tracks_title: "Web",
+                    calendly_link: null
                 })
                 done()
             })
@@ -104,18 +107,17 @@ describe("MODEL all progress", () => {
         })
         it("should return an object with shape: {id (int), first_name (string), last_name (string), email (string), tracks_id (int), is_admin (bool), progress (int), tracks_title (String)} ", done => {
             getUserWithProgress(1).then(res => {
-                expect(res).toEqual(
-                    expect.objectContaining({
-                        id: expect.any(Number),
-                        first_name: expect.any(String),
-                        last_name: expect.any(String),
-                        email: expect.any(String),
-                        tracks_id: expect.any(Number),
-                        is_admin: expect.any(Boolean),
-                        progress: expect.any(Number),
-                        tracks_title: expect.any(String)
-                    })
+                expect(res).toHaveProperty("first_name", "bob")
+                expect(res).toHaveProperty("last_name", "ross")
+                expect(res).toHaveProperty(
+                    "email",
+                    "bob_ross@happylittlemistakes.com"
                 )
+                expect(res).toHaveProperty("tracks_id", 1)
+                expect(res).toHaveProperty("is_admin", false)
+                expect(res).toHaveProperty("id", 1)
+                expect(res).toHaveProperty("tracks_title", "Web")
+                expect(res).toHaveProperty("calendly_link", null)
                 done()
             })
         })
@@ -129,7 +131,9 @@ describe("MODEL all progress", () => {
                     is_admin: false,
                     id: 1,
                     progress: 0,
-                    tracks_title: "Web"
+                    tracks_title: "Web",
+                    calendly_link: null,
+                    coach: null
                 })
                 done()
             })

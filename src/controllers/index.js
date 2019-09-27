@@ -1,22 +1,18 @@
-const { findUsers } = require("../model")
-
-const getUsers = async (req, res, next) => {
-    try {
-        const users = await findUsers()
-        res.json(users)
-    } catch (error) {
-        console.log(error)
-        next(error)
-    }
-}
+const { getStudents, pinStudent } = require("./pin-student")
 
 module.exports = {
-    getUsers,
+    getUsers: require("./get-users"),
     login: require("./login"),
     addUser: require("./add-user"),
+    updateUser: require("./update-user"),
     viewEndorsementRequirements: require("./viewEndorsementRequirements"),
     viewTracks: require("./tracks"),
     getSteps: require("./get-steps"),
     markSteps: require("./mark-steps"),
-    getAllProgressForUser: require("./get-all-progress")
+    getAllProgressForUser: require("./get-all-progress"),
+    resetPassword: require("./reset-password"),
+    deleteUser: require("./delete-user"),
+    getStudents,
+    pinStudent,
+    getReqsForUser: require("./get-reqs-for-user")
 }
