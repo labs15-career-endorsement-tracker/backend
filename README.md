@@ -290,7 +290,7 @@ Headers
 ]
 ```
 
-### GET /api/v2/students
+#### GET /api/v2/students
 
 ##### REQUEST
 
