@@ -110,12 +110,15 @@ To run the test server
 
 ```
 Headers
-Content-Type                application/json
+{
+    content-type: application/json
+}
+
 
 Body    raw(application/json)
 {
-        "email": "bob_ross@happylittlemistakes.com",
-        "password": "Password1234!"
+    "email": "bob_ross@happylittlemistakes.com",
+    "password": "Password1234!"
 }
 ```
 
@@ -123,8 +126,8 @@ Body    raw(application/json)
 
 ```
 {
-        "token": "eyQiOjEsImlhdCI6MTU2NjkyODU0MywiZXhwIjoxNTY3MDE0O",
-        "userId": 1
+    "token": "eyQiOjEsImlhdCI6MTU2NjkyODU0MywiZXhwIjoxNTY3MDE0O",
+    "userId": 1
 }
 ```
 
@@ -134,11 +137,13 @@ Body    raw(application/json)
 
 ```
 Headers
-Content-Type                application/json
+{
+    content-type: application/json
+}
 
 Body
 {
-        email: "bob_ross@happylittlemistakes.com"
+    "email": "bob_ross@happylittlemistakes.com"
 }
 ```
 
@@ -155,7 +160,7 @@ OK
 ```
 Headers
 {
-  authorization: bearer token
+    authorization: bearer token
 }
 ```
 
@@ -255,7 +260,7 @@ Headers
 ```
 Headers
 {
-  authorization: bearer token
+    authorization: bearer token
 }
 ```
 
@@ -297,7 +302,7 @@ Headers
 ```
 Headers
 {
-  authorization: bearer token
+    authorization: bearer token
 }
 ```
 
@@ -346,7 +351,7 @@ Body
 ```
 Headers
 {
-  authorization: bearer token
+    authorization: bearer token
 }
 ```
 
@@ -383,7 +388,7 @@ Headers
 ```
 Headers
 {
-  authorization: bearer token
+    authorization: bearer token
 }
 ```
 
@@ -437,7 +442,7 @@ Headers
 ```
 Headers
 {
-  authorization: bearer token
+    authorization: bearer token
 }
 ```
 
@@ -454,7 +459,7 @@ OK
 ```
 Headers
 {
-  authorization: bearer token
+    authorization: bearer token
 }
 ```
 
@@ -471,7 +476,7 @@ OK
 ```
 Headers
 {
-  authorization: bearer token
+    authorization: bearer token
 }
 ```
 
@@ -499,7 +504,7 @@ Headers
 ```
 Headers
 {
-  authorization: bearer token
+    authorization: bearer token
 }
 ```
 
@@ -527,7 +532,7 @@ Headers
 ```
 Headers
 {
-  authorization: bearer token
+    authorization: bearer token
 }
 ```
 
